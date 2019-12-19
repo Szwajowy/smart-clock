@@ -1,0 +1,119 @@
+@import '../../styles.scss';
+
+.container {
+    height: calc(100% - 120px);
+    width: 100%;
+    padding: 60px 0;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    .left-arrow, .right-arrow {
+        height: auto;
+        width: 20px;
+        padding: 0 30px;
+    }
+
+    .timer-content {
+        flex-grow: 100;
+        align-self: flex-end;
+    
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+
+        overflow: hidden;
+    
+        .timer {
+            margin-bottom: 80px;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            .hours, .minutes, .seconds {
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+
+                button {
+                    padding: 0;
+                    margin: 0;
+
+                    background: none;
+                    outline: none;
+                    border: none;
+
+                    &.increase {
+                        transform: rotate(90deg);
+                    }
+
+                    &.decrease {
+                        transform: rotate(-90deg);
+                    }
+                }
+
+                p {
+                    width: 170px;
+                    display: block;
+
+                    text-align: center;
+
+                    padding: 0;
+                    margin: 0;
+
+                    font-size: 120px;
+                    font-weight: 700;
+                    line-height: 1em;
+                    // text-shadow: 0 0 6px $app-text-shadow;
+                }
+            }
+
+            .separator {
+                font-size: 120px;
+                font-weight: 700;
+                line-height: 1em;
+                // text-shadow: 0 0 6px $app-text-shadow;
+            }
+        }
+    
+        .buttons {
+            width: 100%;
+    
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+    
+            .btn {
+                width: 48%;
+                padding: 15px;
+    
+                outline: none;
+                border: none;
+                border-radius: 500px;
+                // box-shadow: 0 0 6px 0 $app-text-shadow;
+    
+                font-size: 24px;
+                font-weight: 600;
+    
+                &.start-btn {
+                    color: $app-accent;
+                    background: $app-color;
+    
+                    &:hover {
+                        background: $app-color-darker;
+                    }
+                }
+    
+                &.stop-btn {
+                    background: #B90B0B;
+                    color: $app-color;
+    
+                    &:hover {
+                        background: darken(#B90B0B, 10%);
+                    }
+                }
+            }
+        }
+    }
+}

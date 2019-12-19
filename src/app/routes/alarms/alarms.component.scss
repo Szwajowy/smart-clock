@@ -1,0 +1,286 @@
+@import '../../styles.scss';
+
+.container {
+  height: calc(100% - 120px);
+  width: 100%;
+  padding: 60px 0;
+
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+
+  .left-arrow, .right-arrow {
+    height: auto;
+    width: 20px;
+    padding: 0 30px;
+  }
+
+  .alarms-content {
+    flex-grow: 100;
+
+    .creating-alarm {
+      flex-grow: 100;
+      height: calc(312px - 60px);
+
+      padding: 30px;
+
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+
+      background: $app-color;
+      border-radius: 12px;
+
+      .top {
+        width: 100%;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        .time {
+
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+
+          .hours, .minutes, .seconds {
+              display: flex;
+              flex-flow: column nowrap;
+              align-items: center;
+
+              button {
+                  padding: 0;
+                  margin: 0;
+
+                  background: none;
+                  outline: none;
+                  border: none;
+
+                  svg g line {
+                    stroke: $app-accent;
+                  }
+
+                  &.increase {
+                      transform: rotate(90deg);
+                  }
+
+                  &.decrease {
+                      transform: rotate(-90deg);
+                  }
+              }
+
+              p {
+                  width: 130px;
+                  display: block;
+
+                  text-align: center;
+
+                  padding: 0;
+                  margin: 0;
+
+                  color: $app-accent;
+                  font-size: 90px;
+                  font-weight: 700;
+                  line-height: 1em;
+                  // text-shadow: 0 0 6px $app-text-shadow;
+              }
+          }
+
+          .separator {
+              color: $app-accent;
+              font-size: 90px;
+              font-weight: 700;
+              line-height: 1em;
+              // text-shadow: 0 0 6px $app-text-shadow;
+          }
+      }
+
+        .buttons {
+          display: flex;
+          flex-flow: column nowrap;
+
+          .btn {
+            width: 220px;
+            padding: 12px;
+
+            color: $app-color;
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1em;
+            outline: none;
+            border: none;
+            border-radius: 200px;
+
+            &:not(:last-child) {
+              margin-bottom: 22px;
+            }
+
+            &.create {
+              background: $app-accent;
+            }
+
+            &.cancel {
+              background: #B90B0B;
+            }
+          }
+        }
+      }
+
+      .bottom {
+
+        button {
+          padding: 0;
+          margin: 0;
+
+          color: $app-color-darker;
+          font-size: 36px;
+          font-weight: 400;
+          line-height: 1em;
+
+          background: none;
+          outline: none;
+          border: none;
+
+          &:not(:last-child) {
+            margin-right: 12px;
+          }
+
+          &.active {
+            color: $app-accent;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .alarms-list {
+      flex-grow: 100;
+      max-height: 312px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      display: flex;
+      flex-flow: column nowrap;
+      justify-self: center;
+
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .alarm {
+        padding: 20px 30px;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        background: $app-color;
+        border-radius: 12px;
+
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+
+        h3 {
+          padding: 0;
+          margin: 0;
+
+          color: $app-accent;
+          font-size: 64px;
+          font-weight: 600;
+          line-height: 1em;
+        }
+
+        p {
+          padding: 0;
+          margin: 10px 0 0 0;
+
+          color: $app-color-darkest;
+          font-size: 32px;
+          font-weight: 400;
+          line-height: 1em;
+        }
+
+        .label {
+          display: inline-flex;
+          align-items: center;
+          cursor: pointer;
+        }
+          
+        .toggle {
+          isolation: isolate;
+          position: relative;
+          height: 32px;
+          width: 64px;
+          border-radius: 15px;
+          background: $app-color-darkest;
+          overflow: hidden;
+        }
+        
+        .toggle-inner {
+          z-index: 2;
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          height: 28px;
+          width: 60px;
+          border-radius: 15px;
+          overflow: hidden;
+        }
+        
+        .active-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 200%;
+          background: $app-color-darker;
+          transform: translate3d(-100%, 0, 0);
+          transition: transform 0.05s linear 0.17s;
+        }
+        
+        .toggle-state {
+          display: none;
+        }
+        
+        .indicator {
+          height: 100%;
+          width: 200%;
+          background: $app-color;
+          border-radius: 13px;
+          transform: translate3d(-75%, 0, 0);
+          transition: transform 0.35s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+        }
+        
+        .toggle-state:checked ~ .active-bg {
+          transform: translate3d(-50%, 0, 0);
+        }
+        
+        .toggle-state:checked ~ .toggle-inner .indicator {
+          transform: translate3d(25%, 0, 0);
+          background: $app-accent;
+        }
+      }
+
+      .add-alarm-btn {
+        padding: 15px 0;
+  
+        background: $app-color;
+        color: $app-accent;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1em;
+        outline: none;
+        border: none;
+        border-radius: 40px;
+
+        &:active {
+          background: $app-color-darkest;
+        }
+      }
+    }
+  }
+}

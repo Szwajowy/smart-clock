@@ -1,0 +1,30 @@
+<div class="container" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" (swipeup)="onSwipeUp()" (swipedown)="onSwipeDown()">
+    <a [routerLink]="this.navigation.left" class="navigation-arrow left-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
+            <g transform="translate(4.243 4.243)">
+                <line x1="13" y2="13" stroke-linecap="round" stroke-width="6"/>
+                <line x1="13" y1="13" transform="translate(0 13)" stroke-linecap="round" stroke-width="6"/>
+            </g>
+        </svg>
+    </a>
+
+    <div class="stopwatch-content">
+        <div class="stopwatch">
+            <h1 class="hours"><span>{{ getTime('hours') }}</span> {{ getHoursText() }}</h1>
+            <h1><span>{{ getTime('minutes') }}</span>:<span>{{ getTime('seconds') }}</span>:<span>{{ getTime('milliseconds') }}</span></h1>
+        </div>
+        <div class="buttons">
+            <button class="start-btn btn" (click)="onStartPause()">{{ (!isPaused() && isRunning()) ? 'Pauza' : 'Start'}}</button>
+            <button class="stop-btn btn" (click)="onStop()">Stop</button>
+        </div>
+    </div>
+
+    <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
+            <g transform="translate(-747.257 -176.257)">
+                <line x2="13" y2="13" transform="translate(751.5 180.5)" stroke-linecap="round" stroke-width="6"/>
+                <line y1="13" x2="13" transform="translate(751.5 193.5)" stroke-linecap="round" stroke-width="6"/>
+            </g>
+        </svg>
+    </a>
+</div>
