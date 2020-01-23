@@ -8,5 +8,7 @@
 
     overflow: hidden;
 
-    background: $app-accent;
+    background: var(--accent);
+
+    transition: background linear 500ms;
 }

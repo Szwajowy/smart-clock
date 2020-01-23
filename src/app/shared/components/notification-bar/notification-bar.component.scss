@@ -1,0 +1,88 @@
+@import 'styles.scss';
+
+.notification-bar {
+    height: 95px;
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    
+    background: var(--color);
+
+    .left-arrow, .right-arrow {
+        height: auto;
+        width: 20px;
+        padding: 0 40px;
+    }
+
+    a svg, a svg g, a svg g line {
+        height: 20px;
+        width: auto;
+        stroke: var(--color-darker);
+    }
+
+    .notifications-list {
+        flex-grow: 100;
+        
+        width: 600px;
+        height: 100%;
+        overflow: hidden;
+
+        position: relative;
+
+        .notification {
+            width: 600px;
+
+            display: flex;
+            flex-flow: row nowrap;
+            transition: ease 1s;
+
+            &:first-child {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+            
+            &:not(:first-child) {
+                position: absolute;
+                top: 50%;
+                left: 100%;
+                transform: translateY(-50%);
+            }
+
+            .notification-icon {
+                height: 40px;
+                width: 40px;
+    
+                margin-right: 20px;
+
+                svg {
+                    height: 100%;
+                    width: auto;
+                    fill: var(--accent);
+                    stroke: var(--accent);
+                }
+            }
+        
+            .notification-text {
+                h5,h2 {
+                    padding: 0;
+                    margin: 0;
+            
+                    line-height: 1em;
+                }
+            
+                h2 {
+                    color: var(--accent);
+                }
+            
+                h5 {
+                    color: var(--accent-lighter);
+                }
+            }
+        }
+    }
+}

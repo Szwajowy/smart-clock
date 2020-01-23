@@ -1,0 +1,43 @@
+<div class="container" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" (swipeup)="onSwipeUp()" (swipedown)="onSwipeDown()">
+    <a [routerLink]="this.navigation.left" class="navigation-arrow left-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
+            <g transform="translate(4.243 4.243)">
+                <line x1="13" y2="13" stroke-linecap="round" stroke-width="6"/>
+                <line x1="13" y1="13" transform="translate(0 13)" stroke-linecap="round" stroke-width="6"/>
+            </g>
+        </svg>
+    </a>
+
+    <div class="settings-content">
+        <header>
+            <h2>Ustawienia</h2>
+            <button *ngIf="!logged" (click)="onLogin()">
+                Zaloguj się
+                <div class="avatar">
+                    <svg viewBox="0 0 448 512"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+                </div>
+            </button>
+            <button *ngIf="logged" (click)="onLogout()">
+                Krzysztof Czaja
+                <img src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p160x160/52983635_1396325420507284_6518690908471296000_o.jpg?_nc_cat=103&_nc_oc=AQmrFNwLzoTvuZ1DqZr4b8ZSun1k2ZK7R2cRI6onuXUXo36eGC_fEWSrZYi_Fguz17A8EzCz4_I9vkUvGeR8zPYS&_nc_ht=scontent-waw1-1.xx&_nc_tp=1&oh=36a7d0b6ac3f3071eeaac68619ad294d&oe=5EAAFA29" class="avatar" />
+            </button>
+        </header>
+        <section class="settings-wraper">
+            <div class="form-group">
+                <h3>Kolor akcentu</h3>
+                <ul class="color-picker">
+                    <li *ngFor="let theme of themes" [style.background]="theme.properties.accent" (click)="onThemeChange(theme.name)"></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
+            <g transform="translate(-747.257 -176.257)">
+                <line x2="13" y2="13" transform="translate(751.5 180.5)" stroke-linecap="round" stroke-width="6"/>
+                <line y1="13" x2="13" transform="translate(751.5 193.5)" stroke-linecap="round" stroke-width="6"/>
+            </g>
+        </svg>
+    </a>
+</div>

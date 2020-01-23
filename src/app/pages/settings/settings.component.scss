@@ -1,0 +1,128 @@
+@import 'styles.scss';
+
+.container {
+    height: calc(100% - 120px);
+    width: 100%;
+    padding: 60px 0;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+
+    .left-arrow, .right-arrow {
+        height: auto;
+        width: 20px;
+        padding: 0 30px;
+
+        transition: stroke linear 500ms;
+    }
+
+    .settings-content {
+        height: 100%;
+        flex-grow: 100;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-self: center;
+
+        header {
+            margin-bottom: 18px;
+
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+                margin: 0;
+                padding: 0;
+    
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 1em;
+
+                transition: color linear 500ms;
+            }
+
+            button {
+                padding: 6px 12px;
+
+                background: var(--color);
+                border: none;
+                border-radius: 100px;
+                color: var(--accent);
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 1em;
+
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                transition: background linear 500ms,
+                            color linear 500ms;
+
+                .avatar {
+                    height: 30px;
+                    width: 30px;
+
+                    margin-left: 12px;
+
+                    background: var(--color-darker);
+                    border-radius: 100px;
+
+                    svg {
+                        height: 80%;
+                        padding: 10%;
+
+                        fill: var(--accent);
+                        background: none;
+
+                        transition: fill linear 500ms;
+                    }
+                }
+            }
+        }
+
+        .settings-wraper {
+            height: calc(100% - 40px);
+
+            padding: 20px;
+
+            color: var(--color-darkest);
+            background: var(--color);
+            border-radius: 12px;
+
+            transition: background linear 500ms,
+                        color linear 500ms;
+
+            .form-group {
+                h3 {
+                    padding: 0;
+                    margin: 0 0 12px 0;
+                }
+
+                .color-picker {
+                    margin: 0;
+                    padding: 0;
+
+                    list-style: none;
+
+                    display: flex;
+                    flex-flow: row nowrap;
+
+                    li {
+                        width: 40px;
+                        height: 40px;
+                        
+                        border-radius: 6px;
+
+                        &:not(:last-child) {
+                            margin-right: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

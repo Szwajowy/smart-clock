@@ -5,7 +5,7 @@ const animationDuration = '700ms';
 export const slideInAnimation =
 
   trigger('routeAnimations', [
-    transition('Clock => WeatherToday, Stopwatch => WeatherToday, Timer => WeatherToday, Alarms => WeatherToday, WeatherToday => Calendar, WeatherTomorrow => Calendar, Calendar => Clock', [
+    transition('Clock => WeatherToday, Stopwatch => WeatherToday, Timer => WeatherToday, Alarms => WeatherToday, WeatherToday => Calendar, WeatherTomorrow => Calendar, WeatherThreeDays=>Calendar, Calendar => Settings, Settings => Clock', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -30,7 +30,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild()),
     ]),
-    transition('Clock => Calendar, Calendar => WeatherToday, WeatherToday => Clock, WeatherTomorrow => Clock', [
+    transition('Clock => Settings, Settings => Calendar, Calendar => WeatherToday, WeatherToday => Clock, WeatherTomorrow => Clock, WeatherThreeDays => Clock', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -55,7 +55,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild()),
     ]),
-    transition('Clock => Stopwatch, Stopwatch => Timer, Timer => Alarms, Alarms => Clock, WeatherToday => WeatherTomorrow', [
+    transition('Clock => Stopwatch, Stopwatch => Timer, Timer => Alarms, Alarms => Clock, WeatherToday => WeatherTomorrow, WeatherTomorrow => WeatherThreeDays, WeatherThreeDays => WeatherToday', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -80,7 +80,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild()),
     ]),
-    transition('Alarms => Timer, Timer => Stopwatch, Stopwatch => Clock, Clock => Alarms, WeatherTomorrow => WeatherToday', [
+    transition('Alarms => Timer, Timer => Stopwatch, Stopwatch => Clock, Clock => Alarms, WeatherThreeDays => WeatherTomorrow, WeatherTomorrow => WeatherToday, WeatherToday => WeatherThreeDays', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -131,15 +131,15 @@ export const notificationSlide =
       opacity: '0'
     })),
     transition('active => leave', [
-      animate('0.5s')
+      animate('0.5s ease')
     ]),
     transition('leave => active', [
-      animate('0.5s')
+      animate('0.5s ease')
     ]),
     transition('enter => active', [
-      animate('0.5s')
+      animate('0.5s ease')
     ]),
     transition('active => enter', [
-      animate('0.5s')
+      animate('0.5s ease')
     ])
   ]);

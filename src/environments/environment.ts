@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyBgdhXPiADyIvswqgwgwpvwuSpMg9d9LuY",
+    authDomain: "smartclock-api.firebaseapp.com",
+    databaseURL: "https://smartclock-api.firebaseio.com",
+    projectId: "smartclock-api",
+    storageBucket: "smartclock-api.appspot.com",
+    messagingSenderId: "212228267803",
+    appId: "1:212228267803:web:139f0935949b171239fdbe",
+    measurementId: "G-6X70N876LY"
+  }
 };
 
 /*

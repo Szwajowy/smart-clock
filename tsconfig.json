@@ -1,7 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@env": ["enviroments/enviroment"],
+      "@shared/*": ["app/shared/*"],
+      "@styles/*": ["../styles/*"],
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
