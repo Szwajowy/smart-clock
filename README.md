@@ -1,27 +1,19 @@
-# SmartClock
+# SmartClock on Raspberry Pi
+## Make your own smartclock on cheap
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.3.
+I'm running a apache server on my Raspberry Pi and automatically launching this app on fullscreen after boot. There is plenty ways of making it better and more 'yours', but it's already preaty fun.
 
-## Development server
+Some feauters are only on my second project called SmartClock-Manager which is a app to manage your SmartClock.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Features
+* Displaying current time and date
+* Weather for 5 days
+* Timer
+* Stopwatch
+* Alarm clock
+* Themes
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### TODO
+* Change the alarm component to handle edit and deleting (for this moment you can do it only using SmartClock-Manager)
+* Add displaying upcoming events from google calendar
+* Add more themes
