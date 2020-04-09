@@ -1,92 +1,128 @@
-@import 'styles.scss';
+@import "styles.scss";
 
 .container {
-    height: calc(100% - 120px);
-    width: 100%;
-    padding: 60px 0;
+  height: calc(100% - 120px);
+  width: 100%;
+  padding: 60px 0;
 
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 
-    position: relative;
+  position: relative;
 
-    .left-arrow, .right-arrow {
-        height: auto;
-        width: 20px;
-        padding: 0 30px;
+  .left-arrow,
+  .right-arrow {
+    height: auto;
+    width: 20px;
+    padding: 0 30px;
+  }
+
+  .weather-content {
+    flex-grow: 100;
+    align-self: center;
+
+    overflow: hidden;
+
+    .error-msg {
+      h3 {
+        padding: 16px 0;
+        margin: 0;
+
+        font-size: 54px;
+        font-weight: 700;
+        line-height: 1em;
+      }
+
+      h4 {
+        padding: 0;
+        margin: 0;
+
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1em;
+      }
     }
 
-    .weather-content {
-        flex-grow: 100;
-        align-self: center;
+    .weather-icon {
+      width: 40%;
+      max-height: 80%;
 
-        overflow: hidden;
+      position: absolute;
+      top: 50%;
+      right: 80px;
 
-        .weather-icon {
-            width: 40%;
-            max-height: 80%;
+      transform: translateY(-50%);
 
-            position: absolute;
-            top: 50%;
-            right: 80px;
-
-            transform: translateY(-50%);
-
-            fill: var(--accent-lighter);
-        }
-        
-        .weather-info {
-            position: relative;
-            z-index: 2;
-
-            p {
-                padding: 0;
-                margin: 0 0 10px 0;
-                
-                color: var(--color-darker);
-                font-size: 28px;
-                font-weight: 500;
-                line-height: 1em;
-
-                span {
-                    color: var(--color);
-                    font-size: 1.2em;
-                    font-weight: 600;
-                }
-            }
-    
-            h3 {
-                padding: 16px 0;
-                margin: 0;
-    
-                font-size: 54px;
-                font-weight: 700;
-                line-height: 1em;
-  
-                // text-shadow: 0 0 6px $app-text-shadow;
-               
-                span {
-                    font-size: 1.2em;
-                }
-            }
-            
-            h4 {
-                padding: 0;
-                margin: 6px 0 0 0;
-    
-                color: var(--color-darker);
-                font-size: 28px;
-                font-weight: 500;
-  
-                // text-shadow: 0 0 6px $app-text-shadow;
-    
-                span {
-                    color: var(--color);
-                    font-size: 1.2em;
-                    font-weight: 700;
-                }
-            }
-        }
+      fill: var(--accent-lighter);
     }
+
+    .weather-info {
+      position: relative;
+      z-index: 2;
+
+      header {
+        margin-bottom: 10px;
+        display: flex;
+        flex-flow: column;
+        // justify-content: space-between;
+
+        p {
+          padding: 0;
+          margin: 0;
+
+          color: var(--color-darker);
+          font-size: 28px;
+          font-weight: 500;
+          line-height: 1em;
+
+          span {
+            margin-right: 6px;
+            color: var(--color);
+            font-size: 1.2em;
+            font-weight: 600;
+
+            border-right: 2px solid var(--color-darker);
+          }
+        }
+
+        small {
+          margin-top: 8px;
+          font-size: 18px;
+        }
+      }
+
+      h3 {
+        padding: 16px 0;
+        margin: 0;
+
+        font-size: 54px;
+        font-weight: 700;
+        line-height: 1em;
+
+        // text-shadow: 0 0 6px $app-text-shadow;
+
+        span {
+          font-size: 1.2em;
+        }
+      }
+
+      h4 {
+        padding: 0;
+        margin: 6px 0 0 0;
+
+        color: var(--color-darker);
+        font-size: 28px;
+        font-weight: 500;
+
+        // text-shadow: 0 0 6px $app-text-shadow;
+
+        span {
+          color: var(--color);
+          font-size: 1.2em;
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }

@@ -1,80 +1,69 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { WeatherService } from './weather.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+
+import { timer, Subscribable, Subscription, interval } from "rxjs";
+import { map } from "rxjs/operators";
+
+import { WeatherService } from "../../shared/services/weather.service";
 
 @Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss']
+  selector: "app-weather",
+  templateUrl: "./weather.component.html",
+  styleUrls: ["./weather.component.scss"]
 })
 export class WeatherComponent implements OnInit, OnDestroy {
-
   public navigation = {
     top: null,
-    right: '/calendar',
-    bottom: '/weather/tomorrow',
-    left: '/'
+    right: "/calendar",
+    bottom: "/weather/tomorrow",
+    left: "/"
   };
 
-  public weather;
+  public weather$ = this.weatherService.getWeather().pipe(
+    map(weather => {
+      if (this.route.snapshot.data["weather"] == "today") {
+        weather.list[0].updateAt = weather.updateAt;
+        weather.list[0].city = weather.city;
+        return weather.list[0];
+      } else {
+        weather.list[1].updateAt = weather.updateAt;
+        weather.list[1].city = weather.city;
+        return weather.list[1];
+      }
+    })
+  );
 
-  public weatherSubscription;
-  private weatherSubjectSubscription;
-
-  constructor(private weatherService: WeatherService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private weatherService: WeatherService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    if(this.route.snapshot.data['weather'] == 'today') {
-      this.navigation.top = '/weather/3days';
-      this.navigation.bottom = '/weather/tomorrow';
+    if (this.route.snapshot.data["weather"] == "today") {
+      this.navigation.top = "/weather/3days";
+      this.navigation.bottom = "/weather/tomorrow";
     } else {
-      this.navigation.top = '/weather/today';
-      this.navigation.bottom = '/weather/3days';
+      this.navigation.top = "/weather/today";
+      this.navigation.bottom = "/weather/3days";
     }
-
-    this.weatherSubscription = this.weatherService.getWeather().subscribe(res => {
-      if(this.route.snapshot.data['weather'] == 'today') {
-        this.weather = res.list[0];
-        this.weather.city = res.city;
-      } else {
-        this.weather = res.list[1];
-        this.weather.city = res.city;
-      }
-    });
-    this.weatherSubscription.unsubscribe();
-
-    this.weatherSubjectSubscription = this.weatherService.getWeatherSubject().subscribe(res => {
-      if(this.route.snapshot.data['weather'] == 'today') {
-        this.weather = res.list[0];
-        this.weather.city = res.city;
-      } else {
-        this.weather = res.list[1];
-        this.weather.city = res.city;
-      }
-    });
   }
 
-  ngOnDestroy () {
-    this.weatherSubjectSubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 
   onSwipeLeft() {
-    if(this.navigation.right)
-      this.router.navigate([this.navigation.right]);
+    if (this.navigation.right) this.router.navigate([this.navigation.right]);
   }
 
   onSwipeRight() {
-    if(this.navigation.left)
-    this.router.navigate([this.navigation.left]);
+    if (this.navigation.left) this.router.navigate([this.navigation.left]);
   }
 
   onSwipeUp() {
-    if(this.navigation.bottom)
-    this.router.navigate([this.navigation.bottom]);
+    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
   }
 
   onSwipeDown() {
-    if(this.navigation.top)
-    this.router.navigate([this.navigation.top]);
+    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

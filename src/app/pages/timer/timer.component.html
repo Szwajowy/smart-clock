@@ -9,10 +9,10 @@
         </a>
     
         <div class="timer-content">
-            <div class="timer">
+            <div class="timer" *ngIf="timerService.time.subject | async as time">
 
                 <div class="hours">
-                    <button class="increase" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onIncrease('hours')">
+                    <button class="increase" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.increment('hours')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" stroke-linecap="round" stroke-width="6"/>
@@ -20,8 +20,8 @@
                             </g>
                         </svg>
                     </button>
-                    <p class="value">{{ getTime('hours') }}</p>
-                    <button class="decrease" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onDecrease('hours')">
+                    <p class="value">{{ time.hours | number:'2.0-0' }}</p>
+                    <button class="decrease" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.decrement('hours')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" stroke-linecap="round" stroke-width="6"/>
@@ -34,7 +34,7 @@
                 <div class="separator">:</div>
 
                 <div class="minutes">                    
-                    <button class="increase" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onIncrease('minutes')">
+                    <button class="increase" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.increment('minutes')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
@@ -42,8 +42,8 @@
                             </g>
                         </svg>
                     </button>
-                    <p class="value">{{ getTime('minutes') }}</p>
-                    <button class="decrease" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onDecrease('minutes')">
+                    <p class="value">{{ time.minutes | number:'2.0-0' }}</p>
+                    <button class="decrease" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.decrement('minutes')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
@@ -56,7 +56,7 @@
                 <div class="separator">:</div>
 
                 <div class="seconds">
-                    <button class="increase" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onIncrease('seconds')">
+                    <button class="increase" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.increment('seconds')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
@@ -64,8 +64,8 @@
                             </g>
                         </svg>
                     </button>
-                    <p class="value">{{ getTime('seconds') }}</p>
-                    <button class="decrease" [ngStyle]="!isRunning() ? {opacity: 100} : {opacity: 0}" (click)="onDecrease('seconds')">
+                    <p class="value">{{ time.seconds | number:'2.0-0' }}</p>
+                    <button class="decrease" [ngStyle]="!timerService.isRunning() ? {opacity: 100} : {opacity: 0}" (click)="timerService.time.decrement('seconds')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="21.485" height="34.485" viewBox="0 0 21.485 34.485">
                             <g transform="translate(4.243 4.243)">
                                 <line x1="13" y2="13" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
@@ -77,8 +77,8 @@
                 
             </div>
             <div class="buttons">
-                <button class="start-btn btn" (click)="onStartPause()">{{ (!isPaused() && isRunning()) ? 'Pauza' : 'Start'}}</button>
-                <button class="stop-btn btn" (click)="onStop()">Stop</button>
+                <button class="start-btn btn" (click)="timerService.startPause()">{{ (!timerService.isRunning() || timerService.isPaused()) ? 'Start' : 'Pauza'}}</button>
+                <button class="stop-btn btn" (click)="timerService.stop()">Stop</button>
             </div>
         </div>
     

@@ -9,13 +9,13 @@
     </a>
 
     <div class="stopwatch-content">
-        <div class="stopwatch">
-            <h1 class="hours"><span>{{ getTime('hours') }}</span> {{ getHoursText() }}</h1>
-            <h1><span>{{ getTime('minutes') }}</span>:<span>{{ getTime('seconds') }}</span>:<span>{{ getTime('milliseconds') }}</span></h1>
+        <div class="stopwatch" *ngIf="stopwatchService.time.subject | async as time">
+            <h1 class="hours"><span>{{ time.hours  }}</span> {{ stopwatchService.time.getHoursText() }}</h1>
+            <h1><span>{{ time.minutes | number:'2.0-0' }}</span>:<span>{{ time.seconds | number:'2.0-0' }}</span>:<span>{{ time.milliseconds | number:'2.0-0' }}</span></h1>
         </div>
         <div class="buttons">
-            <button class="start-btn btn" (click)="onStartPause()">{{ (!isPaused() && isRunning()) ? 'Pauza' : 'Start'}}</button>
-            <button class="stop-btn btn" (click)="onStop()">Stop</button>
+            <button class="start-btn btn" (click)="stopwatchService.startPause()">{{ (!stopwatchService.isRunning() || stopwatchService.isPaused()) ? 'Start' : 'Pauza'}}</button>
+            <button class="stop-btn btn" (click)="stopwatchService.stop()">Stop</button>
         </div>
     </div>
 

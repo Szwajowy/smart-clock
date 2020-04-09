@@ -1,30 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  AfterViewInit,
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { fromEvent } from "rxjs";
+import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 
-import { ThemeService } from 'app/shared/services/theme.service';
+import { ThemeService } from "app/shared/services/theme.service";
+import { SettingsService } from "./settings.service";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: "app-settings",
+  templateUrl: "./settings.component.html",
+  styleUrls: ["./settings.component.scss"],
 })
-export class SettingsComponent implements OnInit {
-
+export class SettingsComponent {
   public navigation = {
-    top: '',
-    right: '/',
-    bottom: '',
-    left: '/calendar'
+    top: "",
+    right: "/",
+    bottom: "",
+    left: "/calendar",
   };
 
-  public themes = this.themeService.getAvailableThemes();
-
+  public themes = this.themeService.availableThemes$;
   public logged = false;
 
-  constructor(private themeService: ThemeService, private router: Router) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private settingsService: SettingsService,
+    private themeService: ThemeService,
+    private router: Router
+  ) {}
 
   onLogin() {
     this.logged = true;
@@ -35,27 +44,26 @@ export class SettingsComponent implements OnInit {
   }
 
   onThemeChange(name: string) {
-    this.themeService.setActiveTheme(name);
+    this.settingsService.changeTheme(name);
+  }
+
+  getSettings() {
+    return this.settingsService.getSettings();
   }
 
   onSwipeLeft() {
-    if(this.navigation.right)
-      this.router.navigate([this.navigation.right]);
+    if (this.navigation.right) this.router.navigate([this.navigation.right]);
   }
 
   onSwipeRight() {
-    if(this.navigation.left)
-    this.router.navigate([this.navigation.left]);
+    if (this.navigation.left) this.router.navigate([this.navigation.left]);
   }
 
   onSwipeUp() {
-    if(this.navigation.bottom)
-    this.router.navigate([this.navigation.bottom]);
+    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
   }
 
   onSwipeDown() {
-    if(this.navigation.top)
-    this.router.navigate([this.navigation.top]);
+    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
-
 }
