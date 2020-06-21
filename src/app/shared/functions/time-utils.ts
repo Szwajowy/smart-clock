@@ -155,3 +155,10 @@ export function decreaseTime(timeParam, part, options?) {
 
   return time;
 }
+
+export function transformToMinutes(time: {
+  hour: number;
+  minute: number;
+}): number {
+  return time.minute + time.hour * 60;
+}

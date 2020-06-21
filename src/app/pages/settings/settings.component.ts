@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { ThemeName } from "@shared/models/theme-name.enum";
 
 import { ThemeService } from "app/shared/services/theme.service";
 import { SettingsService } from "./settings.service";
@@ -34,7 +35,7 @@ export class SettingsComponent {
     this.logged = false;
   }
 
-  onThemeChange(name: string) {
+  onThemeChange(name: ThemeName) {
     this.settingsService.changeTheme(name);
   }
 

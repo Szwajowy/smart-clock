@@ -1,32 +1,34 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subject, Observable } from "rxjs";
-
-import * as moment from "moment";
-
-import { AdjustingInterval } from "../models/adjusting-interval.model";
-import { NotificationsService } from "app/shared/components/notification-bar/notifications.service";
-import { FirebaseService } from "./firebase.service";
+import { Alarm } from "@shared/models/alarm.model";
+import { Timezone } from "@shared/models/timezone.model";
 import { SettingsService } from "app/pages/settings/settings.service";
+import { NotificationsService } from "app/shared/components/notification-bar/notifications.service";
+import * as moment from "moment";
+import { Subject } from "rxjs";
+import { AdjustingInterval } from "../models/adjusting-interval.model";
+import { AlarmsService } from "./alarms.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ClockService {
   private clock = {
-    datetime: new Date(new Date().getTime()),
+    datetime: new Date(),
     interval: null,
     momentSubject: new Subject<any>(),
   };
 
   private clockSubject = new Subject<any>();
+  private timezone: Timezone;
 
   constructor(
     private router: Router,
-    private firebaseService: FirebaseService,
+    private alarmsService: AlarmsService,
     private notificationsService: NotificationsService,
     private settingsService: SettingsService
   ) {
+    this.timezone = this.settingsService.getSettings().timezone;
     this.clock.interval = new AdjustingInterval(
       this.getTimeNow.bind(this),
       1000
@@ -35,171 +37,162 @@ export class ClockService {
     this.clock.interval.start();
   }
 
-  pad(number) {
+  pad(number: number): string {
     if (number < 10) return "0" + number;
 
-    return number;
+    return number.toString();
   }
 
-  // MAIN FUNCTIONS FOR CLOCK, STOPWATCH AND TIMER
-  getTimeNow() {
-    this.clock.datetime = new Date(new Date().getTime());
+  getTimeNow(): void {
+    this.clock.datetime = new Date();
     this.clock.momentSubject.next(this.clock.datetime);
 
     // CHECK FOR EACH ALARM IF IT IS SET TO THIS TIME
-
-    // if (this.alarms && this.alarms.length > 0) {
-    //   let closeAlarms = [];
-
-    //   this.alarms.forEach((alarm) => {
-    //     // Check if alarm time is in 3 hours range from now
-    //     if (alarm.active === true) {
-    //       let alarmTime = {
-    //         hour: alarm.time.hours,
-    //         minute: alarm.time.minutes,
-    //       };
-
-    //       if (
-    //         this.isAlarmBetween(
-    //           alarmTime,
-    //           {
-    //             hour:
-    //               this.clock.datetime.getUTCHours() +
-    //               Number(
-    //                 this.settingsService
-    //                   .getSettings()
-    //                   .timezone.offset.slice(0, 3)
-    //               ),
-    //             minute: this.clock.datetime.getUTCMinutes(),
-    //           },
-    //           {
-    //             hour:
-    //               this.clock.datetime.getUTCHours() +
-    //               8 +
-    //               Number(
-    //                 this.settingsService
-    //                   .getSettings()
-    //                   .timezone.offset.slice(0, 3)
-    //               ),
-    //             minute: this.clock.datetime.getUTCMinutes(),
-    //           }
-    //         )
-    //       ) {
-    //         closeAlarms.push(moment(alarmTime));
-    //       }
-    //     }
-
-    // Check if alarm is turned on and
-    // if alarm fire time is same as now and
-    // if it should fire day and
-    // it wasnt firing today or wasnt firing at all
-
-    let hourInTimezone =
-      this.clock.datetime.getUTCHours() +
-      Number(this.settingsService.getSettings().timezone.offset.slice(0, 3));
-    if (hourInTimezone === 24) hourInTimezone = 0;
-
-    //   if (
-    //     alarm.active === true &&
-    //     alarm.time.hours === hourInTimezone &&
-    //     alarm.time.minutes === this.clock.datetime.getUTCMinutes() &&
-    //     this.isAlarmToday(alarm) &&
-    //     (!alarm.lastFiring ||
-    //       moment(alarm.lastFiring).isBefore(this.clock.datetime, "minute")) &&
-    //     this.router.url !== "/firingAlarm"
-    //   ) {
-    //     // Set last firing date to today and redirect to alarm screen
-    //     alarm.lastFiring = this.clock.datetime;
-    //     this.router.navigate(["/alarmFiring"]);
-    //   }
-    // });
-
-    //   if (closeAlarms.length > 0) {
-    //     let closestAlarm = closeAlarms[0];
-    //     closeAlarms.forEach((alarm) => {
-    //       closestAlarm = alarm.isBefore(closestAlarm) ? alarm : closestAlarm;
-    //     });
-
-    //     this.notificationsService.getInputNotificationsSubject().next({
-    //       type: "alarm",
-    //       operation: "post",
-    //       content:
-    //         "Budzik zadzwoni o " +
-    //         this.pad(closestAlarm.get("hour")) +
-    //         ":" +
-    //         this.pad(closestAlarm.get("minute")),
-    //       icon: "clock",
-    //     });
-    //   } else {
-    //     this.notificationsService.getInputNotificationsSubject().next({
-    //       type: "alarm",
-    //       operation: "remove",
-    //       content: null,
-    //       icon: null,
-    //     });
-    //   }
-    // }
+    this.checkForCloseAlarms();
+    this.checkForFiringAlarms();
   }
 
-  // HELPING FUNCTIONS
-  transformToMinutes(time) {
-    return time.minute + time.hour * 60;
+  checkForCloseAlarms(): void {
+    const hoursToCheck = 8;
+    let closeAlarms: Alarm[] = [];
+
+    this.alarmsService.alarms$.subscribe((alarms: Alarm[]) => {
+      if (!alarms || alarms.length === 0) return false;
+
+      alarms.forEach((alarm) => {
+        if (!alarm.active) return false;
+        if (
+          this.alarmIsFiringInNextHours(alarm, hoursToCheck) &&
+          (!alarm.lastFiring ||
+            moment(alarm.lastFiring).isBefore(this.clock.datetime, "minute"))
+        )
+          closeAlarms.push(alarm);
+      });
+
+      this.sendNotificationAboutClosestAlarm(closeAlarms);
+    });
   }
 
-  // isAlarmToday(alarm) {
-  //   let alarmToday = false;
+  private alarmIsFiringInNextHours(
+    alarm: Alarm,
+    hoursToCheck: number
+  ): boolean {
+    const startTime = {
+      hour:
+        this.clock.datetime.getUTCHours() +
+        Number(this.timezone.offset.slice(0, 3)),
+      minute: this.clock.datetime.getUTCMinutes(),
+    };
+    const endTime = {
+      hour:
+        this.clock.datetime.getUTCHours() +
+        hoursToCheck +
+        Number(this.timezone.offset.slice(0, 3)),
+      minute: this.clock.datetime.getUTCMinutes(),
+    };
 
-  //   // Check for everyday of week
-  //   for (let day in alarm.repeat) {
-  //     // If alarm is set to repeat on this day and this day is today
-  //     if (
-  //       alarm.repeat[day] === true &&
-  //       this.changeDayOfWeekNameToNumber(day) === this.clock.datetime.getDay()
-  //     )
-  //       alarmToday = true;
-  //   }
+    if (!alarm.repeat.includes(true)) {
+      return this.alarmsService.isAlarmBetween(alarm, startTime, endTime);
+    }
 
-  //   return alarmToday;
-  // }
+    if (endTime.hour > 23) {
+      let firesToday = false;
+      let firesTommorow = false;
+      const endOfDay = { hour: 23, minute: 59 };
+      const startOfDay = { hour: 0, minute: 0 };
 
-  // isAlarmBetween(alarm, startTime, endTime) {
-  //   const alarmInMinutes = this.transformToMinutes(alarm);
-  //   const startTimeInMinutes = this.transformToMinutes(startTime);
-  //   const endTimeInMinutes = this.transformToMinutes(endTime);
+      if (alarm.repeat[this.clock.datetime.getDay()]) {
+        firesToday = this.alarmsService.isAlarmBetween(
+          alarm,
+          startTime,
+          endOfDay
+        );
+      }
 
-  //   if (endTimeInMinutes < startTimeInMinutes) {
-  //     if (this.isAlarmBetween(alarm, startTime, { hour: 24, minute: 0 }))
-  //       return true;
+      if (alarm.repeat[this.clock.datetime.getDate()]) {
+        firesTommorow = this.alarmsService.isAlarmBetween(
+          alarm,
+          startOfDay,
+          endTime
+        );
+      }
 
-  //     if (this.isAlarmBetween(alarm, { hour: 0, minute: 0 }, endTime))
-  //       return true;
-  //   } else if (
-  //     alarmInMinutes >= startTimeInMinutes &&
-  //     alarmInMinutes <= endTimeInMinutes
-  //   )
-  //     return true;
+      return firesToday || firesTommorow;
+    } else {
+      if (alarm.repeat[this.clock.datetime.getDay()])
+        return this.alarmsService.isAlarmBetween(alarm, startTime, endTime);
+    }
+  }
 
-  //   return false;
-  // }
+  checkForFiringAlarms() {
+    this.alarmsService.alarms$.subscribe((alarms: Alarm[]) => {
+      if (!alarms || alarms.length === 0) return false;
 
-  // changeDayOfWeekNameToNumber(day) {
-  //   switch (day) {
-  //     case "mon":
-  //       return 0;
-  //     case "tue":
-  //       return 1;
-  //     case "wed":
-  //       return 2;
-  //     case "thu":
-  //       return 3;
-  //     case "fri":
-  //       return 4;
-  //     case "sat":
-  //       return 5;
-  //     case "sun":
-  //       return 6;
-  //   }
-  // }
+      alarms.forEach((alarm) => {
+        if (!alarm.active) return false;
+
+        let hourInTimezone =
+          this.clock.datetime.getUTCHours() +
+          Number(
+            this.settingsService.getSettings().timezone.offset.slice(0, 3)
+          );
+        if (hourInTimezone === 24) hourInTimezone = 0;
+
+        if (
+          alarm.time.hours === hourInTimezone &&
+          alarm.time.minutes === this.clock.datetime.getUTCMinutes() &&
+          this.alarmsService.isAlarmToday(
+            alarm,
+            this.clock.datetime.getDay()
+          ) &&
+          (!alarm.lastFiring ||
+            moment(alarm.lastFiring).isBefore(this.clock.datetime, "minute")) &&
+          this.router.url !== "/firingAlarm"
+        ) {
+          // Set last firing date to today and redirect to alarm screen
+          alarm.lastFiring = this.clock.datetime;
+          if (!alarm.repeat.includes(true)) alarm.active = false;
+          this.router.navigate(["/alarmFiring"]);
+        }
+      });
+    });
+  }
+
+  private sendNotificationAboutClosestAlarm(closeAlarms: Alarm[]): void {
+    if (closeAlarms.length > 0) {
+      let closestAlarm = moment({
+        hour: closeAlarms[0].time.hours,
+        minute: closeAlarms[0].time.minutes,
+      });
+      closeAlarms.forEach((alarm: Alarm) => {
+        const alarmTime = moment({
+          hour: alarm.time.hours,
+          minute: alarm.time.minutes,
+        });
+        closestAlarm = alarmTime.isBefore(closestAlarm)
+          ? alarmTime
+          : closestAlarm;
+      });
+
+      this.notificationsService.getInputNotificationsSubject().next({
+        type: "alarm",
+        operation: "post",
+        content:
+          "Budzik zadzwoni o " +
+          this.pad(closestAlarm.get("hour")) +
+          ":" +
+          this.pad(closestAlarm.get("minute")),
+        icon: "clock",
+      });
+    } else {
+      this.notificationsService.getInputNotificationsSubject().next({
+        type: "alarm",
+        operation: "remove",
+        content: null,
+        icon: null,
+      });
+    }
+  }
 
   // SUBJECT FOR NOTIFICATIONS
   getSubject() {
