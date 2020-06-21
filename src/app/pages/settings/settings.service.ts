@@ -13,6 +13,7 @@ import { FirebaseService } from "@shared/services/firebase.service";
 export class SettingsService {
   private settings = {
     activeTheme: "blue",
+    clockStyle: 1,
     city: "Katowice",
     updateTime: 2,
     lastUpdate: new Date().getTime(),
@@ -49,7 +50,6 @@ export class SettingsService {
 
     this.firebaseService
       .getDeviceData("settings")
-      .pipe()
       .subscribe((settings: any) => {
         let newSettings;
 
@@ -85,11 +85,12 @@ export class SettingsService {
         this.themeService.setActiveTheme(this.settings.activeTheme);
         this.weatherService.setCity(this.settings.city);
         this.weatherService.setRefreshInterval(this.settings.updateTime);
+        this.settingChanged.next();
       });
   }
 
   saveSettings() {
-    console.log("Zapisywanie ustawień !");
+    console.log("Saving settigns!");
     localStorage.setItem("settings", JSON.stringify(this.settings));
   }
 
@@ -106,7 +107,7 @@ export class SettingsService {
   }
 
   setWeatherCity(city: string) {
-    console.log("Zmieniono miasto na " + city);
+    console.log("Changed city for which weather is displayed. New city is " + city);
     this.settings.city = city;
     this.settings.lastUpdate = new Date().getTime();
     this.settingChanged.next();
@@ -118,6 +119,13 @@ export class SettingsService {
     this.settings.activeTheme = name;
     this.settings.lastUpdate = new Date().getTime();
     this.themeService.setActiveTheme(name);
+
+    this.settingChanged.next();
+  }
+
+  changeClockStyle(id: number) {
+    this.settings.clockStyle = id;
+    this.settings.lastUpdate = new Date().getTime();
 
     this.settingChanged.next();
   }

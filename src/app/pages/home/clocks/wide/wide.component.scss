@@ -1,0 +1,22 @@
+p {
+    font-family: 'Lexend Tera', sans-serif;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+    line-height: 1em;
+}
+
+.time {
+    font-size: 180px;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+.date {
+    font-size: 22px;
+}

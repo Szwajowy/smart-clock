@@ -26,7 +26,7 @@
   </a>
 
   <div class="weather-content">
-    <ng-container *ngIf="weather$ | async as weather">
+    <ng-container *ngIf="weather$ | async as weather; else error">
       <div class="weather-icon">
         <app-weather-icon [icon]="weather.weather[0].icon"></app-weather-icon>
       </div>
@@ -62,6 +62,11 @@
         </h4>
       </div>
     </ng-container>
+    <ng-template #error>
+      <h1>Coś poszło nie tak podczas pobierania pogody!</h1>
+      <h2>Sprawdź połączenie z internetem i spróbuj ponownie.</h2>
+      <button type="button" (click)="onRefreshWeather()">Pobierz pogodę</button>
+    </ng-template>
   </div>
 
   <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">

@@ -35,6 +35,9 @@ import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
 import { WeatherIconComponent } from "./shared/components/weather-icon/weather-icon.component";
 import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
 import { AlarmComponent } from './pages/alarms/components/alarm/alarm.component';
+import { StandartComponent } from './pages/home/clocks/standart/standart.component';
+import { BoxyComponent } from './pages/home/clocks/boxy/boxy.component';
+import { WideComponent } from './pages/home/clocks/wide/wide.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -60,7 +63,10 @@ registerLocaleData(localePl);
     CapitalizefirstPipe,
     WeatherIconComponent,
     DateAgoPipe,
-    AlarmComponent
+    AlarmComponent,
+    StandartComponent,
+    BoxyComponent,
+    WideComponent
   ],
   imports: [
     BrowserModule,

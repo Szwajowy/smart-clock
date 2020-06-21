@@ -51,6 +51,10 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
+  onRefreshWeather() {
+    this.weatherService.refreshWeather();
+  }
+
   onSwipeLeft() {
     if (this.navigation.right) this.router.navigate([this.navigation.right]);
   }

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import {} from "rxjs/operators";
+import { switchMapTo } from "rxjs/operators";
 
 import { ClockService } from "app/shared/services/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
+import { SettingsService } from '../settings/settings.service';
 
 @Component({
   selector: "app-home",
@@ -13,7 +14,9 @@ import { map } from "rxjs/operators";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  helloMsg = "Witaj";
+  username = "użytkowniku";
+  clockStyle = 1;
+
   navigation = {
     top: "/alarms",
     right: "/weather/today",
@@ -24,21 +27,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   private now;
   public timezone$;
   private momentSubscription;
+  private settingsSubscription;
 
   constructor(
     private clockService: ClockService,
+    private settingsService: SettingsService,
     private firebaseService: FirebaseService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.now = this.clockService.getNow();
-    this.setHelloMsg();
+    this.clockStyle = this.settingsService.getSettings().clockStyle;
+    this.setUsername();
 
     this.timezone$ = this.firebaseService.getDeviceData("settings").pipe(
       map((res: any) => {
-        console.log(res);
-        return res.timezone;
+        return res ? res.timezone : null;
       })
     );
 
@@ -46,24 +51,24 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getMomentSubject()
       .subscribe((res) => {
         this.now = res;
-        this.setHelloMsg();
+      });
+
+    this.settingsSubscription = this.settingsService
+      .getSettingChanged()
+      .subscribe( res => {
+        this.clockStyle = this.settingsService.getSettings().clockStyle;
       });
   }
 
   ngOnDestroy() {
     this.momentSubscription.unsubscribe();
+    this.settingsSubscription.unsubscribe();
   }
 
-  setHelloMsg() {
-    if (!this.now) return;
-
-    if (this.now.getHours() < 18 && this.now.getHours() >= 5) {
-      this.helloMsg = "Dzień dobry";
-    } else if (this.now.getHours() < 21 && this.now.getHours() >= 18) {
-      this.helloMsg = "Dobry wieczór";
-    } else {
-      this.helloMsg = "Dobranoc";
-    }
+  setUsername() {
+    this.firebaseService.getUserData("name").subscribe((res) => {
+      this.username = res;
+    });
   }
 
   getNow() {

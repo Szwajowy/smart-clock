@@ -13,11 +13,13 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    position: relative;
 
     .navigation-arrow {
       height: auto;
       width: 20px;
       padding: 0 30px;
+      z-index: 9999;
     }
 
     .home-content {
@@ -26,61 +28,6 @@
 
       overflow: hidden;
 
-      h1 {
-        padding: 0;
-        margin: 0;
-
-        font-size: 28px;
-        font-weight: 400;
-        line-height: 1em;
-
-        span {
-          font-weight: 600;
-        }
-      }
-
-      .datetime {
-        padding: 0;
-        margin: 12px 0 0 0;
-
-        .time {
-          padding: 0;
-          margin: 0;
-
-          font-size: 140px;
-          font-weight: 700;
-          line-height: 1em;
-          // text-shadow: 0 0 6px $app-text-shadow;
-        }
-
-        .subline {
-          .date {
-            width: 100%;
-
-            padding: 0;
-            margin: 0;
-
-            font-size: 32px;
-            font-weight: 600;
-            line-height: 1em;
-            // text-shadow: 0 0 6px $app-text-shadow;
-          }
-
-          .holiday {
-            display: inline-block;
-
-            padding: 8px 22px;
-            margin: 16px 0 0 0;
-
-            background: var(--color-darkest);
-            border-radius: 100px;
-            color: var(--accent);
-            font-size: 1.1em;
-            font-weight: 600;
-            line-height: 1em;
-          }
-        }
-      }
     }
   }
 }

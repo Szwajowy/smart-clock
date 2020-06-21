@@ -47,6 +47,10 @@ export class SettingsComponent {
     this.settingsService.changeTheme(name);
   }
 
+  onClockStyleChange(id: number) {
+    this.settingsService.changeClockStyle(id);
+  }
+  
   getSettings() {
     return this.settingsService.getSettings();
   }

@@ -27,18 +27,11 @@
     </a>
 
     <div class="home-content">
-      <h1>{{ helloMsg }} <span>Krzysztof</span>!</h1>
-      <div class="datetime" *ngIf="timezone$ | async as timezone">
-        <p class="time">
-          {{ getNow() | date: "HH:mm":timezone?.offset || "+0000" }}
-        </p>
-        <div class="subline">
-          <p class="date">
-            {{ getNow() | date: "EEEE":timezone?.offset || "+0000" }},
-            {{ getNow() | date: "longDate":timezone?.offset || "+0000" }}
-          </p>
-        </div>
-      </div>
+      <ng-container [ngSwitch]="clockStyle">
+        <app-standart-clock *ngSwitchCase="1" [time]="getNow()" [timezone$]="timezone$" [username]="username"></app-standart-clock>
+        <app-wide-clock *ngSwitchCase="2" [time]="getNow()" [timezone$]="timezone$"></app-wide-clock>
+        <app-boxy-clock *ngSwitchCase="3" [time]="getNow()" [timezone$]="timezone$"></app-boxy-clock>
+      </ng-container>
     </div>
 
     <a
