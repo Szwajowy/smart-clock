@@ -15,8 +15,11 @@ import { environment } from "../environments/environment";
 import * as Hammer from "hammerjs";
 import {
   HammerGestureConfig,
-  HAMMER_GESTURE_CONFIG
+  HAMMER_GESTURE_CONFIG,
 } from "@angular/platform-browser";
+
+import * as echarts from "echarts";
+import { NgxEchartsModule } from "ngx-echarts";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -33,15 +36,16 @@ import { ThreeDaysForecastComponent } from "./pages/three-days-forecast/three-da
 import { SettingsComponent } from "./pages/settings/settings.component";
 import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
 import { WeatherIconComponent } from "./shared/components/weather-icon/weather-icon.component";
-import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
-import { AlarmComponent } from './pages/alarms/components/alarm/alarm.component';
-import { StandartComponent } from './pages/home/clocks/standart/standart.component';
-import { BoxyComponent } from './pages/home/clocks/boxy/boxy.component';
-import { WideComponent } from './pages/home/clocks/wide/wide.component';
+import { DateAgoPipe } from "./shared/pipes/date-ago.pipe";
+import { AlarmComponent } from "./pages/alarms/components/alarm/alarm.component";
+import { StandardComponent } from "./pages/home/clocks/standard/standard.component";
+import { BoxyComponent } from "./pages/home/clocks/boxy/boxy.component";
+import { WideComponent } from "./pages/home/clocks/wide/wide.component";
+import { ChartComponent } from "./pages/weather/chart/chart.component";
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
-    swipe: { velocity: 0.4, threshold: 10, direction: Hammer.DIRECTION_ALL } // override default settings
+    swipe: { velocity: 0.4, threshold: 10, direction: Hammer.DIRECTION_ALL }, // override default settings
   };
 }
 
@@ -64,9 +68,10 @@ registerLocaleData(localePl);
     WeatherIconComponent,
     DateAgoPipe,
     AlarmComponent,
-    StandartComponent,
+    StandardComponent,
     BoxyComponent,
-    WideComponent
+    WideComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,15 +81,18 @@ registerLocaleData(localePl);
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxEchartsModule.forRoot({
+      echarts,
+    }),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "pl" },
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
-    }
+      useClass: MyHammerConfig,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

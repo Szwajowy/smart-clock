@@ -25,6 +25,10 @@
     </svg>
   </a>
 
+  <div class="chart">
+    <app-chart></app-chart>
+  </div>
+
   <div class="weather-content">
     <ng-container *ngIf="weather$ | async as weather; else error">
       <div class="weather-icon">
@@ -48,17 +52,20 @@
         </header>
 
         <h3>
-          {{ weather.weather[0].description | capitalizefirst }}&nbsp;<span
-            >{{ weather.main.temp | number: "1.0-0" }}&nbsp;°C</span
-          >
+          {{ weather.weather[0].description | capitalizefirst }}&nbsp;<span>{{
+            weather.main.temp | number: "1.0-0"
+          }}</span
+          ><span class="unit">°C</span>
         </h3>
         <h4>
           Odczuwalna:
-          <span>{{ weather.main.feels_like | number: "1.0-0" }}&nbsp;°C</span>
+          <span>{{ weather.main.feels_like | number: "1.0-0" }}</span
+          ><span class="unit">°C</span>
         </h4>
         <h4>
           Ciśnienie:
-          <span>{{ weather.main.pressure | number: "1.0-0" }}&nbsp;hPa</span>
+          <span>{{ weather.main.pressure | number: "1.0-0" }}</span
+          ><span class="unit">hPa</span>
         </h4>
       </div>
     </ng-container>

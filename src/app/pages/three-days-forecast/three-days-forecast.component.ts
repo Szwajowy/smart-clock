@@ -8,24 +8,35 @@ import { WeatherService } from "../../shared/services/weather.service";
 @Component({
   selector: "app-three-days-forecast",
   templateUrl: "./three-days-forecast.component.html",
-  styleUrls: ["./three-days-forecast.component.scss"]
+  styleUrls: ["./three-days-forecast.component.scss"],
 })
 export class ThreeDaysForecastComponent implements OnInit, OnDestroy {
   public navigation = {
     top: "/weather/tomorrow",
     right: "/calendar",
     bottom: "/weather/today",
-    left: "/"
+    left: "/",
   };
 
   public weather$ = this.weatherService.getWeather().pipe(
-    map(weather => {
-      weather = weather.list.slice(2, 5);
-      for (let i = 0; i < weather.length; i++) {
-        weather[i].weekday = moment.unix(weather[i].dt).weekday();
+    map((weather) => {
+      let newWeather = JSON.parse(JSON.stringify(weather));
+      let newList = [weather.list[0]];
+      for (let i = 1; i < weather.list.length; i++) {
+        let date = new Date(weather.list[i].dt * 1000);
+        if (date.getUTCHours() === 12) {
+          newList.push(weather.list[i]);
+        }
       }
 
-      return weather;
+      newWeather.list = newList;
+
+      newWeather = newWeather.list.slice(2, 5);
+      for (let i = 0; i < newWeather.length; i++) {
+        newWeather[i].weekday = moment.unix(newWeather[i].dt).weekday();
+      }
+
+      return newWeather;
     })
   );
 
@@ -52,6 +63,10 @@ export class ThreeDaysForecastComponent implements OnInit, OnDestroy {
       case 6:
         return "Nd";
     }
+  }
+
+  onRefreshWeather() {
+    this.weatherService.refreshWeather();
   }
 
   onSwipeLeft() {

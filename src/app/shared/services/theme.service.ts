@@ -7,7 +7,7 @@ import { Theme } from "../models/theme.model";
 import { tap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ThemeService {
   private active: Theme;
@@ -38,7 +38,7 @@ export class ThemeService {
   findTheme(name) {
     let foundTheme = null;
 
-    this.availableThemes.forEach(theme => {
+    this.availableThemes.forEach((theme) => {
       if (theme.name === name) foundTheme = theme;
     });
 
@@ -70,7 +70,7 @@ export class ThemeService {
   }
 
   private setCSSProperties() {
-    Object.keys(this.active.properties).forEach(property => {
+    Object.keys(this.active.properties).forEach((property) => {
       document.documentElement.style.setProperty(
         "--" + property,
         this.active.properties[property]

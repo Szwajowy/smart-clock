@@ -1,35 +1,50 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
-import { timer, Subscribable, Subscription, interval } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, catchError, tap } from "rxjs/operators";
 
 import { WeatherService } from "../../shared/services/weather.service";
+import { of } from "rxjs";
 
 @Component({
   selector: "app-weather",
   templateUrl: "./weather.component.html",
-  styleUrls: ["./weather.component.scss"]
+  styleUrls: ["./weather.component.scss"],
 })
 export class WeatherComponent implements OnInit, OnDestroy {
   public navigation = {
     top: null,
     right: "/calendar",
     bottom: "/weather/tomorrow",
-    left: "/"
+    left: "/",
   };
 
   public weather$ = this.weatherService.getWeather().pipe(
-    map(weather => {
-      if (this.route.snapshot.data["weather"] == "today") {
-        weather.list[0].updateAt = weather.updateAt;
-        weather.list[0].city = weather.city;
-        return weather.list[0];
-      } else {
-        weather.list[1].updateAt = weather.updateAt;
-        weather.list[1].city = weather.city;
-        return weather.list[1];
+    map((weather) => {
+      let newWeather = JSON.parse(JSON.stringify(weather));
+      let newList = [weather.list[0]];
+      for (let i = 1; i < weather.list.length; i++) {
+        let date = new Date(weather.list[i].dt * 1000);
+        if (date.getUTCHours() === 12) {
+          newList.push(weather.list[i]);
+        }
       }
+
+      newWeather.list = newList;
+
+      if (this.route.snapshot.data["weather"] == "today") {
+        newWeather.list[0].updateAt = newWeather.updateAt;
+        newWeather.list[0].city = newWeather.city;
+        return newWeather.list[0];
+      } else {
+        newWeather.list[1].updateAt = newWeather.updateAt;
+        newWeather.list[1].city = newWeather.city;
+        return newWeather.list[1];
+      }
+    }),
+    catchError((error) => {
+      console.log(error);
+      return of(null);
     })
   );
 

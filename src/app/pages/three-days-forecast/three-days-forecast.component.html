@@ -26,7 +26,7 @@
   </a>
 
   <div class="weather-content">
-    <ng-container *ngIf="weather$ | async as weatherArr">
+    <ng-container *ngIf="weather$ | async as weatherArr; else error">
       <div class="day-weather" *ngFor="let weather of weatherArr">
         <small>{{
           weather.dt * 1000 | date: "EEEEEE":"":"pl" | titlecase
@@ -34,10 +34,15 @@
         <div class="weather-icon">
           <app-weather-icon [icon]="weather.weather[0].icon"></app-weather-icon>
         </div>
-        <h1>{{ weather.main.temp | number: "1.0-0" }}&nbsp;°C</h1>
+        <h1>{{ weather.main.temp | number: "1.0-0" }}<span class="degrees">°C</span></h1>
         <h2>{{ weather.weather[0].description | capitalizefirst }}</h2>
       </div>
     </ng-container>
+    <ng-template #error>
+      <h1>Coś poszło nie tak podczas pobierania pogody!</h1>
+      <h2>Sprawdź połączenie z internetem i spróbuj ponownie.</h2>
+      <button type="button" (click)="onRefreshWeather()">Pobierz pogodę</button>
+    </ng-template>
   </div>
 
   <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">

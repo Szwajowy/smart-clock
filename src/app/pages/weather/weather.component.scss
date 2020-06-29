@@ -16,6 +16,18 @@
     height: auto;
     width: 20px;
     padding: 0 30px;
+    z-index: 2;
+  }
+
+  .chart {
+    width: calc(100% + 200px);
+    height: 100%;
+
+    position: absolute;
+    bottom: -140px;
+    left: -100px;
+
+    z-index: 1;
   }
 
   .weather-content {
@@ -23,6 +35,8 @@
     align-self: center;
 
     overflow: hidden;
+
+    z-index: 2;
 
     .error-msg {
       h3 {
@@ -54,7 +68,9 @@
 
       transform: translateY(-50%);
 
-      fill: var(--accent-lighter);
+      // fill: var(--accent-lighter);
+      fill: var(--color);
+      opacity: 0.3;
     }
 
     .weather-info {
@@ -90,6 +106,11 @@
           margin-top: 8px;
           font-size: 18px;
         }
+      }
+
+      h3 .unit,
+      h4 .unit {
+        font-size: 0.8em;
       }
 
       h3 {

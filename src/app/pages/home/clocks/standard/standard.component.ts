@@ -1,19 +1,18 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from "@angular/core";
 
 @Component({
-  selector: 'app-standart-clock',
-  templateUrl: './standart.component.html',
-  styleUrls: ['./standart.component.scss']
+  selector: "app-standard-clock",
+  templateUrl: "./standard.component.html",
+  styleUrls: ["./standard.component.scss"],
 })
-export class StandartComponent implements OnInit, OnChanges {
-
+export class StandardComponent implements OnInit, OnChanges {
   @Input() time;
   @Input() timezone$;
   @Input() username: string;
 
   public helloMsg: string = "Witaj";
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.setHelloMsg();
@@ -34,5 +33,4 @@ export class StandartComponent implements OnInit, OnChanges {
       this.helloMsg = "Dobranoc";
     }
   }
-
 }

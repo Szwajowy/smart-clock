@@ -70,7 +70,12 @@
       .weather-icon {
         width: 60%;
         margin-bottom: 28px;
-        fill: var(--color-darker);
+        fill: var(--color);
+        opacity: 0.3;
+      }
+
+      .degrees {
+        font-size: 0.6em;  
       }
 
       h1,
