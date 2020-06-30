@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
-import { map, catchError, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { WeatherService } from "../../shared/services/weather.service";
-import { of } from "rxjs";
 
 @Component({
   selector: "app-weather",
@@ -21,11 +20,17 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   public weather$ = this.weatherService.getWeather().pipe(
     map((weather) => {
+      if (weather === null) return null;
+
+      console.log(weather);
+
       let newWeather = JSON.parse(JSON.stringify(weather));
       let newList = [weather.list[0]];
+      let firstDate = new Date(weather.list[0].dt * 1000);
+
       for (let i = 1; i < weather.list.length; i++) {
         let date = new Date(weather.list[i].dt * 1000);
-        if (date.getUTCHours() === 12) {
+        if (date.getDay() !== firstDate.getDay() && date.getUTCHours() === 12) {
           newList.push(weather.list[i]);
         }
       }
@@ -33,18 +38,14 @@ export class WeatherComponent implements OnInit, OnDestroy {
       newWeather.list = newList;
 
       if (this.route.snapshot.data["weather"] == "today") {
-        newWeather.list[0].updateAt = newWeather.updateAt;
+        newWeather.list[0].updateAt = newWeather.updatedAt;
         newWeather.list[0].city = newWeather.city;
         return newWeather.list[0];
       } else {
-        newWeather.list[1].updateAt = newWeather.updateAt;
+        newWeather.list[1].updateAt = newWeather.updatedAt;
         newWeather.list[1].city = newWeather.city;
         return newWeather.list[1];
       }
-    }),
-    catchError((error) => {
-      console.log(error);
-      return of(null);
     })
   );
 

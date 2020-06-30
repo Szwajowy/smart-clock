@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
 
-import { AdjustingInterval } from '../models/adjusting-interval.model';
-import { TimeCounter } from '../models/time-counter.model';
+import { AdjustingInterval } from "../models/adjusting-interval.model";
+import { TimeCounter } from "../models/time-counter.model";
+import { NotificationsService } from "@shared/components/notification-bar/notifications.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class StopwatchService {
   private _time = new TimeCounter();
@@ -17,38 +17,47 @@ export class StopwatchService {
     return this._time;
   }
 
+  constructor(private notificationsService: NotificationsService) {}
+
   countUp() {
-    if(!this.paused) {
-      if(this.time.increment('milliseconds') === false) {
+    if (!this.paused) {
+      if (this.time.increment("milliseconds") === false) {
         this.stop();
       }
 
       // SEND NOTIFICATION
-      // this.notificationsService.getInputNotificationsSubject().next({
-      //   type: 'timer',
-      //   operation: 'post',
-      //   content: this.pad(this.timer.time.hours) + ':' + 
-      //            this.pad(this.timer.time.minutes) + ':' + 
-      //            this.pad(this.timer.time.seconds),
-      //   icon: 'stopwatch',
-      // });
+      this.notificationsService.getInputNotificationsSubject().next({
+        type: "stopwatch",
+        operation: "post",
+        content:
+          this.pad(this.time.hours) +
+          ":" +
+          this.pad(this.time.minutes) +
+          ":" +
+          this.pad(this.time.seconds),
+        icon: "stopwatch",
+      });
     }
   }
 
+  pad(number) {
+    return number > 9 ? number.toString() : "0" + number;
+  }
+
   startPause() {
-    if(!this.running) {
+    if (!this.running) {
       this.running = true;
       this.interval.start();
-    } else if(!this.paused) {
+    } else if (!this.paused) {
       this.paused = true;
-      
+
       // SEND NOTIFICATION
-      // this.notificationsService.getInputNotificationsSubject().next({
-      //   type: objectName,
-      //   operation: 'post',
-      //   content: objectName === 'timer' ? 'Minutnik został wstrzymany!' : 'Stoper został wstrzymany!',
-      //   icon: 'stopwatch',
-      // });
+      this.notificationsService.getInputNotificationsSubject().next({
+        type: "stopwatch",
+        operation: "post",
+        content: "Stoper został wstrzymany!",
+        icon: "timer",
+      });
     } else {
       this.paused = false;
     }
@@ -60,16 +69,16 @@ export class StopwatchService {
 
     this.running = false;
     this.paused = false;
-    
+
     this.time.reset();
 
     // SEND NOTIFICATION
-    // this.notificationsService.getInputNotificationsSubject().next({
-    //   type: objectName,
-    //   operation: 'remove',
-    //   content: null,
-    //   icon: null,
-    // });
+    this.notificationsService.getInputNotificationsSubject().next({
+      type: "stopwatch",
+      operation: "remove",
+      content: null,
+      icon: null,
+    });
   }
 
   isPaused() {

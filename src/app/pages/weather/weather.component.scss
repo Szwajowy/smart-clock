@@ -20,12 +20,12 @@
   }
 
   .chart {
-    width: calc(100% + 200px);
-    height: 100%;
+    width: calc(100%);
+    height: calc(100%);
 
     position: absolute;
-    bottom: -140px;
-    left: -100px;
+    top: 0px;
+    left: 0px;
 
     z-index: 1;
   }

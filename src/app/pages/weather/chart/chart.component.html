@@ -1,1 +1,9 @@
-<div echarts [options]="options" [merge]="updateOptions" theme="default"></div>
+<ng-container *ngIf="todayWeatherFull$ | async">
+  <div
+    echarts
+    class="chart"
+    [options]="options"
+    [merge]="updateOptions"
+    theme="default"
+  ></div>
+</ng-container>

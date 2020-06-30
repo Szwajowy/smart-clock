@@ -8,7 +8,7 @@ import { WeatherService } from "@shared/services/weather.service";
   selector: "app-notification-bar",
   animations: [notificationSlide],
   templateUrl: "./notification-bar.component.html",
-  styleUrls: ["./notification-bar.component.scss"]
+  styleUrls: ["./notification-bar.component.scss"],
 })
 export class NotificationBarComponent implements OnInit, OnDestroy {
   private notificationsSubscription;
@@ -22,13 +22,11 @@ export class NotificationBarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.notificationsService.subscribeToAll();
-
     this.notifications = this.notificationsService.getNotifications();
 
     this.notificationsSubscription = this.notificationsService
       .getNotificationsSubject()
-      .subscribe(res => {
+      .subscribe((res) => {
         this.notifications = res;
       });
 

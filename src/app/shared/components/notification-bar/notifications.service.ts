@@ -1,22 +1,14 @@
 import { Injectable, OnInit, OnDestroy } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, BehaviorSubject } from "rxjs";
 
-import {
-  bufferTime,
-  last,
-  debounceTime,
-  buffer,
-  takeLast,
-  throttleTime
-} from "rxjs/operators";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { bufferTime, tap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class NotificationsService implements OnInit, OnDestroy {
   private inputNotificationsSubject = new Subject<any>();
-  private notificationsSubject = new Subject<any>();
+  private notificationsSubject = new BehaviorSubject<[]>([]);
 
   private activeNotification = 0;
   private notifications = [];
@@ -30,13 +22,13 @@ export class NotificationsService implements OnInit, OnDestroy {
   subscribeToAll() {
     this.inputNotificationsSubject // NEEDS BUFFERING FOR AT LEAST 1s
       .pipe(bufferTime(1000))
-      .subscribe(notificationsList => {
+      .subscribe((notificationsList) => {
         let finalNotificationsList = [];
         let indexOfExistingNot;
 
-        notificationsList.forEach(notification => {
+        notificationsList.forEach((notification) => {
           indexOfExistingNot = finalNotificationsList.findIndex(
-            finalNotification => finalNotification.type === notification.type
+            (finalNotification) => finalNotification.type === notification.type
           );
 
           if (indexOfExistingNot === -1) {
@@ -47,7 +39,7 @@ export class NotificationsService implements OnInit, OnDestroy {
         });
 
         // CHECK IF NOTIFICATION EXIST
-        finalNotificationsList.forEach(res => {
+        finalNotificationsList.forEach((res) => {
           if (res.operation === "post") {
             let notificationExist = false;
 
@@ -56,7 +48,7 @@ export class NotificationsService implements OnInit, OnDestroy {
                 this.notifications[index] = {
                   type: res.type,
                   icon: res.icon,
-                  message: res.content
+                  message: res.content,
                 };
                 notificationExist = true;
               }
@@ -67,18 +59,18 @@ export class NotificationsService implements OnInit, OnDestroy {
                 this.notifications.unshift({
                   type: res.type,
                   icon: res.icon,
-                  message: res.content
+                  message: res.content,
                 });
               } else {
                 this.notifications.push({
                   type: res.type,
                   icon: res.icon,
-                  message: res.content
+                  message: res.content,
                 });
               }
             }
 
-            this.getNotificationsSubject().next(this.notifications);
+            this.getNotificationsSubject().next(this.notifications as []);
           } else if (res.operation === "remove") {
             this.notifications.forEach((notification, index) => {
               if (notification.type == res.type) {
