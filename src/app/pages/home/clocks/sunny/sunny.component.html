@@ -1,0 +1,13 @@
+<div class="container" #container>
+  <div class="sun" #sun></div>
+  <div class="clouds"></div>
+  <div class="content">
+    <p class="time">
+      {{ time | date: "HH:mm":timezone?.offset }}
+    </p>
+    <p class="date">
+      {{ time | date: "EEEE":timezone?.offset }},
+      {{ time | date: "longDate":timezone?.offset }}
+    </p>
+  </div>
+</div>

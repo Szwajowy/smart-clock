@@ -44,6 +44,12 @@
           [time]="getNow()"
           [timezone$]="timezone$"
         ></app-boxy-clock>
+        <app-sunny-clock
+          *ngSwitchCase="4"
+          [time]="getNow()"
+          [timezone]="timezone$ | async"
+          [weather]="weather$ | async"
+        ></app-sunny-clock>
       </ng-container>
     </div>
 

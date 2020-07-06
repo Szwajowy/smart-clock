@@ -42,6 +42,7 @@ import { StandardComponent } from "./pages/home/clocks/standard/standard.compone
 import { BoxyComponent } from "./pages/home/clocks/boxy/boxy.component";
 import { WideComponent } from "./pages/home/clocks/wide/wide.component";
 import { ChartComponent } from "./pages/weather/chart/chart.component";
+import { SunnyComponent } from './pages/home/clocks/sunny/sunny.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -72,6 +73,7 @@ registerLocaleData(localePl);
     BoxyComponent,
     WideComponent,
     ChartComponent,
+    SunnyComponent,
   ],
   imports: [
     BrowserModule,

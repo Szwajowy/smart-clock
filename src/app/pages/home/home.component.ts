@@ -6,7 +6,8 @@ import { ClockService } from "app/shared/services/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
-import { SettingsService } from '../settings/settings.service';
+import { SettingsService } from "../settings/settings.service";
+import { WeatherService } from "@shared/services/weather.service";
 
 @Component({
   selector: "app-home",
@@ -26,11 +27,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private now;
   public timezone$;
+  public weather$ = this.weatherService.getWeather();
   private momentSubscription;
   private settingsSubscription;
 
   constructor(
     private clockService: ClockService,
+    private weatherService: WeatherService,
     private settingsService: SettingsService,
     private firebaseService: FirebaseService,
     private router: Router
@@ -55,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.settingsSubscription = this.settingsService
       .getSettingChanged()
-      .subscribe( res => {
+      .subscribe((res) => {
         this.clockStyle = this.settingsService.getSettings().clockStyle;
       });
   }

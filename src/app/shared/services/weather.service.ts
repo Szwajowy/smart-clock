@@ -37,10 +37,13 @@ export class WeatherService {
       let localWeather = this.localWeather
         ? new Weather(this.localWeather)
         : null;
+
+      console.log(localWeather);
       if (
         localWeather &&
         localWeather.isUpdated &&
-        localWeather.isUpdated(this.updateTime)
+        localWeather.isUpdated(this.updateTime) &&
+        localWeather.city.name.toLowerCase() === this.cityName.toLowerCase()
       ) {
         console.log("Locally stored weather is up-to-date.");
         this.sendNotification({
@@ -56,7 +59,9 @@ export class WeatherService {
             if (
               firebaseWeather &&
               firebaseWeather.isUpdated &&
-              firebaseWeather.isUpdated(this.updateTime)
+              firebaseWeather.isUpdated(this.updateTime) &&
+              firebaseWeather.city.name.toLowerCase() ===
+                this.cityName.toLowerCase()
             ) {
               console.log("Weather stored in remote database is up-to-date.");
               this.updateLocalWeather(firebaseWeather);
@@ -170,10 +175,15 @@ export class WeatherService {
 
   setCity(city: string): void {
     this.cityName = city;
+    this.openWeather$ = this.http.get<Weather>(
+      `${environment.openWeather.apiURL}/data/2.5/forecast?q=${this.cityName}&units=metric&lang=pl&appid=${environment.openWeather.apiKey}`
+    );
+    this.refreshWeather();
   }
 
   setRefreshInterval(interval: number): void {
     this.updateTime = 1000 * 60 * 60 * interval;
+    this.refreshWeather();
   }
 
   refreshWeather(): void {

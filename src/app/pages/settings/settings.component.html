@@ -60,9 +60,30 @@
       <div class="form-group">
         <h3>Styl zegarka</h3>
         <ul class="color-picker">
-          <li (click)="onClockStyleChange(1)" [ngClass]="{active: getSettings().clockStyle == 1}">1</li>
-          <li (click)="onClockStyleChange(2)" [ngClass]="{active: getSettings().clockStyle == 2}">2</li>
-          <li (click)="onClockStyleChange(3)" [ngClass]="{active: getSettings().clockStyle == 3}">3</li>
+          <li
+            (click)="onClockStyleChange(1)"
+            [ngClass]="{ active: getSettings().clockStyle == 1 }"
+          >
+            1
+          </li>
+          <li
+            (click)="onClockStyleChange(2)"
+            [ngClass]="{ active: getSettings().clockStyle == 2 }"
+          >
+            2
+          </li>
+          <li
+            (click)="onClockStyleChange(3)"
+            [ngClass]="{ active: getSettings().clockStyle == 3 }"
+          >
+            3
+          </li>
+          <li
+            (click)="onClockStyleChange(4)"
+            [ngClass]="{ active: getSettings().clockStyle == 4 }"
+          >
+            4
+          </li>
         </ul>
       </div>
       <!-- <div class="form-group">
