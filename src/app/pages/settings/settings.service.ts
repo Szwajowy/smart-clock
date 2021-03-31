@@ -16,6 +16,10 @@ export class SettingsService {
     clockStyle: 1,
     city: "Katowice",
     updateTime: 2,
+    timezone: {
+      name: "Europe/Warsaw",
+      offset: "+02:00",
+    },
     lastUpdate: new Date().getTime(),
   };
 
@@ -107,7 +111,9 @@ export class SettingsService {
   }
 
   setWeatherCity(city: string) {
-    console.log("Changed city for which weather is displayed. New city is " + city);
+    console.log(
+      "Changed city for which weather is displayed. New city is " + city
+    );
     this.settings.city = city;
     this.settings.lastUpdate = new Date().getTime();
     this.settingChanged.next();

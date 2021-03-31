@@ -1,44 +1,36 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { TimerService } from 'app/shared/services/timer.service';
+import { TimerService } from "app/shared/services/timer.service";
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss']
+  selector: "app-timer",
+  templateUrl: "./timer.component.html",
+  styleUrls: ["./timer.component.scss"],
 })
 export class TimerComponent {
-
   public navigation = {
-    top: '/stopwatch',
-    right: '/weather/today',
-    bottom: '/alarms',
-    left: '/calendar'
+    top: "/stopwatch",
+    right: "/weather/today",
+    bottom: "/alarms",
+    left: "/calendar",
   };
 
-  constructor(
-    public timerService: TimerService, 
-    private router: Router
-    ) { }
+  constructor(public timerService: TimerService, private router: Router) {}
 
   onSwipeLeft() {
-    if(this.navigation.right)
-      this.router.navigate([this.navigation.right]);
+    if (this.navigation.right) this.router.navigate([this.navigation.right]);
   }
 
   onSwipeRight() {
-    if(this.navigation.left)
-    this.router.navigate([this.navigation.left]);
+    if (this.navigation.left) this.router.navigate([this.navigation.left]);
   }
 
   onSwipeUp() {
-    if(this.navigation.bottom)
-    this.router.navigate([this.navigation.bottom]);
+    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
   }
 
   onSwipeDown() {
-    if(this.navigation.top)
-    this.router.navigate([this.navigation.top]);
+    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

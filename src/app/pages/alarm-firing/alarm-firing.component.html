@@ -1,11 +1,29 @@
 <div class="home-container">
-    <div class="message">
-        <h1>Czas wstawać !</h1>
-        <p class="time">{{ getNow()?.format('LT') }}</p>
-        <p class="date">{{ getNow()?.format('dddd') }}, {{ getNow()?.format('LL') }}</p>
-    </div>
-    <div class="buttons">
-        <button class="btn snooze" [ngStyle]="newAlarmTime != null ? {disabled: false} : {disabled: true}" (click)="onSnooze()">Drzemka</button>
-        <button class="btn turnoff" (click)="onTurnOff()">Wyłącz</button>
-    </div>
+  <div class="message">
+    <h1>Czas wstawać !</h1>
+    <p class="time">
+      {{ getNow() | date: "HH:mm":timezone?.offset }}
+    </p>
+    <p class="date">
+      {{ getNow() | date: "EEEE":timezone?.offset }},
+      {{ getNow() | date: "longDate":timezone?.offset }}
+    </p>
+  </div>
+  <div class="buttons">
+    <button
+      class="btn snooze"
+      [ngStyle]="
+        newAlarmTime != null ? { disabled: false } : { disabled: true }
+      "
+      (click)="onSnooze()"
+      [disabled]="newAlarmTime"
+    >
+      {{
+        !newAlarmTime
+          ? "Drzemka na " + snoozeLenght + " min."
+          : "Przełożono na: " + (newAlarmTime | date: "HH:mm":timezone?.offset)
+      }}
+    </button>
+    <button class="btn turnoff" (click)="onTurnOff()">Wyłącz</button>
+  </div>
 </div>

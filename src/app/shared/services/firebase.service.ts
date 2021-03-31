@@ -4,7 +4,7 @@ import { first, switchMap } from "rxjs/operators";
 import { of } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class FirebaseService {
   private serial = "testSerialID";
@@ -16,19 +16,25 @@ export class FirebaseService {
       .list("users")
       .valueChanges()
       .pipe(
-        first(),
         switchMap((users: any) => {
           let found = false;
+          let foundUser = null;
           for (let user in users) {
             for (let device in users[user].devices) {
-              if (device.toString() === this.serial.toString()) {
+              if (
+                users[user].devices[device].id.toString() ===
+                this.serial.toString()
+              ) {
+                foundUser = user;
                 found = true;
               }
             }
-            if (found) {
-              return of(users[user][part]);
-            }
           }
+
+          if (found) {
+            return of(users[foundUser][part]);
+          }
+
           if (!found) return of(null);
         })
       );

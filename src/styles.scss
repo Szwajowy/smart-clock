@@ -49,4 +49,8 @@ body {
       background: darken(#b90b0b, 10%);
     }
   }
+
+  &.btn-full-width {
+    width: 100%;
+  }
 }

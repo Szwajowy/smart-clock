@@ -7,15 +7,16 @@ import * as moment from "moment";
 import { AdjustingInterval } from "../models/adjusting-interval.model";
 import { NotificationsService } from "app/shared/components/notification-bar/notifications.service";
 import { FirebaseService } from "./firebase.service";
+import { SettingsService } from "app/pages/settings/settings.service";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ClockService {
   private clock = {
-    datetime: new Date(),
+    datetime: new Date(new Date().getTime()),
     interval: null,
-    momentSubject: new Subject<any>()
+    momentSubject: new Subject<any>(),
   };
 
   private alarms = [];
@@ -24,7 +25,7 @@ export class ClockService {
   private newAlarm = {
     time: {
       hours: 0,
-      minutes: 0
+      minutes: 0,
     },
     repeat: {
       mon: false,
@@ -33,12 +34,12 @@ export class ClockService {
       thu: false,
       fri: false,
       sat: false,
-      sun: false
+      sun: false,
     },
     active: false,
     lastFiring: null,
     timeSubject: new Subject<any>(),
-    repeatSubject: new Subject<any>()
+    repeatSubject: new Subject<any>(),
   };
 
   private clockSubject = new Subject<any>();
@@ -46,7 +47,8 @@ export class ClockService {
   constructor(
     private router: Router,
     private firebaseService: FirebaseService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private settingsService: SettingsService
   ) {
     this.clock.interval = new AdjustingInterval(
       this.getTimeNow.bind(this),
@@ -64,7 +66,7 @@ export class ClockService {
 
   // MAIN FUNCTIONS FOR CLOCK, STOPWATCH AND TIMER
   getTimeNow() {
-    this.clock.datetime = new Date();
+    this.clock.datetime = new Date(new Date().getTime());
     this.clock.momentSubject.next(this.clock.datetime);
 
     // CHECK FOR EACH ALARM IF IT IS SET TO THIS TIME
@@ -72,49 +74,63 @@ export class ClockService {
     if (this.alarms && this.alarms.length > 0) {
       let closeAlarms = [];
 
-      this.alarms.forEach(alarm => {
+      this.alarms.forEach((alarm) => {
         // Check if alarm time is in 3 hours range from now
         if (alarm.active === true) {
           let alarmTime = {
             hour: alarm.time.hours,
-            minute: alarm.time.minutes
+            minute: alarm.time.minutes,
           };
 
           if (
             this.isAlarmBetween(
               alarmTime,
               {
-                hour: this.clock.datetime.getHours(),
-                minute: this.clock.datetime.getMinutes()
+                hour:
+                  this.clock.datetime.getUTCHours() +
+                  Number(
+                    this.settingsService
+                      .getSettings()
+                      .timezone.offset.slice(0, 3)
+                  ),
+                minute: this.clock.datetime.getUTCMinutes(),
               },
               {
-                hour: this.clock.datetime.getHours() + 8,
-                minute: this.clock.datetime.getMinutes()
+                hour:
+                  this.clock.datetime.getUTCHours() +
+                  8 +
+                  Number(
+                    this.settingsService
+                      .getSettings()
+                      .timezone.offset.slice(0, 3)
+                  ),
+                minute: this.clock.datetime.getUTCMinutes(),
               }
             )
           ) {
             closeAlarms.push(moment(alarmTime));
           }
-
-          // if(minutesOfDay(alarmTime) >= minutesOfDay({ hour: this.clock.datetime.clone().hours(), minute: this.clock.datetime.clone().minutes() + 1 }) &&
-          //   minutesOfDay(alarmTime) <= minutesOfDay({ hour: this.clock.datetime.clone().hours() + 8, minute: this.clock.datetime.clone().minutes() })
-          //    // Weird bug and datetime is +1 hour so i substract it
-          // ) {
-          //   closeAlarms.push(moment(alarmTime));
-          // }
         }
 
         // Check if alarm is turned on and
         // if alarm fire time is same as now and
         // if it should fire day and
         // it wasnt firing today or wasnt firing at all
+
+        let hourInTimezone =
+          this.clock.datetime.getUTCHours() +
+          Number(
+            this.settingsService.getSettings().timezone.offset.slice(0, 3)
+          );
+        if (hourInTimezone === 24) hourInTimezone = 0;
+
         if (
           alarm.active === true &&
-          alarm.time.hours === this.clock.datetime.getHours() &&
-          alarm.time.minutes === this.clock.datetime.getMinutes() &&
+          alarm.time.hours === hourInTimezone &&
+          alarm.time.minutes === this.clock.datetime.getUTCMinutes() &&
           this.isAlarmToday(alarm) &&
           (!alarm.lastFiring ||
-            alarm.lastFiring.isBefore(this.clock.datetime, "minute")) &&
+            moment(alarm.lastFiring).isBefore(this.clock.datetime, "minute")) &&
           this.router.url !== "/firingAlarm"
         ) {
           // Set last firing date to today and redirect to alarm screen
@@ -125,7 +141,7 @@ export class ClockService {
 
       if (closeAlarms.length > 0) {
         let closestAlarm = closeAlarms[0];
-        closeAlarms.forEach(alarm => {
+        closeAlarms.forEach((alarm) => {
           closestAlarm = alarm.isBefore(closestAlarm) ? alarm : closestAlarm;
         });
 
@@ -137,14 +153,14 @@ export class ClockService {
             this.pad(closestAlarm.get("hour")) +
             ":" +
             this.pad(closestAlarm.get("minute")),
-          icon: "clock"
+          icon: "clock",
         });
       } else {
         this.notificationsService.getInputNotificationsSubject().next({
           type: "alarm",
           operation: "remove",
           content: null,
-          icon: null
+          icon: null,
         });
       }
     }
@@ -390,7 +406,7 @@ export class ClockService {
   }
 
   fetchAlarmsFromAPI() {
-    this.firebaseService.getDeviceDataList("alarms").subscribe(res => {
+    this.firebaseService.getDeviceDataList("alarms").subscribe((res) => {
       this.alarms = res;
       this.alarmsSubject.next(this.alarms);
     });
@@ -412,7 +428,7 @@ export class ClockService {
         thu: true,
         fri: true,
         sat: true,
-        sun: true
+        sun: true,
       };
 
     // Using JSON.parse(JSON.stingify()) to deeply clone object
@@ -421,7 +437,7 @@ export class ClockService {
         JSON.stringify({
           time: this.newAlarm.time,
           repeat: this.newAlarm.repeat,
-          active: true
+          active: true,
         })
       )
     );
@@ -437,7 +453,7 @@ export class ClockService {
   clearNewAlarm() {
     this.newAlarm.time = {
       hours: 0,
-      minutes: 0
+      minutes: 0,
     };
 
     this.newAlarm.repeat = {
@@ -447,7 +463,7 @@ export class ClockService {
       thu: false,
       fri: false,
       sat: false,
-      sun: false
+      sun: false,
     };
 
     this.newAlarm.active = false;
