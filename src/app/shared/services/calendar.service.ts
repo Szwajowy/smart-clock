@@ -16,7 +16,7 @@ export interface Event {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CalendarService {
   constructor(private firebaseService: FirebaseService) {}
@@ -26,49 +26,40 @@ export class CalendarService {
       first(),
       switchMap((events: Event[]) => {
         let todayList = [];
-        let tommorowList = [];
+        let tomorrowList = [];
 
         for (let event in events) {
-          if (this.isUpcoming(events[event].start.dateTime)) {
+          if (this.isDaysFromToday(events[event].start.dateTime, 0)) {
             todayList.push(events[event]);
           } else if (this.isDaysFromToday(events[event].start.dateTime, 1)) {
-            tommorowList.push(events[event]);
+            tomorrowList.push(events[event]);
           }
         }
 
-        return of({ today: todayList, tommorow: tommorowList });
+        return of({ today: todayList, tomorrow: tomorrowList });
       })
     );
-  }
-
-  isUpcoming(date: string) {
-    let currentDate = new Date();
-    let passedDate = new Date(date);
-
-    if (
-      this.isDaysFromToday(date) &&
-      (currentDate.getHours() < passedDate.getHours() ||
-        (currentDate.getHours() === passedDate.getHours() &&
-          currentDate.getMinutes() <= passedDate.getMinutes()))
-    )
-      return true;
-
-    return false;
   }
 
   isDaysFromToday(date: string, shift?: number) {
     let currentDate = new Date();
     if (shift) currentDate.setDate(currentDate.getDate() + shift);
-
     let passedDate = new Date(date);
+
+    console.log(
+      currentDate.getDate() === passedDate.getDate() &&
+        currentDate.getMonth() === passedDate.getMonth() &&
+        currentDate.getFullYear() === passedDate.getFullYear()
+    );
 
     if (
       currentDate.getDate() === passedDate.getDate() &&
       currentDate.getMonth() === passedDate.getMonth() &&
       currentDate.getFullYear() === passedDate.getFullYear()
-    )
+    ) {
       return true;
-
-    return false;
+    } else {
+      return false;
+    }
   }
 }

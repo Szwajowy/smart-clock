@@ -1,12 +1,14 @@
-import { Component, Input, ViewChild, OnInit } from "@angular/core";
+import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { ClockService } from "@shared/services/clock.service";
+import { interval, Subscription } from "rxjs";
+import { filter } from "rxjs/operators";
 
 @Component({
   selector: "app-sunny-clock",
   templateUrl: "./sunny.component.html",
   styleUrls: ["./sunny.component.scss"],
 })
-export class SunnyComponent implements OnInit {
+export class SunnyComponent implements OnInit, OnDestroy {
   @Input() time;
   @Input() timezone;
   @Input() weather;
@@ -14,17 +16,24 @@ export class SunnyComponent implements OnInit {
   @ViewChild("sun", { static: true }) sun;
   @ViewChild("container", { static: true }) container;
 
+  private refresh$ = interval(15000);
+  private refreshSubscription: Subscription;
+
   constructor(private clockService: ClockService) {}
 
   ngOnInit() {
     this.animate();
-    setInterval(() => {
+    this.refreshSubscription = this.refresh$.subscribe(() => {
+      console.log("animating");
       this.animate();
-    }, 15000);
+    });
+  }
+
+  ngOnDestroy() {
+    this.refreshSubscription.unsubscribe();
   }
 
   private animate() {
-    console.log("animating");
     let startPosition = -54;
 
     if (this.weather) {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Howl } from "howler";
 
 import { AdjustingInterval } from "../models/adjusting-interval.model";
 import { TimeCounter } from "../models/time-counter.model";
@@ -13,7 +13,16 @@ export class TimerService {
   private _time = new TimeCounter();
   private running = false;
   private paused = false;
+  private countedDown = false;
+
   private interval = new AdjustingInterval(this.countDown.bind(this), 10);
+
+  private timerEndSound = new Howl({
+    src: "../../../../assets/audio/alarm-sound.mp3",
+    preload: true,
+    loop: true,
+    volume: 0,
+  });
 
   get time() {
     return this._time;
@@ -24,6 +33,9 @@ export class TimerService {
   countDown() {
     if (!this.paused) {
       if (this._time.decrement("milliseconds") === false) {
+        this.countedDown = true;
+        this.timerEndSound.play();
+        this.timerEndSound.fade(0, 1, 100);
         this.stop();
       }
 
@@ -81,6 +93,12 @@ export class TimerService {
       content: null,
       icon: null,
     });
+  }
+
+  reset() {
+    this.stop();
+    this.countedDown = false;
+    this.timerEndSound.stop();
   }
 
   isPaused() {

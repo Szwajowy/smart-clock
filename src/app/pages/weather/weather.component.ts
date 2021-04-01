@@ -22,8 +22,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
     map((weather) => {
       if (weather === null) return null;
 
-      console.log(weather);
-
       let newWeather = JSON.parse(JSON.stringify(weather));
       let newList = [weather.list[0]];
       let firstDate = new Date(weather.list[0].dt * 1000);

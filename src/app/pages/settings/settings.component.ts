@@ -1,14 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-  AfterViewInit,
-} from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { fromEvent } from "rxjs";
-import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 
 import { ThemeService } from "app/shared/services/theme.service";
 import { SettingsService } from "./settings.service";
@@ -50,7 +41,7 @@ export class SettingsComponent {
   onClockStyleChange(id: number) {
     this.settingsService.changeClockStyle(id);
   }
-  
+
   getSettings() {
     return this.settingsService.getSettings();
   }

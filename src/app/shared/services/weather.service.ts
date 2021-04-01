@@ -37,8 +37,6 @@ export class WeatherService {
       let localWeather = this.localWeather
         ? new Weather(this.localWeather)
         : null;
-
-      console.log(localWeather);
       if (
         localWeather &&
         localWeather.isUpdated &&

@@ -26,38 +26,33 @@
   </a>
 
   <div class="calendar-content">
-    <ng-container *ngIf="events$ | async as events">
-      <ng-container *ngIf="events.today && events.today.length">
-        <h2>Dzisiaj</h2>
-        <div class="card event" *ngFor="let event of events.today">
-          <div class="time">
-            {{ event.start.dateTime | date: "HH:mm" }}
-          </div>
-          <div class="info">
-            <h3>{{ event.summary }}</h3>
-          </div>
+    <ng-container *ngIf="todayEvents.length">
+      <h2>Dzisiaj</h2>
+      <div class="card event" *ngFor="let event of todayEvents">
+        <div class="time">
+          {{ event.start.dateTime | date: "HH:mm" }}
         </div>
-      </ng-container>
-      <ng-container *ngIf="events.tommorow && events.tommorow.length">
-        <h2>Jutro</h2>
-        <div class="card event" *ngFor="let event of events.tommorow">
-          <div class="time">
-            {{ event.start.dateTime | date: "HH:mm" }}
-          </div>
-          <div class="info">
-            <h3>{{ event.summary }}</h3>
-          </div>
+        <div class="info">
+          <h3>{{ event.summary }}</h3>
         </div>
-      </ng-container>
-      <ng-container
-        *ngIf="
-          !events ||
-          ((!events.today || !events.today.length) &&
-            (!events.tommorow || !events.tommorow.length))
-        "
-      >
-        <h2>Brak nadchodzących wydarzeń.</h2>
-      </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="tomorrowEvents.length">
+      <h2>Jutro</h2>
+      <div class="card event" *ngFor="let event of tomorrowEvents">
+        <div class="time">
+          {{ event.start.dateTime | date: "HH:mm" }}
+        </div>
+        <div class="info">
+          <h3>{{ event.summary }}</h3>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!todayEvents.length && !tomorrowEvents.length">
+      <h2>Wydarzenia</h2>
+      <div class="error">
+        <h3>Brak nadchodzących wydarzeń.</h3>
+      </div>
     </ng-container>
   </div>
 

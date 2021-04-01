@@ -1,23 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import { CalendarService, Event } from "@shared/services/calendar.service";
 
 @Component({
   selector: "app-calendar",
   templateUrl: "./calendar.component.html",
-  styleUrls: ["./calendar.component.scss"]
+  styleUrls: ["./calendar.component.scss"],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   public navigation = {
     top: "",
     right: "/settings",
     bottom: "",
-    left: "/weather/today"
+    left: "/weather/today",
   };
 
-  public events$: Observable<{ today: Event[]; tommorow: Event[] }>;
+  private eventsSubscription: Subscription;
+
+  public todayEvents = [];
+  public tomorrowEvents = [];
 
   constructor(
     private router: Router,
@@ -25,7 +28,24 @@ export class CalendarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.events$ = this.calendarService.getFirebaseCalendar();
+    this.eventsSubscription = this.calendarService
+      .getFirebaseCalendar()
+      .subscribe((events) => {
+        this.todayEvents = [];
+        this.tomorrowEvents = [];
+        console.log(events.today);
+
+        events.today.forEach((event) => {
+          this.todayEvents.push(event);
+        });
+        events.tomorrow.forEach((event) => {
+          this.tomorrowEvents.push(event);
+        });
+      });
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
   }
 
   isToday(date: string, shift?: number) {
