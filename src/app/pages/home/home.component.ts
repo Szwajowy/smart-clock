@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { switchMapTo } from "rxjs/operators";
 
 import { ClockService } from "app/shared/services/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
-import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import { SettingsService } from "../settings/settings.service";
 import { WeatherService } from "@shared/services/weather.service";

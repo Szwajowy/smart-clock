@@ -1,80 +1,82 @@
-@import 'styles.scss';
-
 .home-container {
-    height: calc(100% - 170px);
-    width: calc(100% - 170px);
+  height: calc(100% - 170px);
+  width: calc(100% - 170px);
 
-    padding: 85px;
+  padding: 85px;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+
+  h1 {
+    padding: 0;
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1em;
+  }
+
+  .time {
+    padding: 0;
+    margin: 0;
+
+    font-size: 140px;
+    font-weight: 700;
+    line-height: 1em;
+    // text-shadow: 0 0 6px $app-text-shadow;
+  }
+
+  .date {
+    padding: 0;
+    margin: 0;
+
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1em;
+    // text-shadow: 0 0 6px $app-text-shadow;
+  }
+
+  .buttons {
+    width: 100%;
 
     display: flex;
-    flex-flow: column;
+    flex-flow: row nowrap;
     justify-content: space-between;
 
-    h1 {
-        padding: 0;
-        margin: 0;
+    .btn {
+      width: 48%;
+      padding: 15px;
 
-        font-size: 28px;
-        font-weight: 400;
-        line-height: 1em;
-    }
+      outline: none;
+      border: none;
+      border-radius: 500px;
+      // box-shadow: 0 0 6px 0 $app-text-shadow;
 
-    .time {
-        padding: 0;
-        margin: 0;
+      font-size: 24px;
+      font-weight: 600;
 
-        font-size: 140px;
-        font-weight: 700;
-        line-height: 1em;
-        // text-shadow: 0 0 6px $app-text-shadow;
-    }
+      &.snooze {
+        color: var(--accent);
+        background: var(--color);
 
-    .date {
-        padding: 0;
-        margin: 0;
-
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 1em;
-        // text-shadow: 0 0 6px $app-text-shadow;
-    }
-
-    .buttons {
-        width: 100%;
-
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-
-        .btn {
-            width: 48%;
-            padding: 15px;
-
-            outline: none;
-            border: none;
-            border-radius: 500px;
-            // box-shadow: 0 0 6px 0 $app-text-shadow;
-
-            font-size: 24px;
-            font-weight: 600;
-
-            &.snooze {
-                color: var(--accent);
-                background: var(--color);
-
-                &:hover {
-                    background: var(--color-darker);
-                }
-            }
-
-            &.turnoff {
-                background: #B90B0B;
-                color: var(--color);
-
-                &:hover {
-                    background: darken(#B90B0B, 10%);
-                }
-            }
+        &:hover {
+          background: var(--color-darker);
         }
+
+        &:disabled {
+          background: var(--color-darkest);
+        }
+      }
+
+      &.turnoff {
+        background: #b90b0b;
+        color: var(--color);
+
+        &:hover {
+          background: darken(#b90b0b, 10%);
+        }
+      }
     }
+  }
 }

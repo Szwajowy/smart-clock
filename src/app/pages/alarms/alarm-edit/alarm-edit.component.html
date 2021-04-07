@@ -1,0 +1,28 @@
+<div class="creating-alarm">
+  <div class="top">
+    <div class="time">
+      <app-set-time-part
+        [time]="alarm.time"
+        [part]="'hours'"
+      ></app-set-time-part>
+      <div class="separator">:</div>
+      <app-set-time-part
+        [time]="alarm.time"
+        [part]="'minutes'"
+      ></app-set-time-part>
+    </div>
+    <div class="buttons">
+      <button class="btn create" (click)="onCreateAlarm()">Utwórz</button>
+      <button class="btn cancel" (click)="onCancel()">Cofnij</button>
+    </div>
+  </div>
+  <div class="bottom">
+    <button
+      *ngFor="let day of dayOrder; let i = index"
+      [ngClass]="alarm.repeat[i] ? 'active' : ''"
+      (click)="onToggleDay(i)"
+    >
+      {{ day | uppercase }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="alarm" (click)="onEditAlarm()">
+  <div class="info">
+    <h3 class="hour">
+      {{ getTime("hours") + ":" + getTime("minutes") }}
+    </h3>
+    <p class="days">{{ getRepeatDays() }}</p>
+  </div>
+  <label class="label">
+    <div class="toggle">
+      <input
+        class="toggle-state"
+        type="checkbox"
+        name="check"
+        value="check"
+        [checked]="alarm.active"
+        (change)="onAlarmToggleStatus()"
+      />
+      <div class="toggle-inner">
+        <div class="indicator"></div>
+      </div>
+      <div class="active-bg"></div>
+    </div>
+  </label>
+</div>

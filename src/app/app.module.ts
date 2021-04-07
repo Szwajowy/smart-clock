@@ -37,12 +37,15 @@ import { SettingsComponent } from "./pages/settings/settings.component";
 import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
 import { WeatherIconComponent } from "./shared/components/weather-icon/weather-icon.component";
 import { DateAgoPipe } from "./shared/pipes/date-ago.pipe";
-import { AlarmComponent } from "./pages/alarms/components/alarm/alarm.component";
 import { StandardComponent } from "./pages/home/clocks/standard/standard.component";
 import { BoxyComponent } from "./pages/home/clocks/boxy/boxy.component";
 import { WideComponent } from "./pages/home/clocks/wide/wide.component";
 import { ChartComponent } from "./pages/weather/chart/chart.component";
-import { SunnyComponent } from './pages/home/clocks/sunny/sunny.component';
+import { SunnyComponent } from "./pages/home/clocks/sunny/sunny.component";
+import { AlarmComponent } from "./pages/alarms/alarm/alarm.component";
+import { AlarmEditComponent } from "./pages/alarms/alarm-edit/alarm-edit.component";
+import { NavArrowButtonComponent } from "./shared/components/nav-arrow-button/nav-arrow-button.component";
+import { SetTimePartComponent } from './shared/components/set-time-part/set-time-part.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -68,12 +71,15 @@ registerLocaleData(localePl);
     CapitalizefirstPipe,
     WeatherIconComponent,
     DateAgoPipe,
-    AlarmComponent,
     StandardComponent,
     BoxyComponent,
     WideComponent,
     ChartComponent,
     SunnyComponent,
+    AlarmComponent,
+    AlarmEditComponent,
+    NavArrowButtonComponent,
+    SetTimePartComponent,
   ],
   imports: [
     BrowserModule,

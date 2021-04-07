@@ -1,0 +1,9 @@
+<div class="wraper">
+  <button class="increase" (click)="onIncrease()" [disabled]="!time || !part">
+    <i class="bi-arrow-up-short"></i>
+  </button>
+  <p class="value">{{ getNumberInTwoDigits() }}</p>
+  <button class="decrease" (click)="onDecrease()" [disabled]="!time || !part">
+    <i class="bi-arrow-down-short"></i>
+  </button>
+</div>
