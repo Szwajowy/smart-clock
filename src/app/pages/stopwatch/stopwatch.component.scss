@@ -1,21 +1,19 @@
 .container {
-  height: calc(100% - 120px);
+  height: 100%;
   width: 100%;
-  padding: 60px 0;
 
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-
-  .left-arrow,
-  .right-arrow {
-    height: auto;
-    width: 20px;
-    padding: 0 30px;
-  }
+  
+    .nav-arrow {
+      height: 100%;
+      width: 100px;
+    }
 
   .stopwatch-content {
-    flex-grow: 100;
+    padding: 60px 0;
+    flex-grow: 1;
     align-self: flex-end;
 
     display: flex;

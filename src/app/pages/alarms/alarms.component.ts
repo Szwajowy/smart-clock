@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 import { AlarmsService } from "@shared/services/alarms.service";
 
 import { Alarm } from "@shared/models/alarm.model";
-import { take } from "rxjs/operators";
+import { first, take } from "rxjs/operators";
 
 @Component({
   selector: "app-alarms",
@@ -34,20 +34,12 @@ export class AlarmsComponent implements OnInit {
 
   // EVENT FUNCTIONS
   onCreateAlarm() {
-    let alarmsLenght: number;
-    this.alarms$.pipe(take(1)).subscribe((alarms: Alarm[]) => {
-      alarmsLenght = alarms.length;
-    });
-
-    this.editedAlarmId$.next(alarmsLenght);
+    this.alarmsService.createAlarm();
   }
 
   onEditAlarm(id: number) {
-    this.editedAlarmId$.next(id);
-    this.alarmsService.setEditedAlarmTo(id);
+    this.alarmsService.editAlarm(id);
   }
-
-  onCloseEdit() {}
 
   // NAVIGATION
   onSwipeLeft() {

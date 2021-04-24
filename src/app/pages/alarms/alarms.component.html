@@ -15,8 +15,9 @@
     <app-alarm-edit *ngIf="(editedAlarmId$ | async) !== null"></app-alarm-edit>
     <div class="alarms-list" *ngIf="(editedAlarmId$ | async) === null">
       <app-alarm
-        *ngFor="let alarm of alarms$ | async"
+        *ngFor="let alarm of alarms$ | async; let id = index"
         [alarm]="alarm"
+        [id]="id"
       ></app-alarm>
       <button class="add-alarm-btn" (click)="onCreateAlarm()">
         <i class="bi-alarm-fill"></i>Dodaj alarm

@@ -1,4 +1,8 @@
 .wraper {
+  --element-color: var(--accent);
+  --element-size: 6rem;
+
+  width: calc(var(--element-size)/2.2*3.2);
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -11,16 +15,20 @@ button {
   background: none;
   outline: none;
   border: none;
+  opacity: 1;
 
   i {
-    color: var(--accent);
-    font-size: 3rem;
+    color: var(--element-color);
+    font-size: calc(var(--element-size)/2.2);
     line-height: 1em;
+  }
+
+  &[disabled] {
+    opacity: 0;
   }
 }
 
 p {
-  width: 130px;
   display: block;
 
   text-align: center;
@@ -28,9 +36,8 @@ p {
   padding: 0;
   margin: 0;
 
-  color: var(--accent);
-  font-size: 90px;
+  color: var(--element-color);
+  font-size: var(--element-size);
   font-weight: 700;
   line-height: 1em;
-  // text-shadow: 0 0 6px $app-text-shadow;
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Alarm } from "@shared/models/alarm.model";
+import { AlarmsService } from "@shared/services/alarms.service";
 
 @Component({
   selector: "app-alarm",
@@ -8,12 +9,19 @@ import { Alarm } from "@shared/models/alarm.model";
 })
 export class AlarmComponent implements OnInit {
   @Input("alarm") alarm: Alarm;
+  @Input("id") id: number;
 
-  constructor() {}
+  constructor(private alarmsService: AlarmsService) {}
 
   ngOnInit() {}
 
-  onEditAlarm() {}
+  onEditAlarm() {
+    this.alarmsService.editAlarm(this.id);
+  }
+
+  onToggleActiveState() {
+    this.alarmsService.toggleActiveStateOfAlarm(this.id)
+  }
 
   getTime(part) {
     return this.alarm.time[part] < 10
@@ -25,8 +33,9 @@ export class AlarmComponent implements OnInit {
     let stringResult = "";
 
     for (const key in this.alarm.repeat) {
-      if (this.alarm.repeat[key] === true)
+      if (this.alarm.repeat[key] === true) {
         stringResult += this.getDayNameShort(key) + ", ";
+      }
     }
 
     return stringResult.slice(0, -2);
@@ -34,20 +43,21 @@ export class AlarmComponent implements OnInit {
 
   private getDayNameShort(day) {
     switch (day) {
-      case "mon":
+      case "0":
         return "pon";
-      case "tue":
+      case "1":
         return "wt";
-      case "wed":
+      case "2":
         return "śr";
-      case "thu":
+      case "3":
         return "czw";
-      case "fri":
+      case "4":
         return "pt";
-      case "sat":
+      case "5":
         return "sob";
-      case "sun":
+      case "6":
         return "nd";
     }
   }
+
 }

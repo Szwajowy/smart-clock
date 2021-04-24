@@ -1,16 +1,17 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { RouterOutlet, ActivatedRoute } from "@angular/router";
+import { first } from "rxjs/operators";
 import * as moment from "moment";
 
 import { slideInAnimation } from "./animations";
 
+import { AlarmsService } from "./shared/services/alarms.service";
 import { ClockService } from "./shared/services/clock.service";
-import { SettingsService } from "./pages/settings/settings.service";
-import { ThemeService } from "@shared/services/theme.service";
-import { first } from "rxjs/operators";
 import { FirebaseService } from "@shared/services/firebase.service";
-import { WeatherService } from "@shared/services/weather.service";
 import { NotificationsService } from "@shared/components/notification-bar/notifications.service";
+import { ThemeService } from "@shared/services/theme.service";
+import { SettingsService } from "./pages/settings/settings.service";
+import { WeatherService } from "@shared/services/weather.service";
 
 @Component({
   selector: "app-root",
@@ -19,12 +20,14 @@ import { NotificationsService } from "@shared/components/notification-bar/notifi
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  private alarmsSubscription;
   private notificationsSubscription;
   private weatherSubscription;
 
   constructor(
     private route: ActivatedRoute,
     private settingsService: SettingsService,
+    private alarmService: AlarmsService,
     private clockService: ClockService,
     private firebaseService: FirebaseService,
     private notificationsService: NotificationsService,
@@ -47,13 +50,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.settingsService.loadSettings();
-      this.clockService.fetchAlarmsFromAPI();
+      this.alarmsSubscription = this.alarmService.fetchAlarmsFromDb().subscribe();
     }, 1000);
   }
 
   ngOnDestroy() {
-    this.weatherSubscription.unsubscribe();
+    this.alarmsSubscription.unsubscribe();
     this.notificationsSubscription.unsubscribe();
+    this.weatherSubscription.unsubscribe();
   }
 
   prepareRoute(outlet: RouterOutlet) {

@@ -10,7 +10,7 @@ import { NotificationsService } from "app/shared/components/notification-bar/not
   providedIn: "root",
 })
 export class TimerService {
-  private _time = new TimeCounter();
+  time = new TimeCounter();
   private running = false;
   private paused = false;
   private countedDown = false;
@@ -24,15 +24,11 @@ export class TimerService {
     volume: 0,
   });
 
-  get time() {
-    return this._time;
-  }
-
   constructor(private notificationsService: NotificationsService) {}
 
   countDown() {
     if (!this.paused) {
-      if (this._time.decrement("milliseconds") === false) {
+      if (this.time.decrement("milliseconds") === false) {
         this.countedDown = true;
         this.timerEndSound.play();
         this.timerEndSound.fade(0, 1, 100);
@@ -84,7 +80,7 @@ export class TimerService {
     this.running = false;
     this.paused = false;
 
-    this._time.reset();
+    this.time.reset();
 
     // SEND NOTIFICATION
     this.notificationsService.getInputNotificationsSubject().next({

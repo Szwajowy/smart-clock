@@ -18,6 +18,11 @@ export class TimerComponent {
 
   constructor(public timerService: TimerService, private router: Router) {}
 
+  setTime(value, part) {
+    console.log(value, part)
+    this.timerService.time[part] = value;
+  }
+
   onSwipeLeft() {
     if (this.navigation.right) this.router.navigate([this.navigation.right]);
   }

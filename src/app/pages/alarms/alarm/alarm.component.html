@@ -1,5 +1,5 @@
-<div class="alarm" (click)="onEditAlarm()">
-  <div class="info">
+<div class="alarm">
+  <div class="info" (click)="onEditAlarm()">
     <h3 class="hour">
       {{ getTime("hours") + ":" + getTime("minutes") }}
     </h3>
@@ -13,7 +13,7 @@
         name="check"
         value="check"
         [checked]="alarm.active"
-        (change)="onAlarmToggleStatus()"
+        (change)="onToggleActiveState()"
       />
       <div class="toggle-inner">
         <div class="indicator"></div>

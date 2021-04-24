@@ -4,6 +4,7 @@ import { ClockService } from "@shared/services/clock.service";
 import { EventEmitter } from "@angular/core";
 import { AlarmsService } from "@shared/services/alarms.service";
 import { WEEKDAYS_SHORT } from "@shared/types/daysNames.tupple";
+import { first } from "rxjs/operators";
 
 @Component({
   selector: "app-alarm-edit",
@@ -11,29 +12,34 @@ import { WEEKDAYS_SHORT } from "@shared/types/daysNames.tupple";
   styleUrls: ["./alarm-edit.component.scss"],
 })
 export class AlarmEditComponent implements OnInit {
-  @Output() closeEditing: EventEmitter<boolean> = new EventEmitter();
-
-  alarm: Alarm;
-  dayOrder: string[];
+  readonly dayOrder = WEEKDAYS_SHORT;
+  
+  editedAlarm: Alarm;
+  isEditMode: boolean = false;
 
   constructor(private alarmsService: AlarmsService) {}
 
   ngOnInit() {
-    this.dayOrder = WEEKDAYS_SHORT;
-    this.alarm = this.alarmsService.editedAlarm;
+    this.editedAlarm = this.alarmsService.editedAlarm;
+    this.isEditMode = this.alarmsService.isEditMode;
   }
 
-  // NEW ALARM FUNCTIONS
-  onCreateAlarm() {}
-
-  onCancel() {
-    this.alarmsService.saveAlarm(null, null);
+  onSaveChanges() {
+    this.alarmsService.saveAlarm(this.editedAlarm);
   }
 
-  onToggleDay(dayId) {
-    this.alarm.repeat[dayId] = !this.alarm.repeat[dayId];
-    console.log(this.alarm);
+  onCancelChanges() {
+    this.alarmsService.cancelAlarm();
   }
 
-  onAlarmToggleStatus(index) {}
+  onRemoveAlarm() {
+    this.alarmsService.editedAlarmId$.pipe(first()).subscribe((id: number) => {
+      let alarmToRemoveId = id;
+      this.alarmsService.removeAlarm(alarmToRemoveId)
+    })
+  }
+
+  onToggleRepeatDay(dayId) {
+    this.editedAlarm.repeat[dayId] = !this.editedAlarm.repeat[dayId];
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { decreaseTime, increaseTime } from "@shared/functions/time-utils";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+
+type TimePart = 'hours' | 'minutes' | 'seconds';
 
 @Component({
   selector: "app-set-time-part",
@@ -7,26 +8,35 @@ import { decreaseTime, increaseTime } from "@shared/functions/time-utils";
   styleUrls: ["./set-time-part.component.scss"],
 })
 export class SetTimePartComponent implements OnInit {
-  @Input() time: { seconds?: number; minutes?: number; hours?: number };
-  @Input() part: "seconds" | "minutes" | "hours";
+  @Input() value: number;
+  @Input() upLimit: number = 99;
+  @Input() downLimit: number = 0;
+  @Input() editable: boolean = true;
+  @Output() change: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
 
   onIncrease() {
-    this.time = increaseTime(this.time, this.part);
+    this.value = this.increase(this.value);
+    this.change.emit(this.value);
   }
 
   onDecrease() {
-    this.time = decreaseTime(this.time, this.part);
+    this.value = this.decrease(this.value);
+    this.change.emit(this.value);
   }
 
-  getNumberInTwoDigits() {
-    if (!this.time || this.time == {}) return "00";
-    const number = this.time[this.part];
-    if (number < 10) return "0" + number;
+  private increase(value: number): number {
+    if(value < this.upLimit)
+      return ++value;
+    return this.downLimit;
+  }
 
-    return number;
+  private decrease(value: number): number {
+    if(value > this.downLimit)
+      return --value;
+    return this.upLimit;
   }
 }

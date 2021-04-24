@@ -17,15 +17,15 @@ export const slideInAnimation =
         })
       ]),
       query(':enter', [
-        style({ left: '100%'})
+        style({ transform: 'translateX(100%)' })
       ]),
       query(':leave', animateChild()),
       group([
         query(':leave', [
-          animate(animationDuration+' ease-out', style({ left: '-100%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateX(-100%)' }))
         ]),
         query(':enter', [
-          animate(animationDuration+' ease-out', style({ left: '0%'}))
+          animate(animationDuration+' ease-out', style({  transform: 'translateX(0%)'}))
         ])
       ]),
       query(':enter', animateChild()),
@@ -42,15 +42,15 @@ export const slideInAnimation =
         })
       ]),
       query(':enter', [
-        style({ left: '-100%'})
+        style({ transform: 'translateX(-100%)' })
       ]),
       query(':leave', animateChild()),
       group([
         query(':leave', [
-          animate(animationDuration+' ease-out', style({ left: '100%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateX(100%)' }))
         ]),
         query(':enter', [
-          animate(animationDuration+' ease-out', style({ left: '0%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateX(0%)' }))
         ])
       ]),
       query(':enter', animateChild()),
@@ -67,15 +67,15 @@ export const slideInAnimation =
         })
       ]),
       query(':enter', [
-        style({ top: '100%'})
+        style({ transform: 'translateY(100%)' })
       ]),
       query(':leave', animateChild()),
       group([
         query(':leave', [
-          animate(animationDuration+' ease-out', style({ top: '-100%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateY(-100%)' }))
         ]),
         query(':enter', [
-          animate(animationDuration+' ease-out', style({ top: '0%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateY(0%)' }))
         ])
       ]),
       query(':enter', animateChild()),
@@ -92,15 +92,15 @@ export const slideInAnimation =
         })
       ]),
       query(':enter', [
-        style({ top: '-100%'})
+        style({ transform: 'translateY(-100%)' })
       ]),
       query(':leave', animateChild()),
       group([
         query(':leave', [
-          animate(animationDuration+' ease-out', style({ top: '100%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateY(100%)' }))
         ]),
         query(':enter', [
-          animate(animationDuration+' ease-out', style({ top: '0%'}))
+          animate(animationDuration+' ease-out', style({ transform: 'translateY(0%)' }))
         ])
       ]),
       query(':enter', animateChild()),
