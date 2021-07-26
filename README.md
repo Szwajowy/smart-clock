@@ -12,8 +12,3 @@ Some feauters are only on my second project called SmartClock-Manager which is a
 * Stopwatch
 * Alarm clock
 * Themes
-
-### TODO
-* Change the alarm component to handle edit and deleting (for this moment you can do it only using SmartClock-Manager)
-* Add displaying upcoming events from google calendar
-* Add more themes
