@@ -1,5 +1,5 @@
 import localePl from "@angular/common/locales/pl";
-import { LOCALE_ID } from "@angular/core";
+import { LOCALE_ID, Injectable } from "@angular/core";
 import { registerLocaleData } from "@angular/common";
 
 import { BrowserModule } from "@angular/platform-browser";
@@ -47,6 +47,7 @@ import { AlarmEditComponent } from "./pages/alarms/alarm-edit/alarm-edit.compone
 import { NavArrowButtonComponent } from "./shared/components/nav-arrow-button/nav-arrow-button.component";
 import { SetTimePartComponent } from './shared/components/set-time-part/set-time-part.component';
 
+@Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: { velocity: 0.4, threshold: 10, direction: Hammer.DIRECTION_ALL }, // override default settings
