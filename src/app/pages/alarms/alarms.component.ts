@@ -6,13 +6,14 @@ import { AlarmsService } from "@shared/services/alarms.service";
 
 import { Alarm } from "@shared/models/alarm.model";
 import { first, take } from "rxjs/operators";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({
   selector: "app-alarms",
   templateUrl: "./alarms.component.html",
   styleUrls: ["./alarms.component.scss"],
 })
-export class AlarmsComponent implements OnInit {
+export class AlarmsComponent extends ApplicationPage implements OnInit {
   // NAVIGATION CONFIGURATION
   public navigation = {
     top: "/timer",
@@ -25,7 +26,9 @@ export class AlarmsComponent implements OnInit {
   editedAlarmId$: Subject<number>;
   alarms$: Subject<Alarm[]>;
 
-  constructor(private alarmsService: AlarmsService, private router: Router) {}
+  constructor(router: Router, private alarmsService: AlarmsService) {
+    super(router);
+  }
 
   ngOnInit() {
     this.alarms$ = this.alarmsService.alarms$;
@@ -39,22 +42,5 @@ export class AlarmsComponent implements OnInit {
 
   onEditAlarm(id: number) {
     this.alarmsService.editAlarm(id);
-  }
-
-  // NAVIGATION
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 import { TimerService } from "app/shared/services/timer.service";
 
@@ -8,7 +9,7 @@ import { TimerService } from "app/shared/services/timer.service";
   templateUrl: "./timer.component.html",
   styleUrls: ["./timer.component.scss"],
 })
-export class TimerComponent {
+export class TimerComponent extends ApplicationPage {
   public navigation = {
     top: "/stopwatch",
     right: "/weather/today",
@@ -16,26 +17,12 @@ export class TimerComponent {
     left: "/calendar",
   };
 
-  constructor(public timerService: TimerService, private router: Router) {}
+  constructor(router: Router, public timerService: TimerService) {
+    super(router);
+  }
 
   setTime(value, part) {
-    console.log(value, part)
+    console.log(value, part);
     this.timerService.time[part] = value;
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

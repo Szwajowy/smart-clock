@@ -4,13 +4,17 @@ import { map } from "rxjs/operators";
 import * as moment from "moment";
 
 import { WeatherService } from "../../shared/services/weather.service";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({
   selector: "app-three-days-forecast",
   templateUrl: "./three-days-forecast.component.html",
   styleUrls: ["./three-days-forecast.component.scss"],
 })
-export class ThreeDaysForecastComponent implements OnInit, OnDestroy {
+export class ThreeDaysForecastComponent
+  extends ApplicationPage
+  implements OnInit, OnDestroy
+{
   public navigation = {
     top: "/weather/tomorrow",
     right: "/calendar",
@@ -40,7 +44,9 @@ export class ThreeDaysForecastComponent implements OnInit, OnDestroy {
     })
   );
 
-  constructor(private weatherService: WeatherService, private router: Router) {}
+  constructor(router: Router, private weatherService: WeatherService) {
+    super(router);
+  }
 
   ngOnInit() {}
 
@@ -67,21 +73,5 @@ export class ThreeDaysForecastComponent implements OnInit, OnDestroy {
 
   onRefreshWeather() {
     this.weatherService.refreshWeather();
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

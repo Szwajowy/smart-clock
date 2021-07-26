@@ -3,13 +3,17 @@ import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 
 import { CalendarService, Event } from "@shared/services/calendar.service";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({
   selector: "app-calendar",
   templateUrl: "./calendar.component.html",
   styleUrls: ["./calendar.component.scss"],
 })
-export class CalendarComponent implements OnInit, OnDestroy {
+export class CalendarComponent
+  extends ApplicationPage
+  implements OnInit, OnDestroy
+{
   public navigation = {
     top: "",
     right: "/settings",
@@ -22,10 +26,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   public todayEvents = [];
   public tomorrowEvents = [];
 
-  constructor(
-    private router: Router,
-    public calendarService: CalendarService
-  ) {}
+  constructor(router: Router, public calendarService: CalendarService) {
+    super(router);
+  }
 
   ngOnInit() {
     this.eventsSubscription = this.calendarService
@@ -50,21 +53,5 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   isToday(date: string, shift?: number) {
     this.calendarService.isDaysFromToday(date, shift);
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

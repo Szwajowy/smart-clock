@@ -6,13 +6,17 @@ import { FirebaseService } from "@shared/services/firebase.service";
 import { map } from "rxjs/operators";
 import { SettingsService } from "../settings/settings.service";
 import { WeatherService } from "@shared/services/weather.service";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent
+  extends ApplicationPage
+  implements OnInit, OnDestroy
+{
   username = "użytkowniku";
   clockStyle = 1;
 
@@ -30,12 +34,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   private settingsSubscription;
 
   constructor(
+    router: Router,
     private clockService: ClockService,
     private weatherService: WeatherService,
     private settingsService: SettingsService,
-    private firebaseService: FirebaseService,
-    private router: Router
-  ) {}
+    private firebaseService: FirebaseService
+  ) {
+    super(router);
+  }
 
   ngOnInit() {
     this.now = this.clockService.getNow();
@@ -74,21 +80,5 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getNow() {
     return this.now;
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }
