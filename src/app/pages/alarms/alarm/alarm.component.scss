@@ -1,0 +1,94 @@
+.alarm {
+  padding: 20px 30px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  background: var(--color);
+  border-radius: 12px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    padding: 0;
+    margin: 0;
+
+    color: var(--accent);
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1em;
+  }
+
+  p {
+    padding: 0;
+    margin: 10px 0 0 0;
+
+    color: var(--color-darkest);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1em;
+  }
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .toggle {
+    isolation: isolate;
+    position: relative;
+    height: 32px;
+    width: 64px;
+    border-radius: 15px;
+    background: var(--color-darkest);
+    overflow: hidden;
+  }
+
+  .toggle-inner {
+    z-index: 2;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 28px;
+    width: 60px;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .active-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200%;
+    background: var(--color-darker);
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.05s linear 0.17s;
+  }
+
+  .toggle-state {
+    display: none;
+  }
+
+  .indicator {
+    height: 100%;
+    width: 200%;
+    background: var(--color);
+    border-radius: 13px;
+    transform: translate3d(-75%, 0, 0);
+    transition: transform 0.35s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+  }
+
+  .toggle-state:checked ~ .active-bg {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .toggle-state:checked ~ .toggle-inner .indicator {
+    transform: translate3d(25%, 0, 0);
+    background: var(--accent);
+  }
+}

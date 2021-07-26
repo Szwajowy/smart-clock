@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { ApplicationPage } from "@shared/models/application-page.model";
+import { ThemeName } from "@shared/models/theme-name.enum";
 
 import { ThemeService } from "app/shared/services/theme.service";
 import { SettingsService } from "./settings.service";
@@ -9,7 +11,7 @@ import { SettingsService } from "./settings.service";
   templateUrl: "./settings.component.html",
   styleUrls: ["./settings.component.scss"],
 })
-export class SettingsComponent {
+export class SettingsComponent extends ApplicationPage {
   public navigation = {
     top: "",
     right: "/",
@@ -23,8 +25,10 @@ export class SettingsComponent {
   constructor(
     private settingsService: SettingsService,
     private themeService: ThemeService,
-    private router: Router
-  ) {}
+    router: Router
+  ) {
+    super(router);
+  }
 
   onLogin() {
     this.logged = true;
@@ -34,7 +38,7 @@ export class SettingsComponent {
     this.logged = false;
   }
 
-  onThemeChange(name: string) {
+  onThemeChange(name: ThemeName) {
     this.settingsService.changeTheme(name);
   }
 
@@ -44,21 +48,5 @@ export class SettingsComponent {
 
   getSettings() {
     return this.settingsService.getSettings();
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 
 import { Theme } from "../models/theme.model";
 import { tap } from "rxjs/operators";
+import { ThemeName } from "@shared/models/theme-name.enum";
 
 @Injectable({
   providedIn: "root",
@@ -57,7 +58,7 @@ export class ThemeService {
     return this.active;
   }
 
-  setActiveTheme(name: string): void {
+  setActiveTheme(name: ThemeName): void {
     let theme = this.findTheme(name);
 
     if (!theme) return null;

@@ -1,0 +1,13 @@
+.arrow-button {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    color: var(--color);
+    font-size: 2rem;
+  }
+}

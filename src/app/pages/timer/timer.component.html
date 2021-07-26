@@ -5,241 +5,38 @@
   (swipeup)="onSwipeUp()"
   (swipedown)="onSwipeDown()"
 >
-  <a [routerLink]="this.navigation.left" class="navigation-arrow left-arrow">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="21.485"
-      height="34.485"
-      viewBox="0 0 21.485 34.485"
-    >
-      <g transform="translate(4.243 4.243)">
-        <line x1="13" y2="13" stroke-linecap="round" stroke-width="6" />
-        <line
-          x1="13"
-          y1="13"
-          transform="translate(0 13)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-      </g>
-    </svg>
-  </a>
+  <app-nav-arrow-button
+  class="nav-arrow"
+  [link]="this.navigation.left"
+  [direction]="'LEFT'"
+  ></app-nav-arrow-button>
 
   <div class="timer-content">
     <div class="timer" *ngIf="timerService.time.subject | async as time">
-      <div class="hours">
-        <button
-          class="increase"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.increment('hours')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line x1="13" y2="13" stroke-linecap="round" stroke-width="6" />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-        <p class="value">{{ time.hours | number: "2.0-0" }}</p>
-        <button
-          class="decrease"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.decrement('hours')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line x1="13" y2="13" stroke-linecap="round" stroke-width="6" />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-      </div>
-
+      <app-set-time-part
+        class="hours"
+        [value]="time.hours"
+        [editable]="!timerService.isRunning() && !timerService.countedDown"
+        (change)="setTime($event, 'hours')"
+      ></app-set-time-part>
       <div class="separator">:</div>
-
-      <div class="minutes">
-        <button
-          class="increase"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.increment('minutes')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line
-                x1="13"
-                y2="13"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-        <p class="value">{{ time.minutes | number: "2.0-0" }}</p>
-        <button
-          class="decrease"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.decrement('minutes')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line
-                x1="13"
-                y2="13"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-      </div>
-
+      <app-set-time-part
+        class="minutes"
+        [value]="time.minutes"
+        [upLimit]="59"
+        [downLimit]="0"
+        [editable]="!timerService.isRunning() && !timerService.countedDown"
+        (change)="setTime($event, 'minutes')"
+      ></app-set-time-part>
       <div class="separator">:</div>
-
-      <div class="seconds">
-        <button
-          class="increase"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.increment('seconds')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line
-                x1="13"
-                y2="13"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-        <p class="value">{{ time.seconds | number: "2.0-0" }}</p>
-        <button
-          class="decrease"
-          [ngStyle]="
-            !timerService.isRunning() && !timerService.countedDown
-              ? { opacity: 100 }
-              : { opacity: 0 }
-          "
-          (click)="timerService.time.decrement('seconds')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="21.485"
-            height="34.485"
-            viewBox="0 0 21.485 34.485"
-          >
-            <g transform="translate(4.243 4.243)">
-              <line
-                x1="13"
-                y2="13"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-              <line
-                x1="13"
-                y1="13"
-                transform="translate(0 13)"
-                fill="none"
-                stroke="#fff"
-                stroke-linecap="round"
-                stroke-width="6"
-              />
-            </g>
-          </svg>
-        </button>
-      </div>
+      <app-set-time-part
+        class="seconds"
+        [value]="time.seconds"
+        [upLimit]="59"
+        [downLimit]="0"
+        [editable]="!timerService.isRunning() && !timerService.countedDown"
+        (change)="setTime($event, 'seconds')"
+      ></app-set-time-part>
     </div>
     <div class="buttons">
       <ng-container *ngIf="!timerService.countedDown; else countedDown">
@@ -263,29 +60,9 @@
     </div>
   </div>
 
-  <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="21.485"
-      height="34.485"
-      viewBox="0 0 21.485 34.485"
-    >
-      <g transform="translate(-747.257 -176.257)">
-        <line
-          x2="13"
-          y2="13"
-          transform="translate(751.5 180.5)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-        <line
-          y1="13"
-          x2="13"
-          transform="translate(751.5 193.5)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-      </g>
-    </svg>
-  </a>
+  <app-nav-arrow-button
+    class="nav-arrow"
+    [link]="this.navigation.right"
+    [direction]="'RIGHT'"
+  ></app-nav-arrow-button>
 </div>

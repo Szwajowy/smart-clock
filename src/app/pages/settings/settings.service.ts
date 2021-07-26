@@ -1,19 +1,19 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/database";
-
-import { Subject } from "rxjs";
-
-import { ThemeService } from "@shared/services/theme.service";
-import { WeatherService } from "../../shared/services/weather.service";
+import { ClockStyle } from "@shared/models/clock-style.enum";
+import { Settings } from "@shared/models/settings.model";
+import { ThemeName } from "@shared/models/theme-name.enum";
 import { FirebaseService } from "@shared/services/firebase.service";
+import { ThemeService } from "@shared/services/theme.service";
+import { Subject } from "rxjs";
+import { WeatherService } from "../../shared/services/weather.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class SettingsService {
-  private settings = {
-    activeTheme: "blue",
-    clockStyle: 1,
+  private defaultSettings = {
+    activeTheme: ThemeName.blue,
+    clockStyle: ClockStyle.standard,
     city: "Katowice",
     updateTime: 2,
     timezone: {
@@ -22,6 +22,8 @@ export class SettingsService {
     },
     lastUpdate: new Date().getTime(),
   };
+
+  private settings: Settings = this.defaultSettings;
 
   private settingChanged = new Subject();
 
@@ -121,7 +123,7 @@ export class SettingsService {
     this.weatherService.setCity(city);
   }
 
-  changeTheme(name: string) {
+  changeTheme(name: ThemeName) {
     this.settings.activeTheme = name;
     this.settings.lastUpdate = new Date().getTime();
     this.themeService.setActiveTheme(name);

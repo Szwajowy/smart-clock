@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ApplicationPage } from "@shared/models/application-page.model";
 
 import { map } from "rxjs/operators";
 
@@ -10,7 +11,10 @@ import { WeatherService } from "../../shared/services/weather.service";
   templateUrl: "./weather.component.html",
   styleUrls: ["./weather.component.scss"],
 })
-export class WeatherComponent implements OnInit, OnDestroy {
+export class WeatherComponent
+  extends ApplicationPage
+  implements OnInit, OnDestroy
+{
   public navigation = {
     top: null,
     right: "/calendar",
@@ -48,10 +52,12 @@ export class WeatherComponent implements OnInit, OnDestroy {
   );
 
   constructor(
-    private weatherService: WeatherService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    router: Router,
+    public route: ActivatedRoute,
+    private weatherService: WeatherService
+  ) {
+    super(router);
+  }
 
   ngOnInit() {
     if (this.route.snapshot.data["weather"] == "today") {
@@ -67,21 +73,5 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   onRefreshWeather() {
     this.weatherService.refreshWeather();
-  }
-
-  onSwipeLeft() {
-    if (this.navigation.right) this.router.navigate([this.navigation.right]);
-  }
-
-  onSwipeRight() {
-    if (this.navigation.left) this.router.navigate([this.navigation.left]);
-  }
-
-  onSwipeUp() {
-    if (this.navigation.bottom) this.router.navigate([this.navigation.bottom]);
-  }
-
-  onSwipeDown() {
-    if (this.navigation.top) this.router.navigate([this.navigation.top]);
   }
 }

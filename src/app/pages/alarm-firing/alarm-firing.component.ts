@@ -23,7 +23,7 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
   private now = this.clockService.getNow();
   public timezone;
   private timezoneSubscription;
-  private newAlarmTime = null;
+  public newAlarmTime = null;
 
   public snoozeLenght = 10;
 

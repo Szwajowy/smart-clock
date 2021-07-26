@@ -1,0 +1,9 @@
+<div class="wraper">
+  <button class="increase" [disabled]="!editable" (click)="onIncrease()">
+    <i class="bi-caret-up-fill"></i>
+  </button>
+  <p class="value">{{ value | number: "2.0-0" }}</p>
+  <button class="decrease" [disabled]="!editable" (click)="onDecrease()">
+    <i class="bi-caret-down-fill"></i>
+  </button>
+</div>

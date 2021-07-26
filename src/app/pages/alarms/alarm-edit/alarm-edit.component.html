@@ -1,0 +1,35 @@
+<div class="creating-alarm">
+  <div class="top">
+    <div class="time">
+      <app-set-time-part
+        [value]="editedAlarm.time.hours"
+        [upLimit]="23"
+        [downLimit]="0"
+        (change)="editedAlarm.time.hours = $event"
+      ></app-set-time-part>
+      <div class="separator">:</div>
+      <app-set-time-part
+        [value]="editedAlarm.time.minutes"
+        [upLimit]="59"
+        [downLimit]="0"
+        (change)="editedAlarm.time.minutes = $event"
+      ></app-set-time-part>
+    </div>
+    <div class="buttons">
+      <button class="btn create" (click)="onSaveChanges()">{{ isEditMode ? 'Zapisz' : 'Utwórz'}}</button>
+      <button *ngIf="isEditMode === true" class="btn cancel" (click)="onRemoveAlarm()">Usuń</button>
+    </div>
+  </div>
+  <div class="bottom">
+    <button
+      *ngFor="let day of dayOrder; let i = index"
+      [ngClass]="editedAlarm.repeat[i] ? 'active' : ''"
+      (click)="onToggleRepeatDay(i)"
+    >
+      {{ day | uppercase }}
+    </button>
+  </div>
+  <button class="close-btn" (click)="onCancelChanges()">
+    <i class="bi-x-circle-fill"></i>
+  </button>
+</div>
