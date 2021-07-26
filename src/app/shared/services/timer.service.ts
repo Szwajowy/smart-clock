@@ -13,7 +13,7 @@ export class TimerService {
   time = new TimeCounter();
   private running = false;
   private paused = false;
-  private countedDown = false;
+  public countedDown = false;
 
   private interval = new AdjustingInterval(this.countDown.bind(this), 10);
 

@@ -53,7 +53,7 @@ export class WeatherComponent
 
   constructor(
     router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private weatherService: WeatherService
   ) {
     super(router);
