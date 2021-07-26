@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SetTimePartComponent } from './set-time-part.component';
 
@@ -6,7 +6,7 @@ describe('SetTimePartComponent', () => {
   let component: SetTimePartComponent;
   let fixture: ComponentFixture<SetTimePartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SetTimePartComponent ]
     })

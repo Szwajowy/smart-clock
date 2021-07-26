@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { NavArrowButtonComponent } from "./nav-arrow-button.component";
 
@@ -6,7 +6,7 @@ describe("NavArrowButtonComponent", () => {
   let component: NavArrowButtonComponent;
   let fixture: ComponentFixture<NavArrowButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NavArrowButtonComponent],
     }).compileComponents();
