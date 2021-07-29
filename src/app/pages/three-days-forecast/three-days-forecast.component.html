@@ -1,16 +1,4 @@
-<div
-  class="container"
-  (swipeleft)="onSwipeLeft()"
-  (swiperight)="onSwipeRight()"
-  (swipeup)="onSwipeUp()"
-  (swipedown)="onSwipeDown()"
->
-  <app-nav-arrow-button
-  class="nav-arrow"
-  [link]="this.navigation.left"
-  [direction]="'LEFT'"
-  ></app-nav-arrow-button>
-
+<app-page-skeleton [navigation]="navigation">
   <div class="weather-content">
     <ng-container *ngIf="weather$ | async as weatherArr; else error">
       <div class="day-weather" *ngFor="let weather of weatherArr">
@@ -20,7 +8,10 @@
         <div class="weather-icon">
           <app-weather-icon [icon]="weather.weather[0].icon"></app-weather-icon>
         </div>
-        <h1>{{ weather.main.temp | number: "1.0-0" }}<span class="degrees">°C</span></h1>
+        <h1>
+          {{ weather.main.temp | number: "1.0-0"
+          }}<span class="degrees">°C</span>
+        </h1>
         <h2>{{ weather.weather[0].description | capitalizefirst }}</h2>
       </div>
     </ng-container>
@@ -30,10 +21,4 @@
       <button type="button" (click)="onRefreshWeather()">Pobierz pogodę</button>
     </ng-template>
   </div>
-
-  <app-nav-arrow-button
-  class="nav-arrow"
-  [link]="this.navigation.right"
-  [direction]="'RIGHT'"
-  ></app-nav-arrow-button>
-</div>
+</app-page-skeleton>

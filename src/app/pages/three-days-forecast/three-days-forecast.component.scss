@@ -1,95 +1,78 @@
-.container {
-  height: 100%;
-  width: 100%;
+.weather-content {
+  padding: 60px 0;
+  flex-grow: 1;
+  align-self: center;
+
+  overflow: hidden;
 
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
 
-  position: relative;
-  
-    .nav-arrow {
-      height: 100%;
-      width: 100px;
-      z-index: 2;
+  .error-msg {
+    h3 {
+      padding: 16px 0;
+      margin: 0;
+
+      font-size: 54px;
+      font-weight: 700;
+      line-height: 1em;
     }
 
-  .weather-content {
-    padding: 60px 0;
-    flex-grow: 1;
-    align-self: center;
+    h4 {
+      padding: 0;
+      margin: 0;
 
-    overflow: hidden;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1em;
+    }
+  }
+
+  .day-weather {
+    width: calc(33% - 24px);
+    padding: 0 12px;
 
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
+    align-items: center;
 
-    .error-msg {
-      h3 {
-        padding: 16px 0;
-        margin: 0;
-
-        font-size: 54px;
-        font-weight: 700;
-        line-height: 1em;
-      }
-
-      h4 {
-        padding: 0;
-        margin: 0;
-
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 1em;
-      }
+    &:not(:last-child) {
+      border-right: 3px solid var(--color);
     }
 
-    .day-weather {
-      width: calc(33% - 24px);
-      padding: 0 12px;
+    small {
+      margin-bottom: 12px;
 
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
+      color: var(--color-darker);
+      font-size: 24px;
+      font-weight: 600;
+    }
 
-      &:not(:last-child) {
-        border-right: 3px solid var(--color);
-      }
+    .weather-icon {
+      width: 60%;
+      margin-bottom: 28px;
+      fill: var(--color);
+      opacity: 0.3;
+    }
 
-      small {
-        margin-bottom: 12px;
+    .degrees {
+      font-size: 0.6em;
+    }
 
-        color: var(--color-darker);
-        font-size: 24px;
-        font-weight: 600;
-      }
+    h1,
+    h2 {
+      padding: 0;
+      margin: 0;
+    }
 
-      .weather-icon {
-        width: 60%;
-        margin-bottom: 28px;
-        fill: var(--color);
-        opacity: 0.3;
-      }
+    h1 {
+      margin-bottom: 12px;
 
-      .degrees {
-        font-size: 0.6em;
-      }
+      font-size: 58px;
+    }
 
-      h1,
-      h2 {
-        padding: 0;
-        margin: 0;
-      }
-
-      h1 {
-        margin-bottom: 12px;
-
-        font-size: 58px;
-      }
-
-      h2 {
-        text-align: center;
-      }
+    h2 {
+      text-align: center;
     }
   }
 }

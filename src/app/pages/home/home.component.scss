@@ -31,15 +31,10 @@
   .container {
     height: 100%;
     width: 100%;
-  
+
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    
-    .nav-arrow {
-      height: 100%;
-      width: 100px;
-    }
 
     .home-content {
       flex-grow: 1;

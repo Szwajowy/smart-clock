@@ -1,68 +1,54 @@
-.container {
-  height: 100%;
-  width: 100%;
+.stopwatch-content {
+  padding: 60px 0;
+  flex-grow: 1;
+  align-self: flex-end;
 
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   align-items: center;
-  
-    .nav-arrow {
-      height: 100%;
-      width: 100px;
-    }
 
-  .stopwatch-content {
-    padding: 60px 0;
-    flex-grow: 1;
-    align-self: flex-end;
+  overflow: hidden;
 
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
+  .stopwatch {
+    margin-bottom: 80px;
 
-    overflow: hidden;
+    h1 {
+      padding: 0;
+      margin: 0;
 
-    .stopwatch {
-      margin-bottom: 80px;
-
-      h1 {
-        padding: 0;
-        margin: 0;
-
-        font-size: 120px;
-        font-weight: 700;
-        line-height: 1em;
-        // text-shadow: 0 0 6px $app-text-shadow;
-
-        display: flex;
-        flex-flow: row nowrap;
-
-        span {
-          width: 170px;
-          display: block;
-
-          text-align: center;
-        }
-
-        &.hours {
-          font-size: 40px;
-
-          span {
-            width: auto;
-            padding: 0 8px;
-
-            font-size: 60px;
-          }
-        }
-      }
-    }
-
-    .buttons {
-      width: 100%;
+      font-size: 120px;
+      font-weight: 700;
+      line-height: 1em;
+      // text-shadow: 0 0 6px $app-text-shadow;
 
       display: flex;
       flex-flow: row nowrap;
-      justify-content: space-between;
+
+      span {
+        width: 170px;
+        display: block;
+
+        text-align: center;
+      }
+
+      &.hours {
+        font-size: 40px;
+
+        span {
+          width: auto;
+          padding: 0 8px;
+
+          font-size: 60px;
+        }
+      }
     }
+  }
+
+  .buttons {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
   }
 }

@@ -1,61 +1,47 @@
-.container {
-  height: 100%;
-  width: 100%;
+.alarms-content {
+  height: calc(100% - 160px);
+  margin: 80px 0;
+  flex-grow: 1;
 
-  display: flex;
-  flex-flow: row;
-  align-items: center;
+  .alarms-list {
+    max-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
-  .nav-arrow {
-    height: 100%;
-    width: 100px;
-  }
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
 
-  .alarms-content {
-    height: calc(100% - 160px);
-    margin: 80px 0;
-    flex-grow: 1;
+    -ms-overflow-style: none;
 
-    .alarms-list {
-      max-height: 100%;
-      overflow-y: scroll;
-      overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .add-alarm-btn {
+      padding: 15px 0;
+
+      background: var(--color);
+      color: var(--accent);
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1em;
+      outline: none;
+      border: none;
+      border-radius: 40px;
 
       display: flex;
-      flex-flow: column nowrap;
-      gap: 20px;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
 
-      -ms-overflow-style: none;
-
-      &::-webkit-scrollbar {
-        display: none;
+      &:active {
+        background: var(--color-darkest);
       }
 
-      .add-alarm-btn {
-        padding: 15px 0;
-
-        background: var(--color);
-        color: var(--accent);
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 1em;
-        outline: none;
-        border: none;
-        border-radius: 40px;
-
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-
-        &:active {
-          background: var(--color-darkest);
-        }
-
-        i {
-          font-size: 0.8em;
-        }
+      i {
+        font-size: 0.8em;
       }
     }
   }

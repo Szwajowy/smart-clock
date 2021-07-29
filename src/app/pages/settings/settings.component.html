@@ -1,30 +1,4 @@
-<div
-  class="container"
-  (swipeleft)="onSwipeLeft()"
-  (swiperight)="onSwipeRight()"
-  (swipeup)="onSwipeUp()"
-  (swipedown)="onSwipeDown()"
->
-  <a [routerLink]="this.navigation.left" class="navigation-arrow left-arrow">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="21.485"
-      height="34.485"
-      viewBox="0 0 21.485 34.485"
-    >
-      <g transform="translate(4.243 4.243)">
-        <line x1="13" y2="13" stroke-linecap="round" stroke-width="6" />
-        <line
-          x1="13"
-          y1="13"
-          transform="translate(0 13)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-      </g>
-    </svg>
-  </a>
-
+<app-page-skeleton [navigation]="navigation">
   <div class="settings-content">
     <header>
       <h2>Ustawienia</h2>
@@ -51,7 +25,7 @@
         <h3>Kolor akcentu</h3>
         <ul class="color-picker">
           <li
-            *ngFor="let theme of themes | async"
+            *ngFor="let theme of availableThemes | async"
             [style.background]="theme.properties.accent"
             (click)="onThemeChange(theme.name)"
           ></li>
@@ -62,25 +36,25 @@
         <ul class="color-picker">
           <li
             (click)="onClockStyleChange(1)"
-            [ngClass]="{ active: getSettings().clockStyle == 1 }"
+            [ngClass]="{ active: (settings | async).clockStyle == 1 }"
           >
             1
           </li>
           <li
             (click)="onClockStyleChange(2)"
-            [ngClass]="{ active: getSettings().clockStyle == 2 }"
+            [ngClass]="{ active: (settings | async).clockStyle == 2 }"
           >
             2
           </li>
           <li
             (click)="onClockStyleChange(3)"
-            [ngClass]="{ active: getSettings().clockStyle == 3 }"
+            [ngClass]="{ active: (settings | async).clockStyle == 3 }"
           >
             3
           </li>
           <li
             (click)="onClockStyleChange(4)"
-            [ngClass]="{ active: getSettings().clockStyle == 4 }"
+            [ngClass]="{ active: (settings | async).clockStyle == 4 }"
           >
             4
           </li>
@@ -99,30 +73,4 @@
       </div> -->
     </section>
   </div>
-
-  <a [routerLink]="this.navigation.right" class="navigation-arrow right-arrow">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="21.485"
-      height="34.485"
-      viewBox="0 0 21.485 34.485"
-    >
-      <g transform="translate(-747.257 -176.257)">
-        <line
-          x2="13"
-          y2="13"
-          transform="translate(751.5 180.5)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-        <line
-          y1="13"
-          x2="13"
-          transform="translate(751.5 193.5)"
-          stroke-linecap="round"
-          stroke-width="6"
-        />
-      </g>
-    </svg>
-  </a>
-</div>
+</app-page-skeleton>

@@ -1,24 +1,29 @@
-<div class="container" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" (swipeup)="onSwipeUp()" (swipedown)="onSwipeDown()">
-    <app-nav-arrow-button
-    class="nav-arrow"
-    [link]="this.navigation.left"
-    [direction]="'LEFT'"
-    ></app-nav-arrow-button>
-
-    <div class="stopwatch-content">
-        <div class="stopwatch" *ngIf="stopwatchService.time.subject | async as time">
-            <h1 class="hours"><span>{{ time.hours  }}</span> {{ stopwatchService.time.getHoursText() }}</h1>
-            <h1><span>{{ time.minutes | number:'2.0-0' }}</span>:<span>{{ time.seconds | number:'2.0-0' }}</span>:<span>{{ time.milliseconds | number:'2.0-0' }}</span></h1>
-        </div>
-        <div class="buttons">
-            <button class="start-btn btn" (click)="stopwatchService.startPause()">{{ (!stopwatchService.isRunning() || stopwatchService.isPaused()) ? 'Start' : 'Pauza'}}</button>
-            <button class="stop-btn btn" (click)="stopwatchService.stop()">Stop</button>
-        </div>
+<app-page-skeleton [navigation]="navigation">
+  <div class="stopwatch-content">
+    <div
+      class="stopwatch"
+      *ngIf="stopwatchService.time.subject | async as time"
+    >
+      <h1 class="hours">
+        <span>{{ time.hours }}</span> {{ stopwatchService.time.getHoursText() }}
+      </h1>
+      <h1>
+        <span>{{ time.minutes | number: "2.0-0" }}</span
+        >:<span>{{ time.seconds | number: "2.0-0" }}</span
+        >:<span>{{ time.milliseconds | number: "2.0-0" }}</span>
+      </h1>
     </div>
-
-    <app-nav-arrow-button
-    class="nav-arrow"
-    [link]="this.navigation.right"
-    [direction]="'RIGHT'"
-    ></app-nav-arrow-button>
-</div>
+    <div class="buttons">
+      <button class="start-btn btn" (click)="stopwatchService.startPause()">
+        {{
+          !stopwatchService.isRunning() || stopwatchService.isPaused()
+            ? "Start"
+            : "Pauza"
+        }}
+      </button>
+      <button class="stop-btn btn" (click)="stopwatchService.stop()">
+        Stop
+      </button>
+    </div>
+  </div>
+</app-page-skeleton>

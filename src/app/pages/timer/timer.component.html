@@ -1,16 +1,4 @@
-<div
-  class="container"
-  (swipeleft)="onSwipeLeft()"
-  (swiperight)="onSwipeRight()"
-  (swipeup)="onSwipeUp()"
-  (swipedown)="onSwipeDown()"
->
-  <app-nav-arrow-button
-  class="nav-arrow"
-  [link]="this.navigation.left"
-  [direction]="'LEFT'"
-  ></app-nav-arrow-button>
-
+<app-page-skeleton [navigation]="navigation">
   <div class="timer-content">
     <div class="timer" *ngIf="timerService.time.subject | async as time">
       <app-set-time-part
@@ -59,10 +47,4 @@
       </ng-template>
     </div>
   </div>
-
-  <app-nav-arrow-button
-    class="nav-arrow"
-    [link]="this.navigation.right"
-    [direction]="'RIGHT'"
-  ></app-nav-arrow-button>
-</div>
+</app-page-skeleton>
