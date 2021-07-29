@@ -1,8 +1,8 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { Alarm } from "@shared/models/alarm.model";
-import { ClockService } from "@shared/services/clock.service";
+import { ClockService } from "app/pages/home/clock.service";
 import { EventEmitter } from "@angular/core";
-import { AlarmsService } from "@shared/services/alarms.service";
+import { AlarmsService } from "app/pages/alarms/alarms.service";
 import { WEEKDAYS_SHORT } from "@shared/types/daysNames.tupple";
 import { first } from "rxjs/operators";
 
@@ -13,7 +13,7 @@ import { first } from "rxjs/operators";
 })
 export class AlarmEditComponent implements OnInit {
   readonly dayOrder = WEEKDAYS_SHORT;
-  
+
   editedAlarm: Alarm;
   isEditMode: boolean = false;
 
@@ -35,8 +35,8 @@ export class AlarmEditComponent implements OnInit {
   onRemoveAlarm() {
     this.alarmsService.editedAlarmId$.pipe(first()).subscribe((id: number) => {
       let alarmToRemoveId = id;
-      this.alarmsService.removeAlarm(alarmToRemoveId)
-    })
+      this.alarmsService.removeAlarm(alarmToRemoveId);
+    });
   }
 
   onToggleRepeatDay(dayId) {

@@ -5,13 +5,13 @@ import * as moment from "moment";
 
 import { slideInAnimation } from "./animations";
 
-import { AlarmsService } from "./shared/services/alarms.service";
-import { ClockService } from "./shared/services/clock.service";
+import { AlarmsService } from "./pages/alarms/alarms.service";
+import { ClockService } from "./pages/home/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
-import { NotificationsService } from "@shared/components/notification-bar/notifications.service";
+import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 import { ThemeService } from "@shared/services/theme.service";
 import { SettingsService } from "./pages/settings/settings.service";
-import { WeatherService } from "@shared/services/weather.service";
+import { WeatherService } from "app/pages/weather/weather.service";
 
 @Component({
   selector: "app-root",

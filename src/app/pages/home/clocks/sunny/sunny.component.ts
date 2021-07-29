@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { ClockService } from "@shared/services/clock.service";
+import { ClockService } from "app/pages/home/clock.service";
 import { interval, Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 

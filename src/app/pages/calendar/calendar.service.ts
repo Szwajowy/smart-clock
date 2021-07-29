@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { FirebaseService } from "./firebase.service";
+import { FirebaseService } from "../../shared/services/firebase.service";
 import { first, switchMap } from "rxjs/operators";
 import { of } from "rxjs";
 

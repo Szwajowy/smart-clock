@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApplicationPage } from "@shared/models/application-page.model";
 
-import { ClockService } from "app/shared/services/clock.service";
-import { StopwatchService } from "app/shared/services/stopwatch.service";
+import { ClockService } from "app/pages/home/clock.service";
+import { StopwatchService } from "app/pages/stopwatch/stopwatch.service";
 
 @Component({
   selector: "app-stopwatch",

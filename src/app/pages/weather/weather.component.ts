@@ -4,7 +4,7 @@ import { ApplicationPage } from "@shared/models/application-page.model";
 
 import { map } from "rxjs/operators";
 
-import { WeatherService } from "../../shared/services/weather.service";
+import { WeatherService } from "./weather.service";
 
 @Component({
   selector: "app-weather",

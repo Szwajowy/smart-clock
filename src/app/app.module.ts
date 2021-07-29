@@ -24,7 +24,7 @@ import { NgxEchartsModule } from "ngx-echarts";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
-import { NotificationBarComponent } from "./shared/components/notification-bar/notification-bar.component";
+import { NotificationBarComponent } from "./pages/home/notification-bar/notification-bar.component";
 import { StopwatchComponent } from "./pages/stopwatch/stopwatch.component";
 import { TimerComponent } from "./pages/timer/timer.component";
 import { AlarmsComponent } from "./pages/alarms/alarms.component";
@@ -45,6 +45,7 @@ import { SunnyComponent } from "./pages/home/clocks/sunny/sunny.component";
 import { AlarmComponent } from "./pages/alarms/alarm/alarm.component";
 import { AlarmEditComponent } from "./pages/alarms/alarm-edit/alarm-edit.component";
 import { NavArrowButtonComponent } from "./shared/components/nav-arrow-button/nav-arrow-button.component";
+import { SetTimePartComponent } from "./shared/components/set-time-part/set-time-part.component";
 import { PageSkeletonComponent } from "./shared/components/page-skeleton/page-skeleton.component";
 
 @Injectable()

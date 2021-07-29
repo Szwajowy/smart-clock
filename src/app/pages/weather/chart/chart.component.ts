@@ -6,7 +6,7 @@ import { catchError } from "rxjs/operators";
 import { SubSink } from "subsink";
 
 import { ThemeService } from "@shared/services/theme.service";
-import { WeatherService } from "@shared/services/weather.service";
+import { WeatherService } from "app/pages/weather/weather.service";
 
 @Component({
   selector: "app-chart",

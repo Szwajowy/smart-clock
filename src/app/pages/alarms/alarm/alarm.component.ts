@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Alarm } from "@shared/models/alarm.model";
-import { AlarmsService } from "@shared/services/alarms.service";
+import { AlarmsService } from "app/pages/alarms/alarms.service";
 
 @Component({
   selector: "app-alarm",
@@ -20,7 +20,7 @@ export class AlarmComponent implements OnInit {
   }
 
   onToggleActiveState() {
-    this.alarmsService.toggleActiveStateOfAlarm(this.id)
+    this.alarmsService.toggleActiveStateOfAlarm(this.id);
   }
 
   getTime(part) {
@@ -59,5 +59,4 @@ export class AlarmComponent implements OnInit {
         return "nd";
     }
   }
-
 }

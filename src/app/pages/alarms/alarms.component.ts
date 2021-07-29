@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
-import { AlarmsService } from "@shared/services/alarms.service";
+import { AlarmsService } from "app/pages/alarms/alarms.service";
 
 import { Alarm } from "@shared/models/alarm.model";
 import { first, take } from "rxjs/operators";

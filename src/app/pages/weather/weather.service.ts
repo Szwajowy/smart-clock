@@ -13,10 +13,10 @@ import { switchMap, map, shareReplay, catchError } from "rxjs/operators";
 
 import { environment } from "../../../environments/environment";
 
-import { FirebaseService } from "./firebase.service";
+import { FirebaseService } from "../../shared/services/firebase.service";
 
 import { Weather } from "@shared/models/weather.model";
-import { NotificationsService } from "@shared/components/notification-bar/notifications.service";
+import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 import { delayedRetry } from "@shared/functions/delayedRetry";
 
 @Injectable({

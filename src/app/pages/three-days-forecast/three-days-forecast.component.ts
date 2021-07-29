@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import * as moment from "moment";
 
-import { WeatherService } from "../../shared/services/weather.service";
+import { WeatherService } from "../weather/weather.service";
 import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({

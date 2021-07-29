@@ -5,7 +5,7 @@ import { ThemeName } from "@shared/models/theme-name.enum";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { ThemeService } from "@shared/services/theme.service";
 import { Subject } from "rxjs";
-import { WeatherService } from "../../shared/services/weather.service";
+import { WeatherService } from "../weather/weather.service";
 
 @Injectable({
   providedIn: "root",

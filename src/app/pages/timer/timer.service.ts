@@ -1,33 +1,43 @@
 import { Injectable } from "@angular/core";
+import { Howl } from "howler";
 
-import { AdjustingInterval } from "../models/adjusting-interval.model";
-import { TimeCounter } from "../models/time-counter.model";
-import { NotificationsService } from "@shared/components/notification-bar/notifications.service";
+import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
+import { TimeCounter } from "../../shared/models/time-counter.model";
+
+import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class StopwatchService {
-  private _time = new TimeCounter();
+export class TimerService {
+  time = new TimeCounter();
   private running = false;
   private paused = false;
-  private interval = new AdjustingInterval(this.countUp.bind(this), 10);
+  public countedDown = false;
 
-  get time() {
-    return this._time;
-  }
+  private interval = new AdjustingInterval(this.countDown.bind(this), 10);
+
+  private timerEndSound = new Howl({
+    src: "../../../../assets/audio/alarm-sound.mp3",
+    preload: true,
+    loop: true,
+    volume: 0,
+  });
 
   constructor(private notificationsService: NotificationsService) {}
 
-  countUp() {
+  countDown() {
     if (!this.paused) {
-      if (this.time.increment("milliseconds") === false) {
+      if (this.time.decrement("milliseconds") === false) {
+        this.countedDown = true;
+        this.timerEndSound.play();
+        this.timerEndSound.fade(0, 1, 100);
         this.stop();
       }
 
       // SEND NOTIFICATION
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "stopwatch",
+        type: "timer",
         operation: "post",
         content:
           this.pad(this.time.hours) +
@@ -53,9 +63,9 @@ export class StopwatchService {
 
       // SEND NOTIFICATION
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "stopwatch",
+        type: "timer",
         operation: "post",
-        content: "Stoper został wstrzymany!",
+        content: "Minutnik został wstrzymany!",
         icon: "timer",
       });
     } else {
@@ -63,7 +73,7 @@ export class StopwatchService {
     }
   }
 
-  // STOP STOPWATCH
+  // STOP STOPWATCH OR TIMER
   stop() {
     this.interval.stop();
 
@@ -74,11 +84,17 @@ export class StopwatchService {
 
     // SEND NOTIFICATION
     this.notificationsService.getInputNotificationsSubject().next({
-      type: "stopwatch",
+      type: "timer",
       operation: "remove",
       content: null,
       icon: null,
     });
+  }
+
+  reset() {
+    this.stop();
+    this.countedDown = false;
+    this.timerEndSound.stop();
   }
 
   isPaused() {

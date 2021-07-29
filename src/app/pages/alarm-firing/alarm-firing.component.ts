@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import * as moment from "moment";
 import { Howl } from "howler";
 
-import { ClockService } from "app/shared/services/clock.service";
+import { ClockService } from "app/pages/home/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { map } from "rxjs/operators";
 

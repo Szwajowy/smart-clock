@@ -5,7 +5,7 @@ import { Alarm } from "@shared/models/alarm.model";
 import { Time } from "@shared/models/time.model";
 import { BehaviorSubject, combineLatest, Observable, Subscription } from "rxjs";
 import { first, tap } from "rxjs/operators";
-import { FirebaseService } from "./firebase.service";
+import { FirebaseService } from "../../shared/services/firebase.service";
 
 @Injectable({
   providedIn: "root",

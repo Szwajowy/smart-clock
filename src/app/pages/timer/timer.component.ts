@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApplicationPage } from "@shared/models/application-page.model";
 
-import { TimerService } from "app/shared/services/timer.service";
+import { TimerService } from "app/pages/timer/timer.service";
 
 @Component({
   selector: "app-timer",

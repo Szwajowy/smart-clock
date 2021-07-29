@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { notificationSlide } from "app/animations";
 
 import { NotificationsService } from "./notifications.service";
-import { WeatherService } from "@shared/services/weather.service";
+import { WeatherService } from "app/pages/weather/weather.service";
 
 @Component({
   selector: "app-notification-bar",

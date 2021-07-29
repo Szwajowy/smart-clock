@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 
-import { CalendarService, Event } from "@shared/services/calendar.service";
+import { CalendarService, Event } from "app/pages/calendar/calendar.service";
 import { ApplicationPage } from "@shared/models/application-page.model";
 
 @Component({

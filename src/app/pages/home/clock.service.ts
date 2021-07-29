@@ -3,11 +3,11 @@ import { Router } from "@angular/router";
 import { Alarm } from "@shared/models/alarm.model";
 import { Timezone } from "@shared/models/timezone.model";
 import { SettingsService } from "app/pages/settings/settings.service";
-import { NotificationsService } from "app/shared/components/notification-bar/notifications.service";
+import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 import * as moment from "moment";
 import { Subject } from "rxjs";
-import { AdjustingInterval } from "../models/adjusting-interval.model";
-import { AlarmsService } from "./alarms.service";
+import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
+import { AlarmsService } from "../alarms/alarms.service";
 
 @Injectable({
   providedIn: "root",
