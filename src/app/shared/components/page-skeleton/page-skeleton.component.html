@@ -1,0 +1,21 @@
+<div
+  class="container"
+  (swipeleft)="onSwipeLeft()"
+  (swiperight)="onSwipeRight()"
+  (swipeup)="onSwipeUp()"
+  (swipedown)="onSwipeDown()"
+>
+  <app-nav-arrow-button
+    class="nav-arrow"
+    [link]="this.navigation.left"
+    [direction]="'LEFT'"
+  ></app-nav-arrow-button>
+
+  <ng-content></ng-content>
+
+  <app-nav-arrow-button
+    class="nav-arrow"
+    [link]="this.navigation.right"
+    [direction]="'RIGHT'"
+  ></app-nav-arrow-button>
+</div>

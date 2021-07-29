@@ -45,7 +45,7 @@ import { SunnyComponent } from "./pages/home/clocks/sunny/sunny.component";
 import { AlarmComponent } from "./pages/alarms/alarm/alarm.component";
 import { AlarmEditComponent } from "./pages/alarms/alarm-edit/alarm-edit.component";
 import { NavArrowButtonComponent } from "./shared/components/nav-arrow-button/nav-arrow-button.component";
-import { SetTimePartComponent } from './shared/components/set-time-part/set-time-part.component';
+import { PageSkeletonComponent } from "./shared/components/page-skeleton/page-skeleton.component";
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -81,6 +81,7 @@ registerLocaleData(localePl);
     AlarmEditComponent,
     NavArrowButtonComponent,
     SetTimePartComponent,
+    PageSkeletonComponent,
   ],
   imports: [
     BrowserModule,

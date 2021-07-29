@@ -1,0 +1,16 @@
+.container {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  position: relative;
+
+  .nav-arrow {
+    height: 100%;
+    width: 100px;
+    z-index: 2;
+  }
+}
