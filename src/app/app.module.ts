@@ -1,27 +1,24 @@
-import localePl from "@angular/common/locales/pl";
-import { LOCALE_ID, Injectable } from "@angular/core";
 import { registerLocaleData } from "@angular/common";
-
-import { BrowserModule } from "@angular/platform-browser";
+import localePl from "@angular/common/locales/pl";
+import { LOCALE_ID, Injectable, NgModule } from "@angular/core";
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+  HammerGestureConfig,
+  HammerModule,
+} from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
 
-import * as Hammer from "hammerjs";
-import {
-  HammerGestureConfig,
-  HAMMER_GESTURE_CONFIG,
-} from "@angular/platform-browser";
-
 import * as echarts from "echarts";
 import { NgxEchartsModule } from "ngx-echarts";
 
 import { AppRoutingModule } from "./app-routing.module";
+
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { NotificationBarComponent } from "./pages/home/notification-bar/notification-bar.component";
@@ -34,9 +31,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AlarmFiringComponent } from "./pages/alarm-firing/alarm-firing.component";
 import { ThreeDaysForecastComponent } from "./pages/three-days-forecast/three-days-forecast.component";
 import { SettingsComponent } from "./pages/settings/settings.component";
-import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
 import { WeatherIconComponent } from "./shared/components/weather-icon/weather-icon.component";
-import { DateAgoPipe } from "./shared/pipes/date-ago.pipe";
 import { StandardComponent } from "./pages/home/clocks/standard/standard.component";
 import { BoxyComponent } from "./pages/home/clocks/boxy/boxy.component";
 import { WideComponent } from "./pages/home/clocks/wide/wide.component";
@@ -48,9 +43,14 @@ import { NavArrowButtonComponent } from "./shared/components/nav-arrow-button/na
 import { SetTimePartComponent } from "./shared/components/set-time-part/set-time-part.component";
 import { PageSkeletonComponent } from "./shared/components/page-skeleton/page-skeleton.component";
 
+import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
+import { DateAgoPipe } from "./shared/pipes/date-ago.pipe";
+
+import * as Hammer from "hammerjs";
+
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any>{
+  overrides: { [key: string]: Object } = {
     swipe: { velocity: 0.4, threshold: 10, direction: Hammer.DIRECTION_ALL }, // override default settings
   };
 }
@@ -85,10 +85,11 @@ registerLocaleData(localePl);
     PageSkeletonComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HammerModule,
     HttpClientModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
