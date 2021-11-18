@@ -1,26 +1,29 @@
 <div class="home-container">
   <app-page-skeleton class="container" [navigation]="navigation">
     <div class="home-content">
-      <ng-container [ngSwitch]="(settings | async).clockStyle">
+      <ng-container
+        *ngIf="currentDate$ | async as currentDate"
+        [ngSwitch]="settings.clockStyle"
+      >
         <app-standard-clock
           *ngSwitchCase="1"
-          [time]="getNow()"
+          [time]="currentDate"
           [timezone$]="timezone$"
           [username]="username"
         ></app-standard-clock>
         <app-wide-clock
           *ngSwitchCase="2"
-          [time]="getNow()"
+          [time]="currentDate"
           [timezone$]="timezone$"
         ></app-wide-clock>
         <app-boxy-clock
           *ngSwitchCase="3"
-          [time]="getNow()"
+          [time]="currentDate"
           [timezone$]="timezone$"
         ></app-boxy-clock>
         <app-sunny-clock
           *ngSwitchCase="4"
-          [time]="getNow()"
+          [time]="currentDate"
           [timezone]="timezone$ | async"
           [weather]="weather$ | async"
         ></app-sunny-clock>

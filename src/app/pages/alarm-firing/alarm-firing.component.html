@@ -2,11 +2,11 @@
   <div class="message">
     <h1>Czas wstawać !</h1>
     <p class="time">
-      {{ getNow() | date: "HH:mm":timezone?.offset }}
+      {{ currentDate$ | async | date: "HH:mm":(timezone$ | async)?.offset }}
     </p>
     <p class="date">
-      {{ getNow() | date: "EEEE":timezone?.offset }},
-      {{ getNow() | date: "longDate":timezone?.offset }}
+      {{ currentDate$ | async | date: "EEEE":(timezone$ | async)?.offset }},
+      {{ currentDate$ | async | date: "longDate":(timezone$ | async)?.offset }}
     </p>
   </div>
   <div class="buttons">
@@ -20,8 +20,9 @@
     >
       {{
         !newAlarmTime
-          ? "Drzemka na " + snoozeLenght + " min."
-          : "Przełożono na: " + (newAlarmTime | date: "HH:mm":timezone?.offset)
+          ? "Drzemka na " + snoozeLength + " min."
+          : "Przełożono na: " +
+            (newAlarmTime | date: "HH:mm":(timezone$ | async)?.offset)
       }}
     </button>
     <button class="btn turnoff" (click)="onTurnOff()">Wyłącz</button>

@@ -1,14 +1,15 @@
 <h1>
-    {{ helloMsg }} <span>{{ username }}</span>!
+  {{ helloMsg }} <span>{{ username }}</span
+  >!
 </h1>
 <div class="datetime">
-    <p class="time">
-        {{ time | date: "HH:mm":(timezone$ | async)?.offset }}
+  <p class="time">
+    {{ time | date: "HH:mm":(timezone$ | async)?.offset }}
+  </p>
+  <div class="subline">
+    <p class="date">
+      {{ time | date: "EEEE":(timezone$ | async)?.offset }},
+      {{ time | date: "longDate":(timezone$ | async)?.offset }}
     </p>
-    <div class="subline">
-        <p class="date">
-        {{ time | date: "EEEE":(timezone$ | async)?.offset }},
-        {{ time | date: "longDate":(timezone$ | async)?.offset }}
-        </p>
-    </div>
+  </div>
 </div>

@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Store } from "@ngrx/store";
 
 import { ApplicationPage } from "@shared/models/application-page.model";
 import { Settings } from "@shared/models/settings.model";
@@ -10,17 +9,15 @@ import { Settings } from "@shared/models/settings.model";
 import { ClockService } from "app/pages/home/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { WeatherService } from "app/pages/weather/weather.service";
+import { SettingsService } from "../settings/settings.service";
+import { Timezone } from "@shared/models/timezone.model";
 
-import * as fromApp from "app/store/app.reducer";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
 })
-export class HomeComponent
-  extends ApplicationPage
-  implements OnInit, OnDestroy
-{
+export class HomeComponent extends ApplicationPage implements OnInit {
   navigation = {
     top: "/alarms",
     right: "/weather/today",
@@ -29,26 +26,23 @@ export class HomeComponent
   };
 
   username = "użytkowniku";
-  settings: Observable<Settings>;
-  timezone$;
+  settings: Settings;
+  timezone$: Observable<Timezone>;
   weather$ = this.weatherService.getWeather();
 
-  private now;
-  private momentSubscription;
+  currentDate$ = this.clockService.getCurrentDate();
 
   constructor(
     router: Router,
     private clockService: ClockService,
+    private settingsService: SettingsService,
     private weatherService: WeatherService,
-    private firebaseService: FirebaseService,
-    private store: Store<fromApp.AppState>
+    private firebaseService: FirebaseService
   ) {
     super(router);
   }
 
   ngOnInit() {
-    this.settings = this.store.select("settings");
-    this.now = this.clockService.getNow();
     this.setUsername();
 
     this.timezone$ = this.firebaseService.getDeviceData("settings").pipe(
@@ -57,24 +51,12 @@ export class HomeComponent
       })
     );
 
-    this.momentSubscription = this.clockService
-      .getMomentSubject()
-      .subscribe((res) => {
-        this.now = res;
-      });
-  }
-
-  ngOnDestroy() {
-    this.momentSubscription.unsubscribe();
+    this.settings = this.settingsService.getSettings();
   }
 
   setUsername() {
     this.firebaseService.getUserData("name").subscribe((res) => {
       this.username = res;
     });
-  }
-
-  getNow() {
-    return this.now;
   }
 }

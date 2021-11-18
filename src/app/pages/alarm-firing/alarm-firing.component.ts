@@ -5,7 +5,8 @@ import { Howl } from "howler";
 
 import { ClockService } from "app/pages/home/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-alarm-firing",
@@ -20,17 +21,20 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
     volume: 0,
   });
 
-  private now = this.clockService.getNow();
-  public timezone;
-  private timezoneSubscription;
-  public newAlarmTime = null;
+  public snoozeLength = 10;
 
-  public snoozeLenght = 10;
-
-  private increseVolumeOverTime = true;
+  private increaseVolumeOverTime = true;
   private timeForIncreasingVolume = 30;
 
-  private momentSubscription;
+  public timezone$ = this.firebaseService.getDeviceData("settings").pipe(
+    map((res: any) => {
+      return res ? res.timezone : null;
+    })
+  );
+  public newAlarmTime = null;
+
+  currentDate$: Observable<Date> = this.clockService.getCurrentDate();
+  private currentDateSubscription;
 
   constructor(
     private clockService: ClockService,
@@ -39,44 +43,27 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.now = this.clockService.getNow();
-    this.momentSubscription = this.clockService
-      .getMomentSubject()
-      .subscribe((res) => {
-        this.now = res;
-
+    this.currentDateSubscription = this.currentDate$.subscribe(
+      (currentDate: Date) => {
         if (
-          (!this.newAlarmTime || this.newAlarmTime.isSameOrBefore(this.now)) &&
+          (!this.newAlarmTime ||
+            this.newAlarmTime.isSameOrBefore(currentDate)) &&
           !this.alarmSound.playing()
         ) {
           this.newAlarmTime = null;
           this.alarmSound.play();
-          if (this.increseVolumeOverTime) {
+          if (this.increaseVolumeOverTime) {
             this.alarmSound.fade(0, 1, 1000 * this.timeForIncreasingVolume); // Increase volume in this time(1s*15)
           } else {
             this.alarmSound.fade(0, 1, 100);
           }
         }
-      });
-    this.timezoneSubscription = this.firebaseService
-      .getDeviceData("settings")
-      .pipe(
-        map((res: any) => {
-          return res ? res.timezone : null;
-        })
-      )
-      .subscribe((timezone) => {
-        this.timezone = timezone;
-      });
+      }
+    );
   }
 
   ngOnDestroy() {
-    this.momentSubscription.unsubscribe();
-    this.timezoneSubscription.unsubscribe();
-  }
-
-  getNow() {
-    return this.now;
+    this.currentDateSubscription.unsubscribe();
   }
 
   setAlarmSound(src: string) {
@@ -84,18 +71,18 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
   }
 
   setSnoozeLenght(lenght: number) {
-    this.snoozeLenght = lenght;
+    this.snoozeLength = lenght;
   }
 
   setIncresingVolume(value: boolean) {
-    this.increseVolumeOverTime = value;
+    this.increaseVolumeOverTime = value;
   }
 
   onSnooze() {
     if (this.newAlarmTime == null) {
       this.alarmSound.stop();
 
-      this.newAlarmTime = moment().add(0, "h").add(this.snoozeLenght, "m");
+      this.newAlarmTime = moment().add(0, "h").add(this.snoozeLength, "m");
     }
   }
 

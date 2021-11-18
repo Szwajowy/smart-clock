@@ -25,7 +25,7 @@
         <h3>Kolor akcentu</h3>
         <ul class="color-picker">
           <li
-            *ngFor="let theme of availableThemes | async"
+            *ngFor="let theme of themes | async"
             [style.background]="theme.properties.accent"
             (click)="onThemeChange(theme.name)"
           ></li>
@@ -36,25 +36,25 @@
         <ul class="color-picker">
           <li
             (click)="onClockStyleChange(1)"
-            [ngClass]="{ active: (settings | async).clockStyle == 1 }"
+            [ngClass]="{ active: getSettings().clockStyle == 1 }"
           >
             1
           </li>
           <li
             (click)="onClockStyleChange(2)"
-            [ngClass]="{ active: (settings | async).clockStyle == 2 }"
+            [ngClass]="{ active: getSettings().clockStyle == 2 }"
           >
             2
           </li>
           <li
             (click)="onClockStyleChange(3)"
-            [ngClass]="{ active: (settings | async).clockStyle == 3 }"
+            [ngClass]="{ active: getSettings().clockStyle == 3 }"
           >
             3
           </li>
           <li
             (click)="onClockStyleChange(4)"
-            [ngClass]="{ active: (settings | async).clockStyle == 4 }"
+            [ngClass]="{ active: getSettings().clockStyle == 4 }"
           >
             4
           </li>
