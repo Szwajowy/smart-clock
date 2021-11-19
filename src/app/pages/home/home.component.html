@@ -3,28 +3,28 @@
     <div class="home-content">
       <ng-container
         *ngIf="currentDate$ | async as currentDate"
-        [ngSwitch]="settings.clockStyle"
+        [ngSwitch]="(settings$ | async)?.clockStyle"
       >
         <app-standard-clock
           *ngSwitchCase="1"
           [time]="currentDate"
-          [timezone$]="timezone$"
+          [timezone]="(settings$ | async)?.timezone"
           [username]="username"
         ></app-standard-clock>
         <app-wide-clock
           *ngSwitchCase="2"
           [time]="currentDate"
-          [timezone$]="timezone$"
+          [timezone]="(settings$ | async)?.timezone"
         ></app-wide-clock>
         <app-boxy-clock
           *ngSwitchCase="3"
           [time]="currentDate"
-          [timezone$]="timezone$"
+          [timezone]="(settings$ | async)?.timezone"
         ></app-boxy-clock>
         <app-sunny-clock
           *ngSwitchCase="4"
           [time]="currentDate"
-          [timezone]="timezone$ | async"
+          [timezone]="(settings$ | async)?.timezone"
           [weather]="weather$ | async"
         ></app-sunny-clock>
       </ng-container>

@@ -4,7 +4,8 @@ import { Settings } from "@shared/models/settings.model";
 import { ThemeName } from "@shared/models/theme-name.enum";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { ThemeService } from "@shared/services/theme.service";
-import { Subject } from "rxjs";
+import { BehaviorSubject, combineLatest, Subscription } from "rxjs";
+import { first } from "rxjs/operators";
 import { WeatherService } from "../weather/weather.service";
 
 @Injectable({
@@ -23,9 +24,9 @@ export class SettingsService {
     lastUpdate: new Date().getTime(),
   };
 
-  private settings: Settings = this.defaultSettings;
-
-  private settingChanged = new Subject();
+  readonly settings$: BehaviorSubject<Settings> = new BehaviorSubject(
+    this.defaultSettings
+  );
 
   constructor(
     private firebaseService: FirebaseService,
@@ -33,116 +34,98 @@ export class SettingsService {
     private weatherService: WeatherService
   ) {}
 
-  loadSettingsFromLocalStorage() {
-    let localSettingsString = localStorage.getItem("settings");
-    let localSettings;
+  private async loadSettingsFromLocalStorage(): Promise<Settings> {
+    let localStorageSettings = localStorage.getItem("settings");
+    let parsedSettings: {};
+    let settings = await this.getCurrentSettings();
 
-    if (localSettingsString) {
-      localSettings = JSON.parse(localSettingsString);
+    if (localStorageSettings) {
+      parsedSettings = JSON.parse(localStorageSettings);
 
-      for (let setting of Object.keys(localSettings)) {
-        this.settings[setting] = localSettings[setting];
+      for (let setting of Object.keys(parsedSettings)) {
+        settings[setting] = parsedSettings[setting];
       }
     }
 
-    this.themeService.setActiveTheme(this.settings.activeTheme);
-    this.weatherService.setCity(this.settings.city);
-    this.weatherService.setRefreshInterval(this.settings.updateTime);
+    return settings;
   }
 
-  loadSettings() {
+  loadSettings(): Subscription {
     console.log("Loading settings... ?");
-    this.loadSettingsFromLocalStorage();
+    let settings: Settings;
 
-    this.firebaseService
-      .getDeviceData("settings")
-      .subscribe((settings: any) => {
-        let newSettings;
+    return combineLatest([
+      this.firebaseService.getDeviceData("settings"),
+      this.loadSettingsFromLocalStorage(),
+    ]).subscribe(([firebaseSettings, localSettings]: [Settings, Settings]) => {
+      if (
+        firebaseSettings?.lastUpdate >= localSettings?.lastUpdate ||
+        (!localSettings && firebaseSettings)
+      ) {
+        console.log(
+          "Settings from firebase are newer than local. Getting them..."
+        );
 
-        if (
-          (this.settings &&
-            settings &&
-            settings.lastUpdate >= this.settings.lastUpdate) ||
-          (!this.settings && settings)
-        ) {
-          console.log(
-            "Settings from firebase are newer than local. Getting them..."
-          );
-          newSettings = settings;
+        settings = firebaseSettings;
+        this.saveSettingsToLocalStorage(firebaseSettings);
+      } else if (
+        firebaseSettings?.lastUpdate < localSettings?.lastUpdate ||
+        (localSettings && !firebaseSettings)
+      ) {
+        console.log(
+          "Settings from firebase are older than local. Getting local ones..."
+        );
 
-          this.saveSettings();
+        settings = localSettings;
+        this.putSettingsToFirebase(localSettings);
+      }
 
-          for (let setting of Object.keys(newSettings)) {
-            this.settings[setting] = newSettings[setting];
-          }
-        } else if (
-          (this.settings &&
-            settings &&
-            settings.lastUpdate < this.settings.lastUpdate) ||
-          (this.settings && !settings)
-        ) {
-          console.log(
-            "Settings from firebase are older than local. Getting local ones..."
-          );
-
-          this.putSettingsToFirebase(this.settings);
-        }
-
-        this.themeService.setActiveTheme(this.settings.activeTheme);
-        this.weatherService.setCity(this.settings.city);
-        this.weatherService.setRefreshInterval(this.settings.updateTime);
-        this.settingChanged.next();
-      });
-  }
-
-  saveSettings() {
-    console.log("Saving settigns!");
-    localStorage.setItem("settings", JSON.stringify(this.settings));
-  }
-
-  putSettingsToFirebase(settings) {
-    console.log("Pushing new settings to firebase!");
-    this.firebaseService.setDeviceData("settings", settings);
-  }
-
-  subscribeToAll() {
-    this.settingChanged.subscribe(() => {
-      this.saveSettings();
-      this.putSettingsToFirebase(this.settings);
+      this.settings$.next(settings);
+      this.themeService.setTheme(settings.activeTheme);
     });
   }
 
-  setWeatherCity(city: string) {
-    console.log(
-      "Changed city for which weather is displayed. New city is " + city
-    );
-    this.settings.city = city;
-    this.settings.lastUpdate = new Date().getTime();
-    this.settingChanged.next();
+  async setWeatherCity(city: string): Promise<void> {
+    let settings = await this.getCurrentSettings();
 
+    settings.city = city;
     this.weatherService.setCity(city);
+
+    this.updateSettings(settings);
   }
 
-  changeTheme(name: ThemeName) {
-    this.settings.activeTheme = name;
-    this.settings.lastUpdate = new Date().getTime();
-    this.themeService.setActiveTheme(name);
-
-    this.settingChanged.next();
+  async changeTheme(name: ThemeName): Promise<void> {
+    let settings = await this.getCurrentSettings();
+    settings.activeTheme = name;
+    this.themeService.setTheme(name);
+    this.updateSettings(settings);
   }
 
-  changeClockStyle(id: number) {
-    this.settings.clockStyle = id;
-    this.settings.lastUpdate = new Date().getTime();
+  async changeClockStyle(id: number): Promise<void> {
+    let settings = await this.getCurrentSettings();
+    settings.clockStyle = id;
 
-    this.settingChanged.next();
+    this.updateSettings(settings);
   }
 
-  getSettings() {
-    return this.settings;
+  private async getCurrentSettings(): Promise<Settings> {
+    return await this.settings$.pipe(first()).toPromise();
   }
 
-  getSettingChanged() {
-    return this.settingChanged;
+  private updateSettings(settings: Settings): void {
+    settings.lastUpdate = new Date().getTime();
+    this.settings$.next(settings);
+    this.saveSettingsToLocalStorage(settings);
+    this.putSettingsToFirebase(settings);
+  }
+
+  private saveSettingsToLocalStorage(settings: Settings): void {
+    console.log("Saving settings!");
+    localStorage.setItem("settings", JSON.stringify(settings));
+  }
+
+  private putSettingsToFirebase(settings): void {
+    console.log("Pushing new settings to firebase!");
+    this.firebaseService.setDeviceData("settings", settings);
   }
 }

@@ -7,7 +7,7 @@ import { Component, OnInit, Input, OnChanges } from "@angular/core";
 })
 export class StandardComponent implements OnInit, OnChanges {
   @Input() time;
-  @Input() timezone$;
+  @Input() timezone;
   @Input() username: string;
 
   public helloMsg: string = "Witaj";

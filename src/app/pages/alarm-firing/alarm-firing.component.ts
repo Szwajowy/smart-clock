@@ -33,7 +33,7 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
   );
   public newAlarmTime = null;
 
-  currentDate$: Observable<Date> = this.clockService.getCurrentDate();
+  currentDate$: Observable<Date> = this.clockService.currentDate$;
   private currentDateSubscription;
 
   constructor(

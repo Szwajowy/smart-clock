@@ -1,19 +1,19 @@
 <p class="hours">
-    <span>
-        {{ time | date: "HH":(timezone$ | async)?.offset | slice:0:1 }}
-    </span>
-    <span>
-        {{ time | date: "HH":(timezone$ | async)?.offset | slice:1:2 }}
-    </span>
+  <span>
+    {{ time | date: "HH":timezone?.offset | slice: 0:1 }}
+  </span>
+  <span>
+    {{ time | date: "HH":timezone?.offset | slice: 1:2 }}
+  </span>
 </p>
 <p class="minutes">
-    <span>
-        {{ time | date: "mm":(timezone$ | async)?.offset | slice:0:1 }}
-    </span>
-    <span>
-        {{ time | date: "mm":(timezone$ | async)?.offset | slice:1:2 }}
-    </span>
+  <span>
+    {{ time | date: "mm":timezone?.offset | slice: 0:1 }}
+  </span>
+  <span>
+    {{ time | date: "mm":timezone?.offset | slice: 1:2 }}
+  </span>
 </p>
 <p class="date">
-    {{ time | date: "longDate":(timezone$ | async)?.offset }}
+  {{ time | date: "longDate":timezone?.offset }}
 </p>

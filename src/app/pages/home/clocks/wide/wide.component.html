@@ -1,7 +1,7 @@
 <p class="time">
-    {{ time | date: "HH:mm":(timezone$ | async)?.offset }}
-  </p>
-  <p class="date">
-    {{ time | date: "EEEE":(timezone$ | async)?.offset }},
-    {{ time | date: "longDate":(timezone$ | async)?.offset }}
-  </p>
+  {{ time | date: "HH:mm":timezone?.offset }}
+</p>
+<p class="date">
+  {{ time | date: "EEEE":timezone?.offset }},
+  {{ time | date: "longDate":timezone?.offset }}
+</p>

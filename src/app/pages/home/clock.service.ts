@@ -1,22 +1,23 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Alarm } from "@shared/models/alarm.model";
-import { Timezone } from "@shared/models/timezone.model";
 import { SettingsService } from "app/pages/settings/settings.service";
 import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 import * as moment from "moment";
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
 import { AlarmsService } from "../alarms/alarms.service";
 import { first } from "rxjs/operators";
+import { Settings } from "@shared/models/settings.model";
 
 const HOURS_TO_CHECK_FOR_ALARM: number = 8;
 @Injectable({
   providedIn: "root",
 })
 export class ClockService {
-  private currentDate$: BehaviorSubject<Date> = new BehaviorSubject(new Date());
-  private timezone: Timezone;
+  readonly currentDate$: BehaviorSubject<Date> = new BehaviorSubject(
+    new Date()
+  );
   private getTimeInterval: AdjustingInterval;
 
   constructor(
@@ -25,7 +26,6 @@ export class ClockService {
     private notificationsService: NotificationsService,
     private settingsService: SettingsService
   ) {
-    this.timezone = this.settingsService.getSettings().timezone;
     this.getTimeInterval = new AdjustingInterval(
       this.getTimeNow.bind(this),
       1000
@@ -34,13 +34,13 @@ export class ClockService {
     this.getTimeInterval.start();
   }
 
-  pad(number: number): string {
+  private pad(number: number): string {
     if (number < 10) return "0" + number;
 
     return number.toString();
   }
 
-  getTimeNow(): void {
+  private getTimeNow(): void {
     this.currentDate$.next(new Date());
 
     // CHECK FOR EACH ALARM IF IT IS SET TO THIS TIME
@@ -48,7 +48,7 @@ export class ClockService {
     this.checkForFiringAlarms();
   }
 
-  checkForCloseAlarms(): void {
+  private checkForCloseAlarms(): void {
     let closeAlarms: Alarm[] = [];
 
     this.alarmsService.alarms$.subscribe((alarms: Alarm[]) => {
@@ -72,24 +72,24 @@ export class ClockService {
     });
   }
 
-  private alarmIsFiringInNextHours(
+  private async alarmIsFiringInNextHours(
     alarm: Alarm,
     hoursToCheck: number
-  ): boolean {
-    let currentDate: Date;
-    this.currentDate$.pipe(first()).subscribe((currentDate: Date) => {
-      currentDate = currentDate;
-    });
+  ): Promise<boolean> {
+    let currentDate: Date = await this.currentDate$.toPromise();
+    let settings: Settings = await this.settingsService.settings$.toPromise();
+
     const startTime = {
       hour:
-        currentDate.getUTCHours() + Number(this.timezone.offset.slice(0, 3)),
+        currentDate.getUTCHours() +
+        Number(settings.timezone.offset.slice(0, 3)),
       minute: currentDate.getUTCMinutes(),
     };
     const endTime = {
       hour:
         currentDate.getUTCHours() +
         hoursToCheck +
-        Number(this.timezone.offset.slice(0, 3)),
+        Number(settings.timezone.offset.slice(0, 3)),
       minute: currentDate.getUTCMinutes(),
     };
 
@@ -126,11 +126,10 @@ export class ClockService {
     }
   }
 
-  checkForFiringAlarms() {
-    let currentDate: Date;
-    this.currentDate$.pipe(first()).subscribe((currentDate: Date) => {
-      currentDate = currentDate;
-    });
+  private async checkForFiringAlarms() {
+    const currentDate = await this.currentDate$.toPromise();
+    const settings = await this.settingsService.settings$.toPromise();
+
     this.alarmsService.alarms$.subscribe((alarms: Alarm[]) => {
       if (!alarms || alarms.length === 0) return false;
 
@@ -139,9 +138,7 @@ export class ClockService {
 
         let hourInTimezone =
           currentDate.getUTCHours() +
-          Number(
-            this.settingsService.getSettings().timezone.offset.slice(0, 3)
-          );
+          Number(settings.timezone.offset.slice(0, 3));
         if (hourInTimezone === 24) hourInTimezone = 0;
 
         if (
@@ -195,9 +192,5 @@ export class ClockService {
         icon: null,
       });
     }
-  }
-
-  getCurrentDate() {
-    return this.currentDate$;
   }
 }

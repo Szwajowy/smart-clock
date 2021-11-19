@@ -2,75 +2,53 @@
   <div class="settings-content">
     <header>
       <h2>Ustawienia</h2>
-      <!-- <button *ngIf="!logged" (click)="onLogin()">
-        Zaloguj się
-        <div class="avatar">
-          <svg viewBox="0 0 448 512">
-            <path
-              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-            ></path>
-          </svg>
-        </div>
-      </button>
-      <button *ngIf="logged" (click)="onLogout()">
-        Krzysztof Czaja
-        <img
-          src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-1/p160x160/52983635_1396325420507284_6518690908471296000_o.jpg?_nc_cat=103&_nc_oc=AQmrFNwLzoTvuZ1DqZr4b8ZSun1k2ZK7R2cRI6onuXUXo36eGC_fEWSrZYi_Fguz17A8EzCz4_I9vkUvGeR8zPYS&_nc_ht=scontent-waw1-1.xx&_nc_tp=1&oh=36a7d0b6ac3f3071eeaac68619ad294d&oe=5EAAFA29"
-          class="avatar"
-        />
-      </button> -->
     </header>
     <section class="settings-wraper">
-      <div class="form-group">
-        <h3>Kolor akcentu</h3>
-        <ul class="color-picker">
-          <li
-            *ngFor="let theme of themes | async"
-            [style.background]="theme.properties.accent"
-            (click)="onThemeChange(theme.name)"
-          ></li>
-        </ul>
-      </div>
-      <div class="form-group">
-        <h3>Styl zegarka</h3>
-        <ul class="color-picker">
-          <li
-            (click)="onClockStyleChange(1)"
-            [ngClass]="{ active: getSettings().clockStyle == 1 }"
-          >
-            1
-          </li>
-          <li
-            (click)="onClockStyleChange(2)"
-            [ngClass]="{ active: getSettings().clockStyle == 2 }"
-          >
-            2
-          </li>
-          <li
-            (click)="onClockStyleChange(3)"
-            [ngClass]="{ active: getSettings().clockStyle == 3 }"
-          >
-            3
-          </li>
-          <li
-            (click)="onClockStyleChange(4)"
-            [ngClass]="{ active: getSettings().clockStyle == 4 }"
-          >
-            4
-          </li>
-        </ul>
-      </div>
-      <!-- <div class="form-group">
-        <h3>Miasto do pogody</h3>
-        <input
-          type="text"
-          name="city"
-          id="city"
-          placeholder="Nazwa miasta"
-          [value]="getSettings().city"
-          #cityInput
-        />
-      </div> -->
+      <form [formGroup]="settingsForm">
+        <div class="form-input">
+          <h3>Jasność ekranu</h3>
+          <div class="form-input">
+            <input class="brightness-slider" type="range" min="20" max="100" />
+          </div>
+        </div>
+        <div class="form-input">
+          <h3>Kolor akcentu</h3>
+          <div class="accent-color-picker">
+            <div
+              class="accent-color-option"
+              *ngFor="let theme of availableThemes$ | async"
+            >
+              <input
+                [id]="theme.name"
+                type="radio"
+                [value]="theme.name"
+                formControlName="activeTheme"
+              />
+              <label
+                [for]="theme.name"
+                [style.background]="theme.properties.accent"
+              ></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-input">
+          <h3>Styl zegarka</h3>
+          <div class="clock-style-picker">
+            <div
+              class="clock-style-option"
+              *ngFor="let clockStyle of clockStyles"
+            >
+              <input
+                [id]="clockStyle"
+                type="radio"
+                [value]="clockStyle"
+                formControlName="activeClockStyle"
+              />
+              <label [for]="clockStyle">{{ clockStyle }}</label>
+            </div>
+          </div>
+        </div>
+      </form>
     </section>
   </div>
 </app-page-skeleton>

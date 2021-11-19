@@ -6,12 +6,11 @@ import * as moment from "moment";
 import { slideInAnimation } from "./animations";
 
 import { AlarmsService } from "./pages/alarms/alarms.service";
-import { ClockService } from "./pages/home/clock.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
-import { ThemeService } from "@shared/services/theme.service";
 import { SettingsService } from "./pages/settings/settings.service";
 import { WeatherService } from "app/pages/weather/weather.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -20,27 +19,22 @@ import { WeatherService } from "app/pages/weather/weather.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private alarmsSubscription;
-  private notificationsSubscription;
-  private weatherSubscription;
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
     private settingsService: SettingsService,
     private alarmService: AlarmsService,
-    private clockService: ClockService,
     private firebaseService: FirebaseService,
     private notificationsService: NotificationsService,
-    private weatherService: WeatherService,
-    private themeService: ThemeService
+    private weatherService: WeatherService
   ) {}
 
   ngOnInit() {
     moment.locale("pl");
-    this.themeService.loadThemes();
-    this.settingsService.subscribeToAll();
+    this.subscriptions.add(this.settingsService.loadSettings());
     this.notificationsService.subscribeToAll();
-    this.weatherSubscription = this.weatherService.getWeather().subscribe();
+    this.subscriptions.add(this.weatherService.getWeather().subscribe());
 
     this.route.queryParams
       .pipe(first((params) => params["serial"] !== undefined))
@@ -49,15 +43,12 @@ export class AppComponent implements OnInit, OnDestroy {
       });
 
     setTimeout(() => {
-      this.settingsService.loadSettings();
-      this.alarmsSubscription = this.alarmService.fetchAlarmsFromDb().subscribe();
+      this.subscriptions.add(this.alarmService.fetchAlarmsFromDb().subscribe());
     }, 1000);
   }
 
   ngOnDestroy() {
-    this.alarmsSubscription.unsubscribe();
-    this.notificationsSubscription.unsubscribe();
-    this.weatherSubscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   prepareRoute(outlet: RouterOutlet) {

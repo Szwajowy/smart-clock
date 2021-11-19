@@ -26,11 +26,10 @@ export class HomeComponent extends ApplicationPage implements OnInit {
   };
 
   username = "użytkowniku";
-  settings: Settings;
-  timezone$: Observable<Timezone>;
+  settings$: Observable<Settings> = this.settingsService.settings$;
   weather$ = this.weatherService.getWeather();
 
-  currentDate$ = this.clockService.getCurrentDate();
+  currentDate$ = this.clockService.currentDate$;
 
   constructor(
     router: Router,
@@ -44,14 +43,6 @@ export class HomeComponent extends ApplicationPage implements OnInit {
 
   ngOnInit() {
     this.setUsername();
-
-    this.timezone$ = this.firebaseService.getDeviceData("settings").pipe(
-      map((res: any) => {
-        return res ? res.timezone : null;
-      })
-    );
-
-    this.settings = this.settingsService.getSettings();
   }
 
   setUsername() {

@@ -1,85 +1,54 @@
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/database";
 
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { first } from "rxjs/operators";
 
 import { Theme } from "../models/theme.model";
-import { tap } from "rxjs/operators";
 import { ThemeName } from "@shared/models/theme-name.enum";
 
 @Injectable({
   providedIn: "root",
 })
 export class ThemeService {
-  private active: Theme;
-
-  private availableThemes: Theme[] = [];
-  public availableThemes$ = this.firebaseDb
-    .list("themes")
-    .valueChanges()
-    .pipe(
-      tap((themes: Theme[]) => {
-        this.availableThemes = themes;
-      })
-    );
-
-  private activeSubject = new Subject();
+  readonly availableThemes$: Observable<Theme[]> = this.firebaseDb
+    .list<Theme>("themes")
+    .valueChanges();
+  readonly activeTheme$: Subject<null> = new Subject();
 
   constructor(private firebaseDb: AngularFireDatabase) {}
 
-  loadThemes() {
-    this.firebaseDb
-      .list("themes")
-      .valueChanges()
-      .subscribe((themes: Theme[]) => {
-        this.availableThemes = themes;
-      });
+  async setTheme(name: ThemeName): Promise<void> {
+    let theme: Theme = await this.findTheme(name);
+
+    if (!theme) {
+      throw new Error("No such theme exist!");
+    }
+
+    this.setCSSProperties(theme);
   }
 
-  findTheme(name) {
+  private async findTheme(name): Promise<Theme | null> {
     let foundTheme = null;
 
-    this.availableThemes.forEach((theme) => {
+    const availableThemes: Theme[] = await this.availableThemes$
+      .pipe(first())
+      .toPromise();
+
+    availableThemes.forEach((theme) => {
       if (theme.name === name) foundTheme = theme;
     });
 
     return foundTheme;
   }
 
-  getAvailableThemes(): Theme[] {
-    return this.availableThemes;
-  }
-
-  setAvailableThemes(themes: Theme[]) {
-    this.availableThemes = themes;
-  }
-
-  getActiveTheme(): Theme {
-    return this.active;
-  }
-
-  setActiveTheme(name: ThemeName): void {
-    let theme = this.findTheme(name);
-
-    if (!theme) return null;
-
-    this.active = theme;
-
-    this.setCSSProperties();
-
-    this.activeSubject.next(this.active);
-  }
-
-  private setCSSProperties() {
-    Object.keys(this.active.properties).forEach((property) => {
+  private setCSSProperties(theme: Theme): void {
+    Object.keys(theme.properties).forEach((property) => {
       document.documentElement.style.setProperty(
         "--" + property,
-        this.active.properties[property]
+        theme.properties[property]
       );
     });
-  }
-
-  getActiveSubject() {
-    return this.activeSubject;
+    this.activeTheme$.next();
   }
 }

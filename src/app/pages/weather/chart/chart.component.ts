@@ -7,6 +7,7 @@ import { SubSink } from "subsink";
 
 import { ThemeService } from "@shared/services/theme.service";
 import { WeatherService } from "app/pages/weather/weather.service";
+import { SettingsService } from "app/pages/settings/settings.service";
 
 @Component({
   selector: "app-chart",
@@ -186,7 +187,7 @@ export class ChartComponent implements OnInit, OnDestroy {
       };
     });
 
-    this.subs.sink = this.themeService.getActiveSubject().subscribe((res) => {
+    this.subs.sink = this.themeService.activeTheme$.subscribe((res) => {
       let color = getComputedStyle(document.documentElement).getPropertyValue(
         "--color"
       );
