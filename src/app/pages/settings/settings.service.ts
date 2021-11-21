@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ClockStyle } from "@shared/models/clock-style.enum";
 import { Settings } from "@shared/models/settings.model";
 import { ThemeName } from "@shared/models/theme-name.enum";
+import { DeviceSettingsService } from "@shared/services/device-settings.service";
 import { FirebaseService } from "@shared/services/firebase.service";
 import { ThemeService } from "@shared/services/theme.service";
 import { BehaviorSubject, combineLatest, Subscription } from "rxjs";
@@ -12,8 +13,9 @@ import { WeatherService } from "../weather/weather.service";
   providedIn: "root",
 })
 export class SettingsService {
-  private defaultSettings = {
+  private defaultSettings: Settings = {
     activeTheme: ThemeName.blue,
+    brightness: 50,
     clockStyle: ClockStyle.standard,
     city: "Katowice",
     updateTime: 2,
@@ -30,6 +32,7 @@ export class SettingsService {
 
   constructor(
     private firebaseService: FirebaseService,
+    private deviceSettingsService: DeviceSettingsService,
     private themeService: ThemeService,
     private weatherService: WeatherService
   ) {}
@@ -94,18 +97,24 @@ export class SettingsService {
     this.updateSettings(settings);
   }
 
-  async changeTheme(name: ThemeName): Promise<void> {
+  async setTheme(name: ThemeName): Promise<void> {
     let settings = await this.getCurrentSettings();
     settings.activeTheme = name;
     this.themeService.setTheme(name);
     this.updateSettings(settings);
   }
 
-  async changeClockStyle(id: number): Promise<void> {
+  async setClockStyle(id: number): Promise<void> {
     let settings = await this.getCurrentSettings();
     settings.clockStyle = id;
 
     this.updateSettings(settings);
+  }
+
+  async setBrightness(value: number): Promise<void> {
+    let settings = await this.getCurrentSettings();
+
+    this.deviceSettingsService.setDeviceBacklightBrightness(value);
   }
 
   private async getCurrentSettings(): Promise<Settings> {

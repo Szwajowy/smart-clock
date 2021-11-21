@@ -4,6 +4,7 @@ import { Timezone } from "./timezone.model";
 
 export interface Settings {
   activeTheme: ThemeName;
+  brightness: number;
   clockStyle: ClockStyle;
   city: string;
   updateTime: number;

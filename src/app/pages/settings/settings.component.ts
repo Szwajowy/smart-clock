@@ -8,6 +8,7 @@ import { Theme } from "@shared/models/theme.model";
 
 import { ThemeService } from "app/shared/services/theme.service";
 import { Observable, Subscription } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 import { SettingsService } from "./settings.service";
 
 @Component({
@@ -47,30 +48,42 @@ export class SettingsComponent
     this.settingsForm = this.fb.group({
       activeTheme: [],
       activeClockStyle: [],
+      screenBrightness: [],
     });
 
-    this.settings$.subscribe((settings: Settings) => {
-      this.settingsForm.setValue(
-        {
-          activeTheme: settings.activeTheme,
-          activeClockStyle: settings.clockStyle,
-        },
-        { emitEvent: false }
-      );
-    });
+    this.subscriptions.add(
+      this.settings$.subscribe((settings: Settings) => {
+        this.settingsForm.setValue(
+          {
+            activeTheme: settings.activeTheme,
+            activeClockStyle: settings.clockStyle.toString(),
+            screenBrightness: settings.brightness,
+          },
+          { emitEvent: false }
+        );
+      })
+    );
 
     this.subscriptions.add(
       this.settingsForm
         .get("activeTheme")
         .valueChanges.subscribe((activeTheme: ThemeName) => {
-          this.settingsService.changeTheme(activeTheme);
+          this.settingsService.setTheme(activeTheme);
         })
     );
     this.subscriptions.add(
       this.settingsForm
         .get("activeClockStyle")
         .valueChanges.subscribe((activeClockStyle: number) => {
-          this.settingsService.changeClockStyle(activeClockStyle);
+          this.settingsService.setClockStyle(activeClockStyle);
+        })
+    );
+    this.subscriptions.add(
+      this.settingsForm
+        .get("screenBrightness")
+        .valueChanges.pipe(debounceTime(200))
+        .subscribe((brightness: number) => {
+          this.settingsService.setBrightness(brightness);
         })
     );
   }

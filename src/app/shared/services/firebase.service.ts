@@ -41,6 +41,7 @@ export class FirebaseService {
   }
 
   getDeviceData(part: string) {
+    console.log("serial: ", this.serial);
     return this.firebaseDb
       .object(`devices/${this.serial}/${part}`)
       .valueChanges();
@@ -57,6 +58,7 @@ export class FirebaseService {
   }
 
   setSerial(serial: string) {
+    console.log("serial:", serial);
     this.serial = serial;
   }
 }
