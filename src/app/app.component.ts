@@ -32,15 +32,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     moment.locale("pl");
-    this.subscriptions.add(this.settingsService.loadSettings());
+    this.route.queryParams.pipe(first()).subscribe((params) => {
+      if (params["serial"]) {
+        this.firebaseService.setSerial(params["serial"]);
+      }
+      this.subscriptions.add(this.settingsService.loadSettings());
+    });
+
     this.notificationsService.subscribeToAll();
     this.subscriptions.add(this.weatherService.getWeather().subscribe());
-
-    this.route.queryParams
-      .pipe(first((params) => params["serial"] !== undefined))
-      .subscribe((params) => {
-        this.firebaseService.setSerial(params["serial"]);
-      });
 
     setTimeout(() => {
       this.subscriptions.add(this.alarmService.fetchAlarmsFromDb().subscribe());
