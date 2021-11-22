@@ -22,7 +22,6 @@ export class TimerComponent extends ApplicationPage {
   }
 
   setTime(value, part) {
-    console.log(value, part);
     this.timerService.time[part] = value;
   }
 }

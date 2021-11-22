@@ -46,12 +46,6 @@ export class CalendarService {
     if (shift) currentDate.setDate(currentDate.getDate() + shift);
     let passedDate = new Date(date);
 
-    console.log(
-      currentDate.getDate() === passedDate.getDate() &&
-        currentDate.getMonth() === passedDate.getMonth() &&
-        currentDate.getFullYear() === passedDate.getFullYear()
-    );
-
     if (
       currentDate.getDate() === passedDate.getDate() &&
       currentDate.getMonth() === passedDate.getMonth() &&

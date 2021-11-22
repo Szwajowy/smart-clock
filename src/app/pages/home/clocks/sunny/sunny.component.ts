@@ -24,7 +24,6 @@ export class SunnyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.animate();
     this.refreshSubscription = this.refresh$.subscribe(() => {
-      console.log("animating");
       this.animate();
     });
   }

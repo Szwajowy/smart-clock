@@ -36,7 +36,6 @@ export class CalendarComponent
       .subscribe((events) => {
         this.todayEvents = [];
         this.tomorrowEvents = [];
-        console.log(events.today);
 
         events.today.forEach((event) => {
           this.todayEvents.push(event);

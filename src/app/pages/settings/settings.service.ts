@@ -84,7 +84,11 @@ export class SettingsService {
       }
 
       this.settings$.next(settings);
+      this.deviceSettingsService
+        .setDeviceBacklightBrightness(settings.brightness)
+        .subscribe();
       this.themeService.setTheme(settings.activeTheme);
+      this.weatherService.setCity(settings.city);
     });
   }
 
@@ -114,7 +118,12 @@ export class SettingsService {
   async setBrightness(value: number): Promise<void> {
     let settings = await this.getCurrentSettings();
 
-    this.deviceSettingsService.setDeviceBacklightBrightness(value);
+    this.deviceSettingsService
+      .setDeviceBacklightBrightness(value)
+      .subscribe((response: { brightness: number }) => {
+        settings.brightness = value;
+        this.updateSettings(settings);
+      });
   }
 
   private async getCurrentSettings(): Promise<Settings> {

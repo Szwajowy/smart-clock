@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { RouterOutlet, ActivatedRoute } from "@angular/router";
-import { first } from "rxjs/operators";
+import { RouterOutlet } from "@angular/router";
+import { catchError, first } from "rxjs/operators";
 import * as moment from "moment";
 
 import { slideInAnimation } from "./animations";
@@ -10,7 +10,12 @@ import { FirebaseService } from "@shared/services/firebase.service";
 import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
 import { SettingsService } from "./pages/settings/settings.service";
 import { WeatherService } from "app/pages/weather/weather.service";
-import { Subscription } from "rxjs";
+import { of, Subscription } from "rxjs";
+import { DeviceSettingsService } from "@shared/services/device-settings.service";
+import {
+  DEFAULT_DEVICE_INFO,
+  DeviceInfo,
+} from "@shared/models/device-info.model";
 
 @Component({
   selector: "app-root",
@@ -22,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private route: ActivatedRoute,
+    private deviceSettings: DeviceSettingsService,
     private settingsService: SettingsService,
     private alarmService: AlarmsService,
     private firebaseService: FirebaseService,
@@ -32,12 +37,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     moment.locale("pl");
-    this.route.queryParams
-      .pipe(first((params) => params["serial"] !== undefined))
-      .subscribe((params) => {
-        if (params["serial"]) {
-          this.firebaseService.setSerial(params["serial"]);
-        }
+    this.deviceSettings
+      .getDeviceInfo()
+      .pipe(
+        first(),
+        catchError(() => {
+          return of(DEFAULT_DEVICE_INFO);
+        })
+      )
+      .subscribe((response: { result: DeviceInfo }) => {
+        this.firebaseService.setSerial(response.result.serial);
         this.subscriptions.add(this.settingsService.loadSettings());
       });
 
