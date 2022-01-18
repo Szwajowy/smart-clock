@@ -39,12 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     moment.locale("pl");
     this.deviceSettings
       .getDeviceInfo()
-      .pipe(
-        first(),
-        catchError(() => {
-          return of(DEFAULT_DEVICE_INFO);
-        })
-      )
+      .pipe(first())
       .subscribe((response: { result: DeviceInfo }) => {
         this.firebaseService.setSerial(response.result.serial);
         this.subscriptions.add(this.settingsService.loadSettings());

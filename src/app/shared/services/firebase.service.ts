@@ -23,7 +23,7 @@ export class FirebaseService {
             for (let device in users[user].devices) {
               if (
                 users[user].devices[device].id.toString() ===
-                this.serial.toString()
+                this.serial?.toString()
               ) {
                 foundUser = user;
                 found = true;

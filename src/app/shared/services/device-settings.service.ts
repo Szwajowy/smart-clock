@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DeviceInfo } from "@shared/models/device-info.model";
-import { Observable } from "rxjs";
+import {
+  DEFAULT_DEVICE_INFO,
+  DeviceInfo,
+} from "@shared/models/device-info.model";
+import { Observable, of } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 const DEVICE_HELPER_API_URL = "http://localhost:8080";
 
@@ -17,9 +21,16 @@ export class DeviceSettingsService {
   constructor(private http: HttpClient) {}
 
   getDeviceBacklightBrightness(): Observable<{ brightness: number }> {
-    return this.http.get<{ brightness: number }>(
-      DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.screenBrightness
-    );
+    return this.http
+      .get<{ brightness: number }>(
+        DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.screenBrightness
+      )
+      .pipe(
+        catchError((error) => {
+          console.log("Error occured while trying to get backlight value");
+          return of({ brightness: 0 });
+        })
+      );
   }
 
   setDeviceBacklightBrightness(
@@ -35,17 +46,32 @@ export class DeviceSettingsService {
       }),
     };
 
-    return this.http.post<{ brightness: number }>(
-      DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.screenBrightness,
-      requestBody,
-      requestOptions
-    );
+    return this.http
+      .post<{ brightness: number }>(
+        DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.screenBrightness,
+        requestBody,
+        requestOptions
+      )
+      .pipe(
+        catchError((error) => {
+          console.log("Error occured while trying to set backlight value");
+          return of({ brightness: 0 });
+        })
+      );
   }
 
   getDeviceInfo(): Observable<{ result: DeviceInfo }> {
-    return this.http.get<{ result: DeviceInfo }>(
-      DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.deviceInfo
-    );
+    return this.http
+      .get<{ result: DeviceInfo }>(
+        DEVICE_HELPER_API_URL + DEVICE_HELPER_API_ENDPOINTS.deviceInfo
+      )
+      .pipe(
+        catchError((error) => {
+          console.log("Error occured while trying to get device data");
+
+          return of({ result: DEFAULT_DEVICE_INFO });
+        })
+      );
   }
 
   private calcBrightness(value: number): number {
