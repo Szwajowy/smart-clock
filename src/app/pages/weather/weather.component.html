@@ -1,7 +1,5 @@
 <app-page-skeleton [navigation]="navigation">
-  <div class="chart">
-    <app-chart></app-chart>
-  </div>
+  <div class="chart"></div>
 
   <div class="weather-content">
     <ng-container *ngIf="weather$ | async as weather; else error">
