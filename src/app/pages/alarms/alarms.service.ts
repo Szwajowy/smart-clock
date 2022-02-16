@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { transformToMinutes } from "@shared/functions/time-utils";
 import { deepCloneObject } from "@shared/functions/utils";
 import { Alarm } from "@shared/models/alarm.model";
-import { Time } from "@shared/models/time.model";
 import { BehaviorSubject, combineLatest, Observable, Subscription } from "rxjs";
 import { first, tap } from "rxjs/operators";
 import { FirebaseService } from "../../shared/services/firebase.service";
@@ -88,9 +87,9 @@ export class AlarmsService {
     });
   }
 
-  fetchAlarmsFromDb(): Observable<Alarm[]> {
+  fetchAlarmsFromDb(): Observable<any> {
     return this.firebaseService.getDeviceDataList("alarms").pipe(
-      tap((alarms: Alarm[]) => {
+      tap((alarms) => {
         this.alarms$.next(alarms);
       })
     );

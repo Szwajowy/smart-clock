@@ -9,13 +9,7 @@ import {
 } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from "../environments/environment";
-
-import * as echarts from "echarts";
-import { NgxEchartsModule } from "ngx-echarts";
 
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -35,7 +29,6 @@ import { WeatherIconComponent } from "./shared/components/weather-icon/weather-i
 import { StandardComponent } from "./pages/home/clocks/standard/standard.component";
 import { BoxyComponent } from "./pages/home/clocks/boxy/boxy.component";
 import { WideComponent } from "./pages/home/clocks/wide/wide.component";
-import { ChartComponent } from "./pages/weather/chart/chart.component";
 import { SunnyComponent } from "./pages/home/clocks/sunny/sunny.component";
 import { AlarmComponent } from "./pages/alarms/alarm/alarm.component";
 import { AlarmEditComponent } from "./pages/alarms/alarm-edit/alarm-edit.component";
@@ -47,6 +40,10 @@ import { CapitalizefirstPipe } from "./shared/pipes/capitalizefirst.pipe";
 import { DateAgoPipe } from "./shared/pipes/date-ago.pipe";
 
 import * as Hammer from "hammerjs";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { getDatabase, provideDatabase } from "@angular/fire/database";
+import { getAuth, provideAuth } from "@angular/fire/auth";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -76,7 +73,6 @@ registerLocaleData(localePl);
     StandardComponent,
     BoxyComponent,
     WideComponent,
-    ChartComponent,
     SunnyComponent,
     AlarmComponent,
     AlarmEditComponent,
@@ -91,12 +87,10 @@ registerLocaleData(localePl);
     HammerModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    NgxEchartsModule.forRoot({
-      echarts,
-    }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
+    provideAuth(() => getAuth()),
+    NgxChartsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "pl" },

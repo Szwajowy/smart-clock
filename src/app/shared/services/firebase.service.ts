@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/database";
+import { Database, listVal, objectVal } from "@angular/fire/database";
 import { switchMap } from "rxjs/operators";
 import { of } from "rxjs";
+import { ref, set } from "firebase/database";
 
 @Injectable({
   providedIn: "root",
@@ -9,51 +10,44 @@ import { of } from "rxjs";
 export class FirebaseService {
   private serial;
 
-  constructor(private firebaseDb: AngularFireDatabase) {}
+  constructor(private db: Database) {}
 
   getUserData(part: string) {
-    return this.firebaseDb
-      .list("users")
-      .valueChanges()
-      .pipe(
-        switchMap((users: any) => {
-          let found = false;
-          let foundUser = null;
-          for (let user in users) {
-            for (let device in users[user].devices) {
-              if (
-                users[user].devices[device].id.toString() ===
-                this.serial?.toString()
-              ) {
-                foundUser = user;
-                found = true;
-              }
+    return listVal(ref(this.db, "users")).pipe(
+      switchMap((users: any) => {
+        let found = false;
+        let foundUser = null;
+        for (let user in users) {
+          for (let device in users[user].devices) {
+            if (
+              users[user].devices[device].id.toString() ===
+              this.serial?.toString()
+            ) {
+              foundUser = user;
+              found = true;
             }
           }
+        }
 
-          if (found) {
-            return of(users[foundUser][part]);
-          }
+        if (found) {
+          return of(users[foundUser][part]);
+        }
 
-          if (!found) return of(null);
-        })
-      );
+        if (!found) return of(null);
+      })
+    );
   }
 
   getDeviceData(part: string) {
-    return this.firebaseDb
-      .object(`devices/${this.serial}/${part}`)
-      .valueChanges();
+    return objectVal(ref(this.db, `devices/${this.serial}/${part}`));
   }
 
   getDeviceDataList(part: string) {
-    return this.firebaseDb
-      .list(`devices/${this.serial}/${part}`)
-      .valueChanges();
+    return listVal(ref(this.db, `devices/${this.serial}/${part}`));
   }
 
   setDeviceData(part: string, data: any) {
-    return this.firebaseDb.object(`devices/${this.serial}/${part}`).set(data);
+    return set(ref(this.db, `devices/${this.serial}/${part}`), data);
   }
 
   setSerial(serial: string) {
