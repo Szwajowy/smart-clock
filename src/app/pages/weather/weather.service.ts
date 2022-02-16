@@ -140,8 +140,8 @@ export class WeatherService {
     );
   }
 
-  private getFirebaseWeather(): Observable<Weather> {
-    return this.firebaseService.getDeviceData("weather") as Observable<Weather>;
+  private getFirebaseWeather(): Observable<any> {
+    return this.firebaseService.getDeviceData("weather") as Observable<any>;
   }
 
   private updateFirebaseWeather(weather: Weather) {

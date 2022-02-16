@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/database";
+import { Database, list, listVal, ref } from "@angular/fire/database";
 
-import { Observable, Subject } from "rxjs";
-import { first } from "rxjs/operators";
+import { firstValueFrom, Observable, Subject } from "rxjs";
 
 import { Theme } from "../models/theme.model";
 import { ThemeName } from "@shared/models/theme-name.enum";
@@ -11,12 +10,10 @@ import { ThemeName } from "@shared/models/theme-name.enum";
   providedIn: "root",
 })
 export class ThemeService {
-  readonly availableThemes$: Observable<Theme[]> = this.firebaseDb
-    .list<Theme>("themes")
-    .valueChanges();
+  readonly availableThemes$: Observable<any> = listVal(ref(this.db, "themes"));
   readonly activeTheme$: Subject<null> = new Subject();
 
-  constructor(private firebaseDb: AngularFireDatabase) {}
+  constructor(private db: Database) {}
 
   async setTheme(name: ThemeName): Promise<void> {
     let theme: Theme = await this.findTheme(name);
@@ -31,9 +28,10 @@ export class ThemeService {
   private async findTheme(name): Promise<Theme | null> {
     let foundTheme = null;
 
-    const availableThemes: Theme[] = await this.availableThemes$
-      .pipe(first())
-      .toPromise();
+    const availableThemes: Theme[] = await firstValueFrom(
+      this.availableThemes$
+    );
+    console.log(availableThemes);
 
     availableThemes.forEach((theme) => {
       if (theme.name === name) foundTheme = theme;
@@ -49,6 +47,6 @@ export class ThemeService {
         theme.properties[property]
       );
     });
-    this.activeTheme$.next();
+    this.activeTheme$.next(null);
   }
 }
