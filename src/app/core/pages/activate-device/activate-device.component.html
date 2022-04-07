@@ -1,0 +1,35 @@
+<div class="page-wrapper">
+  <ng-container *ngIf="success === undefined">
+    <div class="flex-wrapper" *ngIf="deviceCodeResponse; else loading">
+      <qr-code
+        class="qr-code"
+        size="150"
+        [value]="deviceCodeResponse.verification_uri_complete"
+      ></qr-code>
+      <div class="right-side">
+        <h1>To activate this device</h1>
+        <ol class="steps">
+          <li>
+            Visit
+            <span class="link">{{ deviceCodeResponse.verification_uri }}</span>
+            on your computer or mobile device,
+          </li>
+          <li>
+            Enter the following code:
+            <span class="code">{{ deviceCodeResponse.user_code }}</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <ng-template #loading><p>Loading...</p></ng-template>
+  </ng-container>
+
+  <div class="success" *ngIf="success === true">
+    You have successfully authorized this device !
+    <a routerLink="">Go to main page</a>
+  </div>
+
+  <div class="error" *ngIf="success === false">
+    Something went wrong. Try again later.
+  </div>
+</div>

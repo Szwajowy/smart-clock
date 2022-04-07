@@ -1,7 +1,7 @@
-import { deepCloneObject } from "./utils";
+import { cloneObject } from "./utils";
 
 export function increaseTime(timeParam, part, options?) {
-  let time = deepCloneObject(timeParam);
+  let time = cloneObject(timeParam);
   if (
     part !== "hours" &&
     part !== "minutes" &&
@@ -80,7 +80,7 @@ export function increaseTime(timeParam, part, options?) {
 
 // DECREASE TIME ON TIMER OR STOPWATCH
 export function decreaseTime(timeParam, part, options?) {
-  let time = deepCloneObject(timeParam);
+  let time = cloneObject(timeParam);
 
   if (
     part !== "hours" &&
@@ -156,9 +156,14 @@ export function decreaseTime(timeParam, part, options?) {
   return time;
 }
 
-export function transformToMinutes(time: {
+export function transformTimeToMinutes(time: {
   hour: number;
   minute: number;
 }): number {
   return time.minute + time.hour * 60;
+}
+
+export function isBeforeTime(date: Date, time: number): boolean {
+  const now = new Date();
+  return date.getTime() < now.getTime() - time;
 }

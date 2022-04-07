@@ -123,11 +123,4 @@ export class Weather {
     this.city = weather.city;
     this.updatedAt = weather.updatedAt;
   }
-
-  isUpdated(time: number) {
-    let now = new Date().getTime();
-    if (this.updatedAt < now - time) return false;
-
-    return true;
-  }
 }

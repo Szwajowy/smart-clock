@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Direction } from "@shared/types/direction.enum";
+import { Direction } from "@shared/models/direction.enum";
 
 @Component({
   selector: "app-nav-arrow-button",
