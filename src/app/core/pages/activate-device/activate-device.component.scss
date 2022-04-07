@@ -1,0 +1,24 @@
+.page-wrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-code {
+  padding: 10px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 30px;
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: inside decimal;
+  }
+}

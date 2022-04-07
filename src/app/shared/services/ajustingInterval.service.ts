@@ -1,10 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdjustingIntervalService {
-
   private running;
 
   private expected;
@@ -21,9 +18,9 @@ export class AdjustingIntervalService {
   }
 
   start() {
-      this.expected = Date.now() + this.interval;
-      this.timeout = setTimeout(this.step.bind(this), this.interval);
-      this.running = true;
+    this.expected = Date.now() + this.interval;
+    this.timeout = setTimeout(this.step.bind(this), this.interval);
+    this.running = true;
   }
 
   stop() {
@@ -34,16 +31,18 @@ export class AdjustingIntervalService {
   step() {
     var drift = Date.now() - this.expected;
     if (drift > this.interval) {
-        // You could have some default stuff here too...
-        if(this.errorFunc) 
-          this.errorFunc();
+      // You could have some default stuff here too...
+      if (this.errorFunc) this.errorFunc();
     }
-    
+
     this.workFunc();
-    
-    if(this.running) {
+
+    if (this.running) {
       this.expected += this.interval;
-      this.timeout = setTimeout(this.step.bind(this), Math.max(0, this.interval - drift));
+      this.timeout = setTimeout(
+        this.step.bind(this),
+        Math.max(0, this.interval - drift)
+      );
     }
   }
 }

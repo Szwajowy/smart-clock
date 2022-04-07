@@ -1,21 +1,19 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { catchError, first } from "rxjs/operators";
+
+import { first } from "rxjs/operators";
+import { Subscription } from "rxjs";
 import * as moment from "moment";
 
 import { slideInAnimation } from "./animations";
 
-import { AlarmsService } from "./pages/alarms/alarms.service";
-import { FirebaseService } from "@shared/services/firebase.service";
-import { NotificationsService } from "app/pages/home/notification-bar/notifications.service";
-import { SettingsService } from "./pages/settings/settings.service";
-import { WeatherService } from "app/pages/weather/weather.service";
-import { of, Subscription } from "rxjs";
-import { DeviceSettingsService } from "@shared/services/device-settings.service";
-import {
-  DEFAULT_DEVICE_INFO,
-  DeviceInfo,
-} from "@shared/models/device-info.model";
+import { DeviceInfoResponse } from "@shared/models/responses/device-info.response";
+import { FirebaseService } from "./core/services/firebase.service";
+import { AlarmsService } from "./modules/alarms/alarms.service";
+import { NotificationsService } from "./modules/home/notifications.service";
+import { SettingsService } from "./modules/settings/settings.service";
+import { WeatherService } from "./modules/weather/weather.service";
+import { GetDeviceInformationsService } from "./core/http/device/get-device-informations.service";
 
 @Component({
   selector: "app-root",
@@ -27,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private deviceSettings: DeviceSettingsService,
+    private getDeviceInformationsService: GetDeviceInformationsService,
     private settingsService: SettingsService,
     private alarmService: AlarmsService,
     private firebaseService: FirebaseService,
@@ -37,10 +35,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     moment.locale("pl");
-    this.deviceSettings
+    this.getDeviceInformationsService
       .getDeviceInfo()
       .pipe(first())
-      .subscribe((response: { result: DeviceInfo }) => {
+      .subscribe((response: { result: DeviceInfoResponse }) => {
         this.firebaseService.setSerial(response.result.serial);
         this.subscriptions.add(this.settingsService.loadSettings());
       });
