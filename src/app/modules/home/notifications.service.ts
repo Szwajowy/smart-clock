@@ -1,21 +1,15 @@
-import { Injectable, OnInit, OnDestroy } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Subject, BehaviorSubject } from "rxjs";
 
 import { bufferTime } from "rxjs/operators";
 
 @Injectable()
-export class NotificationsService implements OnInit, OnDestroy {
+export class NotificationsService {
   private inputNotificationsSubject = new Subject<any>();
   private notificationsSubject = new BehaviorSubject<[]>([]);
 
   private activeNotification = 0;
   private notifications = [];
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  ngOnDestroy() {}
 
   subscribeToAll() {
     this.inputNotificationsSubject // NEEDS BUFFERING FOR AT LEAST 1s

@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "dateAgo"
+  name: "dateAgo",
 })
 export class DateAgoPipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  transform(value: number): string {
     if (value) {
       const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
 
@@ -18,7 +18,7 @@ export class DateAgoPipe implements PipeTransform {
         day: 86400,
         hour: 3600,
         minute: 60,
-        second: 1
+        second: 1,
       };
       const translations = {
         year: ["rok", "lata", "lat"],
@@ -27,7 +27,7 @@ export class DateAgoPipe implements PipeTransform {
         day: ["dzień", "dni", "dni"],
         hour: ["godzinę", "godziny", "godzin"],
         minute: ["minutę", "minuty", "minut"],
-        second: ["sekundę", "sekundy", "sekund"]
+        second: ["sekundę", "sekundy", "sekund"],
       };
 
       let counter;
@@ -48,6 +48,6 @@ export class DateAgoPipe implements PipeTransform {
           }
       }
     }
-    return value;
+    return value.toString();
   }
 }

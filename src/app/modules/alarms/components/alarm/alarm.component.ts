@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Alarm } from "@shared/models/alarm.model";
 import { AlarmsService } from "../../alarms.service";
 
@@ -7,13 +7,11 @@ import { AlarmsService } from "../../alarms.service";
   templateUrl: "./alarm.component.html",
   styleUrls: ["./alarm.component.scss"],
 })
-export class AlarmComponent implements OnInit {
+export class AlarmComponent {
   @Input() alarm: Alarm;
   @Input() id: number;
 
   constructor(private alarmsService: AlarmsService) {}
-
-  ngOnInit() {}
 
   onEditAlarm() {
     this.alarmsService.editAlarm(this.id);

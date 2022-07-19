@@ -5,7 +5,7 @@ import * as Hammer from "hammerjs";
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides: { [key: string]: Object } = {
+  overrides: { [key: string]: object } = {
     swipe: { velocity: 0.4, threshold: 10, direction: Hammer.DIRECTION_ALL }, // override default settings
   };
 }

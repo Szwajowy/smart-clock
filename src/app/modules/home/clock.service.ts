@@ -55,16 +55,14 @@ export class ClockService {
 
       alarms.forEach((alarm) => {
         if (!alarm.active) return false;
-        let currentDate: Date;
         this.currentDate$.pipe(first()).subscribe((currentDate: Date) => {
-          currentDate = currentDate;
+          if (
+            this.alarmIsFiringInNextHours(alarm, HOURS_TO_CHECK_FOR_ALARM) &&
+            (!alarm.lastFiring ||
+              moment(alarm.lastFiring).isBefore(currentDate, "minute"))
+          )
+            closeAlarms.push(alarm);
         });
-        if (
-          this.alarmIsFiringInNextHours(alarm, HOURS_TO_CHECK_FOR_ALARM) &&
-          (!alarm.lastFiring ||
-            moment(alarm.lastFiring).isBefore(currentDate, "minute"))
-        )
-          closeAlarms.push(alarm);
       });
 
       this.sendNotificationAboutClosestAlarm(closeAlarms);

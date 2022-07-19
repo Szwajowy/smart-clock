@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Direction } from "@shared/models/direction.enum";
 
 @Component({
@@ -6,11 +6,7 @@ import { Direction } from "@shared/models/direction.enum";
   templateUrl: "./nav-arrow-button.component.html",
   styleUrls: ["./nav-arrow-button.component.scss"],
 })
-export class NavArrowButtonComponent implements OnInit {
+export class NavArrowButtonComponent {
   @Input() link: string;
   @Input() direction: Direction;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

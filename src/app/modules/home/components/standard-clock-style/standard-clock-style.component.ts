@@ -12,8 +12,6 @@ export class StandardStyleClockComponent implements OnInit, OnChanges {
 
   public helloMsg = "Witaj";
 
-  constructor() {}
-
   ngOnInit() {
     this.setHelloMsg();
   }

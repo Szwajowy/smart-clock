@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import * as moment from "moment";
@@ -11,10 +11,7 @@ import { ApplicationPage } from "@shared/models/application-page.model";
   templateUrl: "./three-days-forecast.component.html",
   styleUrls: ["./three-days-forecast.component.scss"],
 })
-export class ThreeDaysForecastComponent
-  extends ApplicationPage
-  implements OnInit, OnDestroy
-{
+export class ThreeDaysForecastComponent extends ApplicationPage {
   public navigation = {
     top: "/weather/tomorrow",
     right: "/calendar",
@@ -47,10 +44,6 @@ export class ThreeDaysForecastComponent
   constructor(router: Router, private weatherService: WeatherService) {
     super(router);
   }
-
-  ngOnInit() {}
-
-  ngOnDestroy() {}
 
   getWeekday(dayNumber) {
     switch (dayNumber) {

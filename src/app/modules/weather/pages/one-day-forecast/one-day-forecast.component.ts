@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApplicationPage } from "@shared/models/application-page.model";
 
@@ -10,10 +10,7 @@ import { WeatherService } from "../../weather.service";
   templateUrl: "./one-day-forecast.component.html",
   styleUrls: ["./one-day-forecast.component.scss"],
 })
-export class OneDayForecastComponent
-  extends ApplicationPage
-  implements OnInit, OnDestroy
-{
+export class OneDayForecastComponent extends ApplicationPage implements OnInit {
   public navigation = {
     top: null,
     right: "/calendar",
@@ -68,8 +65,6 @@ export class OneDayForecastComponent
       this.navigation.bottom = "/weather/3days";
     }
   }
-
-  ngOnDestroy() {}
 
   onRefreshWeather() {
     this.weatherService.refreshWeather();

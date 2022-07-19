@@ -1,17 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-weather-icon',
-  templateUrl: './weather-icon.component.html',
-  styleUrls: ['./weather-icon.component.scss']
+  selector: "app-weather-icon",
+  templateUrl: "./weather-icon.component.html",
+  styleUrls: ["./weather-icon.component.scss"],
 })
-export class WeatherIconComponent implements OnInit {
-
+export class WeatherIconComponent {
   @Input() icon;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

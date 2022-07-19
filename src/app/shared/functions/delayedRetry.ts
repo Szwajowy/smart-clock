@@ -6,15 +6,15 @@ const getErrorMessage = (maxRetry: number) =>
 
 const DEFAULT_MAX_RETRIES = 5;
 
-export function delayedRetry(
+export function delayedRetry<T>(
   delayedMs: number,
   maxRetry = DEFAULT_MAX_RETRIES
 ) {
   let retries = maxRetry;
 
-  return (src: Observable<any>) =>
+  return (src: Observable<T>) =>
     src.pipe(
-      retryWhen((errors: Observable<any>) =>
+      retryWhen((errors: Observable<T>) =>
         errors.pipe(
           delay(delayedMs),
           mergeMap((error) =>

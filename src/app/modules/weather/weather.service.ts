@@ -117,7 +117,7 @@ export class WeatherService {
     localStorage.setItem("weather", JSON.stringify(this.localWeather));
   }
 
-  private getFirebaseWeather(): Observable<any> {
+  private getFirebaseWeather(): Observable<undefined> {
     return this.firebaseService.getDeviceData("weather") as Observable<any>;
   }
 
@@ -140,7 +140,7 @@ export class WeatherService {
     });
   }
 
-  getWeather(): Observable<Weather> {
+  getWeather(): Observable<Weather | WeatherResponse> {
     return this.weather$;
   }
 

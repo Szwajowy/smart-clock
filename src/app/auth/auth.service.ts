@@ -1,16 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError, timer } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { fromFetch } from "rxjs/fetch";
-import {
-  delay,
-  delayWhen,
-  flatMap,
-  map,
-  mergeMap,
-  retryWhen,
-  scan,
-  switchMap,
-} from "rxjs/operators";
+import { delay, map, mergeMap, retryWhen, switchMap } from "rxjs/operators";
 
 export interface DeviceCodeResponse {
   device_code: string;
@@ -57,8 +48,6 @@ enum RequestTokenError {
 })
 export class AuthService {
   private token: Token;
-
-  constructor() {}
 
   isAuthenticated(): boolean {
     // Check if we have a token and if its still valid

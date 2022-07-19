@@ -39,7 +39,7 @@ export class SettingsService {
 
   private async loadSettingsFromLocalStorage(): Promise<Settings> {
     const localStorageSettings = localStorage.getItem("settings");
-    let parsedSettings: {};
+    let parsedSettings: object;
     const settings = await this.getCurrentSettings();
 
     if (localStorageSettings) {
@@ -56,31 +56,39 @@ export class SettingsService {
   loadSettings(): Subscription {
     let settings: Settings;
 
-    return combineLatest([
-      this.firebaseService.getDeviceData("settings"),
-      this.loadSettingsFromLocalStorage(),
-    ]).subscribe(([firebaseSettings, localSettings]: [Settings, Settings]) => {
-      if (
-        firebaseSettings?.lastUpdate >= localSettings?.lastUpdate ||
-        (!localSettings && firebaseSettings)
-      ) {
-        settings = firebaseSettings;
-        this.saveSettingsToLocalStorage(firebaseSettings);
-      } else if (
-        firebaseSettings?.lastUpdate < localSettings?.lastUpdate ||
-        (localSettings && !firebaseSettings)
-      ) {
-        settings = localSettings;
-        this.putSettingsToFirebase(localSettings);
-      }
+    return combineLatest({
+      firebaseSettings: this.firebaseService.getDeviceData("settings"),
+      localSettings: this.loadSettingsFromLocalStorage(),
+    }).subscribe(
+      ({
+        firebaseSettings,
+        localSettings,
+      }: {
+        firebaseSettings: Settings;
+        localSettings: Settings;
+      }) => {
+        if (
+          firebaseSettings?.lastUpdate >= localSettings?.lastUpdate ||
+          (!localSettings && firebaseSettings)
+        ) {
+          settings = firebaseSettings;
+          this.saveSettingsToLocalStorage(firebaseSettings);
+        } else if (
+          firebaseSettings?.lastUpdate < localSettings?.lastUpdate ||
+          (localSettings && !firebaseSettings)
+        ) {
+          settings = localSettings;
+          this.putSettingsToFirebase(localSettings);
+        }
 
-      this.settings$.next(settings);
-      this.setDeviceBacklightBrightnessService
-        .setDeviceBacklightBrightness(settings.brightness)
-        .subscribe();
-      this.themeService.setTheme(settings.activeTheme);
-      this.weatherService.setCity(settings.city);
-    });
+        this.settings$.next(settings);
+        this.setDeviceBacklightBrightnessService
+          .setDeviceBacklightBrightness(settings.brightness)
+          .subscribe();
+        this.themeService.setTheme(settings.activeTheme);
+        this.weatherService.setCity(settings.city);
+      }
+    );
   }
 
   async setWeatherCity(city: string): Promise<void> {

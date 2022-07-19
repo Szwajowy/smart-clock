@@ -13,7 +13,7 @@
     <button
       class="btn snooze"
       [ngStyle]="
-        newAlarmTime != null ? { disabled: false } : { disabled: true }
+        newAlarmTime !== null ? { disabled: false } : { disabled: true }
       "
       (click)="onSnooze()"
       [disabled]="newAlarmTime"
