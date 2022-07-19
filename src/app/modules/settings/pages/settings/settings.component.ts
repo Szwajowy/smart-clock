@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ApplicationPage } from "@shared/models/application-page.model";
 import { Settings } from "@shared/models/settings.model";
@@ -31,12 +31,12 @@ export class SettingsComponent
   public availableThemes$: Observable<Theme[]> =
     this.themeService.availableThemes$;
   public settings$: Observable<Settings> = this.settingsService.settings$;
-  public settingsForm: FormGroup;
+  public settingsForm: UntypedFormGroup;
 
   private subscriptions: Subscription = new Subscription();
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private settingsService: SettingsService,
     private themeService: ThemeService,
     router: Router
