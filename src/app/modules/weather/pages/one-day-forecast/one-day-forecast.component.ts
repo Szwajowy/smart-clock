@@ -26,12 +26,12 @@ export class OneDayForecastComponent
     map((weather) => {
       if (weather === null) return null;
 
-      let newWeather = JSON.parse(JSON.stringify(weather));
-      let newList = [weather.list[0]];
-      let firstDate = new Date(weather.list[0].dt * 1000);
+      const newWeather = JSON.parse(JSON.stringify(weather));
+      const newList = [weather.list[0]];
+      const firstDate = new Date(weather.list[0].dt * 1000);
 
       for (let i = 1; i < weather.list.length; i++) {
-        let date = new Date(weather.list[i].dt * 1000);
+        const date = new Date(weather.list[i].dt * 1000);
         if (date.getDay() !== firstDate.getDay() && date.getUTCHours() === 12) {
           newList.push(weather.list[i]);
         }

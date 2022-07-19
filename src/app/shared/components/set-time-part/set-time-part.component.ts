@@ -9,9 +9,9 @@ type TimePart = 'hours' | 'minutes' | 'seconds';
 })
 export class SetTimePartComponent implements OnInit {
   @Input() value: number;
-  @Input() upLimit: number = 99;
-  @Input() downLimit: number = 0;
-  @Input() editable: boolean = true;
+  @Input() upLimit = 99;
+  @Input() downLimit = 0;
+  @Input() editable = true;
   @Output() change: EventEmitter<number> = new EventEmitter();
 
   constructor() {}

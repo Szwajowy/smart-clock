@@ -14,7 +14,7 @@ export class ThemeService {
   constructor(private db: Database) {}
 
   async setTheme(name: ThemeName): Promise<void> {
-    let theme: Theme = await this.findTheme(name);
+    const theme: Theme = await this.findTheme(name);
 
     if (!theme) {
       throw new Error("No such theme exist!");

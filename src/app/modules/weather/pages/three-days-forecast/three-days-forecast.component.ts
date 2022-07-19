@@ -25,9 +25,9 @@ export class ThreeDaysForecastComponent
   public weather$ = this.weatherService.getWeather().pipe(
     map((weather) => {
       let newWeather = JSON.parse(JSON.stringify(weather));
-      let newList = [weather.list[0]];
+      const newList = [weather.list[0]];
       for (let i = 1; i < weather.list.length; i++) {
-        let date = new Date(weather.list[i].dt * 1000);
+        const date = new Date(weather.list[i].dt * 1000);
         if (date.getUTCHours() === 12) {
           newList.push(weather.list[i]);
         }

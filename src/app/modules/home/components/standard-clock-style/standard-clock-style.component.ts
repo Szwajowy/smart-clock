@@ -10,7 +10,7 @@ export class StandardStyleClockComponent implements OnInit, OnChanges {
   @Input() timezone;
   @Input() username: string;
 
-  public helloMsg: string = "Witaj";
+  public helloMsg = "Witaj";
 
   constructor() {}
 

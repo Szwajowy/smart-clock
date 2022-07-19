@@ -24,10 +24,10 @@ export class CalendarService {
     return this.firebaseService.getUserData("events").pipe(
       first(),
       switchMap((events: Event[]) => {
-        let todayList = [];
-        let tomorrowList = [];
+        const todayList = [];
+        const tomorrowList = [];
 
-        for (let event in events) {
+        for (const event in events) {
           if (this.isDaysFromToday(events[event].start.dateTime, 0)) {
             todayList.push(events[event]);
           } else if (this.isDaysFromToday(events[event].start.dateTime, 1)) {
@@ -41,9 +41,9 @@ export class CalendarService {
   }
 
   isDaysFromToday(date: string, shift?: number) {
-    let currentDate = new Date();
+    const currentDate = new Date();
     if (shift) currentDate.setDate(currentDate.getDate() + shift);
-    let passedDate = new Date(date);
+    const passedDate = new Date(date);
 
     if (
       currentDate.getDate() === passedDate.getDate() &&

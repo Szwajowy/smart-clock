@@ -13,7 +13,7 @@ export class AlarmEditComponent implements OnInit {
   readonly dayOrder = WEEKDAYS_SHORT;
 
   editedAlarm: Alarm;
-  isEditMode: boolean = false;
+  isEditMode = false;
 
   constructor(private alarmsService: AlarmsService) {}
 
@@ -32,7 +32,7 @@ export class AlarmEditComponent implements OnInit {
 
   onRemoveAlarm() {
     this.alarmsService.editedAlarmId$.pipe(first()).subscribe((id: number) => {
-      let alarmToRemoveId = id;
+      const alarmToRemoveId = id;
       this.alarmsService.removeAlarm(alarmToRemoveId);
     });
   }

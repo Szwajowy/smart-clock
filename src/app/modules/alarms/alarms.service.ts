@@ -9,7 +9,7 @@ import { first, tap } from "rxjs/operators";
 @Injectable()
 export class AlarmsService {
   editedAlarm: Alarm;
-  isEditMode: boolean = false;
+  isEditMode = false;
 
   alarms$: BehaviorSubject<Alarm[]>;
   editedAlarmId$: BehaviorSubject<number>;
@@ -22,7 +22,7 @@ export class AlarmsService {
 
   createAlarm(): void {
     this.alarms$.pipe(first()).subscribe((alarms: Alarm[]) => {
-      let lenghtOfAlarmsArray = alarms.length;
+      const lenghtOfAlarmsArray = alarms.length;
 
       this.isEditMode = false;
       this.editedAlarm = new Alarm();

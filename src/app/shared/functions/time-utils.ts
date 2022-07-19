@@ -1,7 +1,7 @@
 import { cloneObject } from "./utils";
 
 export function increaseTime(timeParam, part, options?) {
-  let time = cloneObject(timeParam);
+  const time = cloneObject(timeParam);
   if (
     part !== "hours" &&
     part !== "minutes" &&
@@ -80,7 +80,7 @@ export function increaseTime(timeParam, part, options?) {
 
 // DECREASE TIME ON TIMER OR STOPWATCH
 export function decreaseTime(timeParam, part, options?) {
-  let time = cloneObject(timeParam);
+  const time = cloneObject(timeParam);
 
   if (
     part !== "hours" &&

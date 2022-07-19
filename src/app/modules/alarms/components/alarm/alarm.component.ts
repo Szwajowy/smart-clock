@@ -8,8 +8,8 @@ import { AlarmsService } from "../../alarms.service";
   styleUrls: ["./alarm.component.scss"],
 })
 export class AlarmComponent implements OnInit {
-  @Input("alarm") alarm: Alarm;
-  @Input("id") id: number;
+  @Input() alarm: Alarm;
+  @Input() id: number;
 
   constructor(private alarmsService: AlarmsService) {}
 

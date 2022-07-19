@@ -38,14 +38,14 @@ export class SettingsService {
   ) {}
 
   private async loadSettingsFromLocalStorage(): Promise<Settings> {
-    let localStorageSettings = localStorage.getItem("settings");
+    const localStorageSettings = localStorage.getItem("settings");
     let parsedSettings: {};
-    let settings = await this.getCurrentSettings();
+    const settings = await this.getCurrentSettings();
 
     if (localStorageSettings) {
       parsedSettings = JSON.parse(localStorageSettings);
 
-      for (let setting of Object.keys(parsedSettings)) {
+      for (const setting of Object.keys(parsedSettings)) {
         settings[setting] = parsedSettings[setting];
       }
     }
@@ -84,7 +84,7 @@ export class SettingsService {
   }
 
   async setWeatherCity(city: string): Promise<void> {
-    let settings = await this.getCurrentSettings();
+    const settings = await this.getCurrentSettings();
 
     settings.city = city;
     this.weatherService.setCity(city);
@@ -93,21 +93,21 @@ export class SettingsService {
   }
 
   async setTheme(name: ThemeName): Promise<void> {
-    let settings = await this.getCurrentSettings();
+    const settings = await this.getCurrentSettings();
     settings.activeTheme = name;
     this.themeService.setTheme(name);
     this.updateSettings(settings);
   }
 
   async setClockStyle(id: number): Promise<void> {
-    let settings = await this.getCurrentSettings();
+    const settings = await this.getCurrentSettings();
     settings.clockStyle = id;
 
     this.updateSettings(settings);
   }
 
   async setBrightness(value: number): Promise<void> {
-    let settings = await this.getCurrentSettings();
+    const settings = await this.getCurrentSettings();
 
     this.setDeviceBacklightBrightnessService
       .setDeviceBacklightBrightness(value)

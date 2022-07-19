@@ -11,7 +11,7 @@ import { Alarm } from "@shared/models/alarm.model";
 import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
 import { Settings } from "@shared/models/settings.model";
 
-const HOURS_TO_CHECK_FOR_ALARM: number = 8;
+const HOURS_TO_CHECK_FOR_ALARM = 8;
 @Injectable()
 export class ClockService {
   readonly currentDate$: BehaviorSubject<Date> = new BehaviorSubject(
@@ -48,7 +48,7 @@ export class ClockService {
   }
 
   private checkForCloseAlarms(): void {
-    let closeAlarms: Alarm[] = [];
+    const closeAlarms: Alarm[] = [];
 
     this.alarmsService.alarms$.subscribe((alarms: Alarm[]) => {
       if (!alarms || alarms.length === 0) return false;
@@ -75,8 +75,8 @@ export class ClockService {
     alarm: Alarm,
     hoursToCheck: number
   ): Promise<boolean> {
-    let currentDate: Date = await this.currentDate$.toPromise();
-    let settings: Settings = await this.settingsService.settings$.toPromise();
+    const currentDate: Date = await this.currentDate$.toPromise();
+    const settings: Settings = await this.settingsService.settings$.toPromise();
 
     const startTime = {
       hour:

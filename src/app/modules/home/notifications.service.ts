@@ -21,7 +21,7 @@ export class NotificationsService implements OnInit, OnDestroy {
     this.inputNotificationsSubject // NEEDS BUFFERING FOR AT LEAST 1s
       .pipe(bufferTime(1000))
       .subscribe((notificationsList) => {
-        let finalNotificationsList = [];
+        const finalNotificationsList = [];
         let indexOfExistingNot;
 
         notificationsList.forEach((notification) => {

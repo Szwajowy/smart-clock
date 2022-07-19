@@ -20,7 +20,7 @@ import { isBeforeTime } from "@shared/functions/time-utils";
 
 @Injectable()
 export class WeatherService {
-  private cityName: string = "Katowice";
+  private cityName = "Katowice";
 
   private refresh$ = new BehaviorSubject(null);
   private refreshInterval$ = interval(1000 * 60 * 5);
@@ -30,7 +30,7 @@ export class WeatherService {
   private weather$ = merge(this.refresh$, this.refreshInterval$).pipe(
     switchMap(() => {
       this.getLocalWeather();
-      let localWeather = this.localWeather
+      const localWeather = this.localWeather
         ? new Weather(this.localWeather)
         : null;
       if (
@@ -47,7 +47,7 @@ export class WeatherService {
       } else {
         return this.getFirebaseWeather().pipe(
           switchMap((weather: Weather) => {
-            let firebaseWeather = weather ? new Weather(weather) : null;
+            const firebaseWeather = weather ? new Weather(weather) : null;
             if (
               firebaseWeather &&
               !isBeforeTime(
@@ -108,7 +108,7 @@ export class WeatherService {
   ) {}
 
   private getLocalWeather(): void {
-    let localWeatherString = localStorage.getItem("weather");
+    const localWeatherString = localStorage.getItem("weather");
     if (localWeatherString) this.localWeather = JSON.parse(localWeatherString);
   }
 

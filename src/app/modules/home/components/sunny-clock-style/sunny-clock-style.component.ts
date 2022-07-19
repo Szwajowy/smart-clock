@@ -32,20 +32,20 @@ export class SunnyStyleClockComponent implements OnInit, OnDestroy {
   }
 
   private animate() {
-    let startPosition = -54;
+    const startPosition = -54;
 
     if (this.weather) {
-      let sunrise = new Date(this.weather.city.sunrise * 1000);
-      let sunriseInMinutes = sunrise.getHours() * 60 + sunrise.getMinutes();
-      let sunset = new Date(this.weather.city.sunset * 1000);
+      const sunrise = new Date(this.weather.city.sunrise * 1000);
+      const sunriseInMinutes = sunrise.getHours() * 60 + sunrise.getMinutes();
+      const sunset = new Date(this.weather.city.sunset * 1000);
 
-      let diff = new Date(
+      const diff = new Date(
         sunset.getTime() - sunrise.getTime() - 1000 * 60 * 60
       );
-      let diffInMinutes = diff.getHours() * 60 + diff.getMinutes();
-      let degPerMinute = 108 / diffInMinutes;
+      const diffInMinutes = diff.getHours() * 60 + diff.getMinutes();
+      const degPerMinute = 108 / diffInMinutes;
 
-      let moveTime =
+      const moveTime =
         (this.time.getHours() + (this.timezone ? this.timezone : 0)) * 60 +
         this.time.getMinutes() -
         sunriseInMinutes;

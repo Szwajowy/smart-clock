@@ -15,8 +15,8 @@ export class FirebaseService {
       switchMap((users: any) => {
         let found = false;
         let foundUser = null;
-        for (let user in users) {
-          for (let device in users[user].devices) {
+        for (const user in users) {
+          for (const device in users[user].devices) {
             if (
               users[user].devices[device].id.toString() ===
               this.serial?.toString()

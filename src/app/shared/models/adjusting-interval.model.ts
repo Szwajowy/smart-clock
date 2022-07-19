@@ -26,7 +26,7 @@ export class AdjustingInterval {
   }
 
   step() {
-    var drift = Date.now() - this.expected;
+    const drift = Date.now() - this.expected;
     if (drift > this.interval) {
         // You could have some default stuff here too...
         if(this.errorFunc) 

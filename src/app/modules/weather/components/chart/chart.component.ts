@@ -101,8 +101,8 @@ export class ChartComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subs.add(
       this.todayWeatherFull$.subscribe((weather) => {
-        let xValues = [];
-        let yValues = [];
+        const xValues = [];
+        const yValues = [];
         if (this.route.snapshot.data["weather"] == "today") {
           for (let i = 0; i < 9; i++) {
             xValues.push(weather.list[i].dt_txt.slice(11, 16));
@@ -270,11 +270,11 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   isColorDark(hex) {
     hex = this.isHexColorValid(hex);
-    var r: any = parseInt(hex.slice(0, 2), 16),
+    const r: any = parseInt(hex.slice(0, 2), 16),
       g: any = parseInt(hex.slice(2, 4), 16),
       b: any = parseInt(hex.slice(4, 6), 16);
 
-    var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
     return luma > 128 ? "bright" : "dark";
   }
@@ -282,7 +282,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   private adjustBrightnessOfColor(hex, value) {
     hex = this.isHexColorValid(hex);
     // invert color components
-    var r: any = parseInt(hex.slice(0, 2), 16),
+    let r: any = parseInt(hex.slice(0, 2), 16),
       g: any = parseInt(hex.slice(2, 4), 16),
       b: any = parseInt(hex.slice(4, 6), 16);
 
@@ -317,7 +317,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     }
 
     // convert color components
-    var r = parseInt(hex.slice(0, 2), 16).toString(),
+    const r = parseInt(hex.slice(0, 2), 16).toString(),
       g = parseInt(hex.slice(2, 4), 16).toString(),
       b = parseInt(hex.slice(4, 6), 16).toString();
 
@@ -326,7 +326,7 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   private padZero(str, len?) {
     len = len || 2;
-    var zeros = new Array(len).join("0");
+    const zeros = new Array(len).join("0");
     return (zeros + str).slice(-len);
   }
 }
