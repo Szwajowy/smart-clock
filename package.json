@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "nx",
     "start:smartclock": "nx serve smart-clock",
-    "build": "nx build",
-    "build:prod": "nx build --configuration=production",
-    "test": "nx test",
+    "build:smartclock": "nx build smart-clock",
+    "build:smartclock:prod": "nx build smart-clock --configuration=production",
     "test:smartclock:ci": "nx test smart-clock --watch=false --browsers=ChromeHeadlessCustom",
-    "lint": "nx lint",
+    "lint:smartclock": "nx lint smart-clock",
     "e2e": "nx e2e",
     "postinstall": "node ./decorate-angular-cli.js"
   },

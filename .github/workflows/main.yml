@@ -41,12 +41,12 @@ jobs:
 
       - name: Lint
         run: |
-          npm run lint
+          npm run lint:smartclock
 
       - name: Test
         run: |
-          npm run test:ci
+          npm run test:smartclock:ci
 
       - name: Build
         run: |
-          npm run build
+          npm run build:smartclock
