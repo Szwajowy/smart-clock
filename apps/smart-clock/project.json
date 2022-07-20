@@ -1,0 +1,131 @@
+{
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss",
+      "skipTests": true
+    },
+    "@schematics/angular:class": {
+      "skipTests": true
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
+    }
+  },
+  "sourceRoot": "apps/smart-clock/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/smart-clock",
+        "index": "apps/smart-clock/src/index.html",
+        "main": "apps/smart-clock/src/main.ts",
+        "polyfills": "apps/smart-clock/src/polyfills.ts",
+        "tsConfig": "apps/smart-clock/tsconfig.app.json",
+        "assets": [
+          "apps/smart-clock/src/favicon.ico",
+          "apps/smart-clock/src/assets"
+        ],
+        "styles": [
+          "apps/smart-clock/src/styles.scss"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "src/styles"
+          ]
+        },
+        "scripts": [],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/smart-clock/src/environments/environment.ts",
+              "with": "apps/smart-clock/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": ""
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "smart-clock:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "smart-clock:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "smart-clock:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/smart-clock/src/test.ts",
+        "polyfills": "apps/smart-clock/src/polyfills.ts",
+        "tsConfig": "apps/smart-clock/tsconfig.spec.json",
+        "karmaConfig": "apps/smart-clock/karma.conf.js",
+        "assets": [
+          "apps/smart-clock/src/favicon.ico",
+          "apps/smart-clock/src/assets"
+        ],
+        "styles": [
+          "apps/smart-clock/src/styles.scss"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "src/styles"
+          ]
+        },
+        "scripts": []
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/smart-clock/**/*.ts",
+          "apps/smart-clock/**/*.html"
+        ]
+      }
+    }
+  }
+}

@@ -1,13 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "src",
-    "paths": {
-      "@env": ["enviroments/enviroment"],
-      "@shared/*": ["app/shared/*"],
-      "@assets/*": ["../assets/*"],
-      "@styles/*": ["../styles/*"]
-    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -18,10 +11,12 @@
     "importHelpers": true,
     "target": "es2020",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "rootDir": "."
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "exclude": ["node_modules", "tmp"]
 }

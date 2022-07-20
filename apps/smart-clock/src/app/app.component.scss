@@ -1,0 +1,14 @@
+@import '../styles/variables.scss';
+
+.main-container {
+  width: $app-width;
+  height: $app-height;
+  padding: 0;
+  margin: 0;
+
+  overflow: hidden;
+
+  background: var(--accent);
+
+  transition: background linear 500ms;
+}
