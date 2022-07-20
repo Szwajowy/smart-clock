@@ -8,7 +8,7 @@ import { AlarmsService } from "../../alarms.service";
   styleUrls: ["./alarm.component.scss"],
 })
 export class AlarmComponent {
-  @Input() alarm: Alarm;
+  @Input() alarm: Alarm = new Alarm();
   @Input() id: number;
 
   constructor(private alarmsService: AlarmsService) {}

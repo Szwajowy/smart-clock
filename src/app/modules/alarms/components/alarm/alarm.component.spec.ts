@@ -1,16 +1,19 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { MockProvider } from "ng-mocks";
 
-import { AlarmComponent } from './alarm.component';
+import { Alarm } from "@shared/models/alarm.model";
+import { AlarmsService } from "../../alarms.service";
+import { AlarmComponent } from "./alarm.component";
 
-describe('AlarmComponent', () => {
+describe("AlarmComponent", () => {
   let component: AlarmComponent;
   let fixture: ComponentFixture<AlarmComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmComponent ]
-    })
-    .compileComponents();
+      declarations: [AlarmComponent],
+      providers: [MockProvider(AlarmsService, { editedAlarm: new Alarm() })],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('AlarmComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
