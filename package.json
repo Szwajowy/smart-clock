@@ -7,7 +7,7 @@
     "build": "nx build",
     "build:prod": "nx build --configuration=production",
     "test": "nx test",
-    "test:ci": "nx test --watch=false --browsers=ChromeHeadlessCustom",
+    "test:smartclock:ci": "nx test smart-clock --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "nx lint",
     "e2e": "nx e2e",
     "postinstall": "node ./decorate-angular-cli.js"
