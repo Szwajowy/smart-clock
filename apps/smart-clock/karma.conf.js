@@ -10,5 +10,8 @@ module.exports = (config) => {
       ...baseConfig.coverageIstanbulReporter,
       dir: path.join(__dirname, './coverage/smart-clock'),
     },
+    autoWatch: true,
+    singleRun: false,
+    restartOnFileChange: true,
   });
 };

@@ -28,8 +28,8 @@ module.exports = () => ({
   port: 9876,
   colors: true,
   logLevel: constants.LOG_INFO,
-  autoWatch: true,
+  autoWatch: false,
   browsers: ['Chrome'],
-  singleRun: false,
-  restartOnFileChange: true,
+  singleRun: true,
+  restartOnFileChange: false,
 });
