@@ -1,13 +1,15 @@
 {
+  "name": "smart-clock-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/smart-clock-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@angular-devkit/build-angular:protractor",
+      "executor": "@nrwl/cypress:cypress",
       "options": {
-        "protractorConfig": "apps/smart-clock-e2e/protractor.conf.js",
-        "devServerTarget": "smart-clock:serve"
+        "cypressConfig": "apps/smart-clock-e2e/cypress.config.ts",
+        "devServerTarget": "smart-clock:serve",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {
@@ -17,18 +19,12 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/smart-clock-e2e/**/*.{js,ts}"
-        ]
+        "lintFilePatterns": ["apps/smart-clock-e2e/**/*.{js,ts}"]
       }
     }
   },
-  "implicitDependencies": [
-    "smart-clock"
-  ],
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["smart-clock"]
 }
