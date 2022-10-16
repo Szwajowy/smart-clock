@@ -28,7 +28,7 @@
         "index": "apps/smart-clock/src/index.html",
         "main": "apps/smart-clock/src/main.ts",
         "polyfills": "apps/smart-clock/src/polyfills.ts",
-        "tsConfig": "apps/smart-clock/tsconfig.app.json",
+        "tsConfig": "apps/smart-clock/tsconfig.json",
         "assets": [
           "apps/smart-clock/src/favicon.ico",
           "apps/smart-clock/src/assets"
@@ -92,24 +92,6 @@
         "browserTarget": "smart-clock:build"
       }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "apps/smart-clock/src/test.ts",
-        "polyfills": "apps/smart-clock/src/polyfills.ts",
-        "tsConfig": "apps/smart-clock/tsconfig.spec.json",
-        "karmaConfig": "apps/smart-clock/karma.conf.js",
-        "assets": [
-          "apps/smart-clock/src/favicon.ico",
-          "apps/smart-clock/src/assets"
-        ],
-        "styles": ["apps/smart-clock/src/styles.scss"],
-        "stylePreprocessorOptions": {
-          "includePaths": ["src/styles"]
-        },
-        "scripts": []
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
@@ -117,6 +99,14 @@
           "apps/smart-clock/**/*.ts",
           "apps/smart-clock/**/*.html"
         ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/smart-clock/jest.config.ts",
+        "passWithNoTests": true
       }
     }
   }
