@@ -1,25 +1,24 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { first } from "rxjs/operators";
-import { Subscription } from "rxjs";
-import * as moment from "moment";
+import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
-import { slideInAnimation } from "./animations";
+import { slideInAnimation } from './animations';
 
-import { DeviceInfoResponse } from "@shared/models/responses/device-info.response";
-import { FirebaseService } from "./core/services/firebase.service";
-import { AlarmsService } from "./modules/alarms/alarms.service";
-import { NotificationsService } from "./modules/home/notifications.service";
-import { SettingsService } from "./modules/settings/settings.service";
-import { WeatherService } from "./modules/weather/weather.service";
-import { GetDeviceInformationsService } from "./core/http/device/get-device-informations.service";
+import { DeviceInfoResponse } from '@shared/models/responses/device-info.response';
+import { FirebaseService } from './core/services/firebase.service';
+import { AlarmsService } from './modules/alarms/alarms.service';
+import { NotificationsService } from './modules/home/notifications.service';
+import { SettingsService } from './modules/settings/settings.service';
+import { WeatherService } from './modules/weather/weather.service';
+import { GetDeviceInformationsService } from './core/http/device/get-device-informations.service';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   animations: [slideInAnimation],
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -34,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    moment.locale("pl");
     this.getDeviceInformationsService
       .getDeviceInfo()
       .pipe(first())
@@ -59,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return (
       outlet &&
       outlet.activatedRouteData &&
-      outlet.activatedRouteData["animation"]
+      outlet.activatedRouteData['animation']
     );
   }
 }

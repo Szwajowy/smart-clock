@@ -1,21 +1,20 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router } from "@angular/router";
-import * as moment from "moment";
-import { Howl } from "howler";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Howl } from 'howler';
 
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { FirebaseService } from "app/core/services/firebase.service";
-import { ClockService } from "app/modules/home/clock.service";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FirebaseService } from 'app/core/services/firebase.service';
+import { ClockService } from 'app/modules/home/clock.service';
 
 @Component({
-  selector: "app-alarm-firing",
-  templateUrl: "./alarm-firing.component.html",
-  styleUrls: ["./alarm-firing.component.scss"],
+  selector: 'app-alarm-firing',
+  templateUrl: './alarm-firing.component.html',
+  styleUrls: ['./alarm-firing.component.scss'],
 })
 export class AlarmFiringComponent implements OnInit, OnDestroy {
   private alarmSound = new Howl({
-    src: "../../../../assets/audio/alarm-sound.mp3",
+    src: '../../../../assets/audio/alarm-sound.mp3',
     preload: true,
     loop: true,
     volume: 0,
@@ -26,7 +25,7 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
   private increaseVolumeOverTime = true;
   private timeForIncreasingVolume = 30;
 
-  public timezone$ = this.firebaseService.getDeviceData("settings").pipe(
+  public timezone$ = this.firebaseService.getDeviceData('settings').pipe(
     map((res: any) => {
       return res ? res.timezone : null;
     })
@@ -82,12 +81,15 @@ export class AlarmFiringComponent implements OnInit, OnDestroy {
     if (this.newAlarmTime == null) {
       this.alarmSound.stop();
 
-      this.newAlarmTime = moment().add(0, "h").add(this.snoozeLength, "m");
+      this.newAlarmTime = new Date();
+      this.newAlarmTime.setMinutes(
+        this.newAlarmTime.getMinutes() + this.snoozeLength
+      );
     }
   }
 
   onTurnOff() {
     this.alarmSound.stop();
-    this.router.navigate([""]);
+    this.router.navigate(['']);
   }
 }

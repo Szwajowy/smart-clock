@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 import {
   interval,
@@ -7,35 +7,50 @@ import {
   Observable,
   Subject,
   merge,
-} from "rxjs";
-import { switchMap, map, shareReplay, catchError } from "rxjs/operators";
+} from 'rxjs';
+import { switchMap, map, shareReplay, catchError } from 'rxjs/operators';
 
-import { Weather } from "@shared/models/weather.model";
-import { delayedRetry } from "@shared/functions/delayedRetry";
-import { FirebaseService } from "app/core/services/firebase.service";
-import { NotificationsService } from "../home/notifications.service";
-import { GetWeatherService } from "app/core/http/weather/get-weather.service";
-import { WeatherResponse } from "@shared/models/responses/weather.response";
-import { isBeforeTime } from "@shared/functions/time-utils";
+import { Weather } from '@shared/models/weather.model';
+import { delayedRetry } from '@shared/functions/delayedRetry';
+import { FirebaseService } from 'app/core/services/firebase.service';
+import { NotificationsService } from '../home/notifications.service';
+import { GetWeatherService } from 'app/core/http/weather/get-weather.service';
+import { WeatherResponse } from '@shared/models/responses/weather.response';
+import { Time } from '@shared/models/time.model';
+import { isTimeBefore } from '@shared/functions/time-utils';
 
 @Injectable()
 export class WeatherService {
-  private cityName = "Katowice";
+  private cityName = 'Katowice';
 
   private refresh$ = new BehaviorSubject(null);
   private refreshInterval$ = interval(1000 * 60 * 5);
 
   private updateTime = 1000 * 60 * 60 * 3;
-  Hello;
   private weather$ = merge(this.refresh$, this.refreshInterval$).pipe(
     switchMap(() => {
       this.getLocalWeather();
       const localWeather = this.localWeather
         ? new Weather(this.localWeather)
         : null;
+
+      const localWeatherUpdateDateTime = new Date(localWeather.updatedAt);
+      const localWeatherUpdateTime = new Time(
+        localWeatherUpdateDateTime.getHours(),
+        localWeatherUpdateDateTime.getMinutes()
+      );
+      const plannedRefreshDateTime = new Date(localWeatherUpdateDateTime);
+      plannedRefreshDateTime.setHours(
+        plannedRefreshDateTime.getHours() + this.updateTime
+      );
+      const plannedRefreshTime = new Time(
+        plannedRefreshDateTime.getHours(),
+        plannedRefreshDateTime.getMinutes()
+      );
+
       if (
         localWeather &&
-        !isBeforeTime(new Date(localWeather.updatedAt), this.updateTime) &&
+        !isTimeBefore(localWeatherUpdateTime, plannedRefreshTime) &&
         localWeather.city.name.toLowerCase() === this.cityName.toLowerCase()
       ) {
         this.sendNotification({
@@ -48,12 +63,26 @@ export class WeatherService {
         return this.getFirebaseWeather().pipe(
           switchMap((weather: Weather) => {
             const firebaseWeather = weather ? new Weather(weather) : null;
+            const firebaseWeatherUpdateDateTime = new Date(
+              firebaseWeather.updatedAt
+            );
+            const firebaseWeatherUpdateTime = new Time(
+              firebaseWeatherUpdateDateTime.getHours(),
+              firebaseWeatherUpdateDateTime.getMinutes()
+            );
+            const plannedRefreshDateTime = new Date(
+              firebaseWeatherUpdateDateTime
+            );
+            plannedRefreshDateTime.setHours(
+              plannedRefreshDateTime.getHours() + this.updateTime
+            );
+            const plannedRefreshTime = new Time(
+              plannedRefreshDateTime.getHours(),
+              plannedRefreshDateTime.getMinutes()
+            );
             if (
               firebaseWeather &&
-              !isBeforeTime(
-                new Date(firebaseWeather.updatedAt),
-                this.updateTime
-              ) &&
+              !isTimeBefore(firebaseWeatherUpdateTime, plannedRefreshTime) &&
               firebaseWeather.city.name.toLowerCase() ===
                 this.cityName.toLowerCase()
             ) {
@@ -108,21 +137,21 @@ export class WeatherService {
   ) {}
 
   private getLocalWeather(): void {
-    const localWeatherString = localStorage.getItem("weather");
+    const localWeatherString = localStorage.getItem('weather');
     if (localWeatherString) this.localWeather = JSON.parse(localWeatherString);
   }
 
   private updateLocalWeather(weather): void {
     this.localWeather = weather;
-    localStorage.setItem("weather", JSON.stringify(this.localWeather));
+    localStorage.setItem('weather', JSON.stringify(this.localWeather));
   }
 
   private getFirebaseWeather(): Observable<undefined> {
-    return this.firebaseService.getDeviceData("weather") as Observable<any>;
+    return this.firebaseService.getDeviceData('weather') as Observable<any>;
   }
 
   private updateFirebaseWeather(weather: WeatherResponse) {
-    return this.firebaseService.setDeviceData("weather", weather);
+    return this.firebaseService.setDeviceData('weather', weather);
   }
 
   private sendNotification(notification: {
@@ -131,8 +160,8 @@ export class WeatherService {
     icon: string;
   }) {
     this.notificationsService.getInputNotificationsSubject().next({
-      type: "weather",
-      operation: "post",
+      type: 'weather',
+      operation: 'post',
       content: `${
         notification.weather[0].toUpperCase() + notification.weather.slice(1)
       } ${Math.round(notification.temp)}°C`,

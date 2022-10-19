@@ -1,22 +1,21 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { map } from "rxjs/operators";
-import * as moment from "moment";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
-import { WeatherService } from "../../weather.service";
-import { ApplicationPage } from "@shared/models/application-page.model";
+import { WeatherService } from '../../weather.service';
+import { ApplicationPage } from '@shared/models/application-page.model';
 
 @Component({
-  selector: "app-three-days-forecast",
-  templateUrl: "./three-days-forecast.component.html",
-  styleUrls: ["./three-days-forecast.component.scss"],
+  selector: 'app-three-days-forecast',
+  templateUrl: './three-days-forecast.component.html',
+  styleUrls: ['./three-days-forecast.component.scss'],
 })
 export class ThreeDaysForecastComponent extends ApplicationPage {
   public navigation = {
-    top: "/weather/tomorrow",
-    right: "/calendar",
-    bottom: "/weather/today",
-    left: "/",
+    top: '/weather/tomorrow',
+    right: '/calendar',
+    bottom: '/weather/today',
+    left: '/',
   };
 
   public weather$ = this.weatherService.getWeather().pipe(
@@ -34,7 +33,7 @@ export class ThreeDaysForecastComponent extends ApplicationPage {
 
       newWeather = newWeather.list.slice(2, 5);
       for (let i = 0; i < newWeather.length; i++) {
-        newWeather[i].weekday = moment.unix(newWeather[i].dt).weekday();
+        newWeather[i].weekday = new Date(newWeather[i].dt).getDay(); // moment.unix(newWeather[i].dt).weekday();
       }
 
       return newWeather;
@@ -48,19 +47,19 @@ export class ThreeDaysForecastComponent extends ApplicationPage {
   getWeekday(dayNumber) {
     switch (dayNumber) {
       case 0:
-        return "Pon";
+        return 'Pon';
       case 1:
-        return "Wt";
+        return 'Wt';
       case 2:
-        return "Śr";
+        return 'Śr';
       case 3:
-        return "Czw";
+        return 'Czw';
       case 4:
-        return "Pt";
+        return 'Pt';
       case 5:
-        return "Sob";
+        return 'Sob';
       case 6:
-        return "Nd";
+        return 'Nd';
     }
   }
 

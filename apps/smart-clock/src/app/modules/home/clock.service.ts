@@ -1,15 +1,16 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
-import { first } from "rxjs/operators";
-import * as moment from "moment";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
-import { AlarmsService } from "../alarms/alarms.service";
-import { SettingsService } from "../settings/settings.service";
-import { NotificationsService } from "./notifications.service";
-import { Alarm } from "@shared/models/alarm.model";
-import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
-import { Settings } from "@shared/models/settings.model";
+import { AlarmsService } from '../alarms/alarms.service';
+import { SettingsService } from '../settings/settings.service';
+import { NotificationsService } from './notifications.service';
+import { Alarm } from '@shared/models/alarm.model';
+import { AdjustingInterval } from '../../shared/models/adjusting-interval.model';
+import { Settings } from '@shared/models/settings.model';
+import { isBefore, isTimeBefore } from '@shared/functions/time-utils';
+import { Time } from '@shared/models/time.model';
 
 const HOURS_TO_CHECK_FOR_ALARM = 8;
 @Injectable()
@@ -34,7 +35,7 @@ export class ClockService {
   }
 
   private pad(number: number): string {
-    if (number < 10) return "0" + number;
+    if (number < 10) return '0' + number;
 
     return number.toString();
   }
@@ -59,7 +60,7 @@ export class ClockService {
           if (
             this.alarmIsFiringInNextHours(alarm, HOURS_TO_CHECK_FOR_ALARM) &&
             (!alarm.lastFiring ||
-              moment(alarm.lastFiring).isBefore(currentDate, "minute"))
+              isBefore(alarm.lastFiring, currentDate, 'minute'))
           )
             closeAlarms.push(alarm);
         });
@@ -143,13 +144,13 @@ export class ClockService {
           alarm.time.minutes === currentDate.getUTCMinutes() &&
           this.alarmsService.isAlarmToday(alarm, currentDate.getDay()) &&
           (!alarm.lastFiring ||
-            moment(alarm.lastFiring).isBefore(currentDate, "minute")) &&
-          this.router.url !== "/firingAlarm"
+            isBefore(alarm.lastFiring, currentDate, 'minute')) &&
+          this.router.url !== '/firingAlarm'
         ) {
           // Set last firing date to today and redirect to alarm screen
           alarm.lastFiring = currentDate;
           if (!alarm.repeat.includes(true)) alarm.active = false;
-          this.router.navigate(["/alarmFiring"]);
+          this.router.navigate(['/alarmFiring']);
         }
       });
     });
@@ -157,34 +158,31 @@ export class ClockService {
 
   private sendNotificationAboutClosestAlarm(closeAlarms: Alarm[]): void {
     if (closeAlarms.length > 0) {
-      let closestAlarm = moment({
-        hour: closeAlarms[0].time.hours,
-        minute: closeAlarms[0].time.minutes,
-      });
+      let closestAlarmTime = new Time(
+        closeAlarms[0].time.hours,
+        closeAlarms[0].time.minutes
+      );
       closeAlarms.forEach((alarm: Alarm) => {
-        const alarmTime = moment({
-          hour: alarm.time.hours,
-          minute: alarm.time.minutes,
-        });
-        closestAlarm = alarmTime.isBefore(closestAlarm)
-          ? alarmTime
-          : closestAlarm;
+        const alarmTime = new Time(alarm.time.hours, alarm.time.minutes);
+        closestAlarmTime = isTimeBefore(closestAlarmTime, alarmTime)
+          ? Time.createCopy(alarmTime)
+          : Time.createCopy(closestAlarmTime);
       });
 
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "alarm",
-        operation: "post",
+        type: 'alarm',
+        operation: 'post',
         content:
-          "Budzik zadzwoni o " +
-          this.pad(closestAlarm.get("hour")) +
-          ":" +
-          this.pad(closestAlarm.get("minute")),
-        icon: "clock",
+          'Budzik zadzwoni o ' +
+          this.pad(closestAlarmTime.hours) +
+          ':' +
+          this.pad(closestAlarmTime.minutes),
+        icon: 'clock',
       });
     } else {
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "alarm",
-        operation: "remove",
+        type: 'alarm',
+        operation: 'remove',
         content: null,
         icon: null,
       });
