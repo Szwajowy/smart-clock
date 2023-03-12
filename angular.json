@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "smart-clock": "apps/smart-clock",
-    "smart-clock-e2e": "apps/smart-clock-e2e"
-  }
-}
