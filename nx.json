@@ -1,7 +1,4 @@
 {
-  "affected": {
-    "defaultBase": "main"
-  },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
@@ -54,5 +51,7 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "NWQwMzA3NjgtMmE0Ny00NTExLWE3NmQtNDJlMGE2OTk1Yzg3fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NWQwMzA3NjgtMmE0Ny00NTExLWE3NmQtNDJlMGE2OTk1Yzg3fHJlYWQtd3JpdGU=",
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }

@@ -1,16 +1,16 @@
 {
   "version": "6.0",
-  "nxVersion": "18.3.0",
+  "nxVersion": "19.8.0",
   "deps": {
-    "@angular/animations": "17.3.12",
-    "@angular/common": "17.3.12",
-    "@angular/compiler": "17.3.12",
-    "@angular/core": "17.3.12",
+    "@angular/animations": "18.2.8",
+    "@angular/common": "18.2.8",
+    "@angular/compiler": "18.2.8",
+    "@angular/core": "18.2.8",
     "@angular/fire": "^7.5.0",
-    "@angular/forms": "17.3.12",
-    "@angular/platform-browser": "17.3.12",
-    "@angular/platform-browser-dynamic": "17.3.12",
-    "@angular/router": "17.3.12",
+    "@angular/forms": "18.2.8",
+    "@angular/platform-browser": "18.2.8",
+    "@angular/platform-browser-dynamic": "18.2.8",
+    "@angular/router": "18.2.8",
     "bootstrap-icons": "^1.8.1",
     "echarts": "^5.3.3",
     "firebase": "^9.6.6",
@@ -20,35 +20,35 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.8",
-    "@nx/angular": "18.3.0",
-    "@angular-devkit/build-angular": "17.3.9",
-    "@angular-eslint/eslint-plugin": "17.3.0",
-    "@angular-eslint/eslint-plugin-template": "17.3.0",
-    "@angular-eslint/template-parser": "17.3.0",
-    "@angular/cli": "~17.1.0",
-    "@angular/compiler-cli": "17.3.12",
-    "@angular/language-service": "17.3.12",
-    "@types/jest": "29.4.0",
+    "@nx/angular": "19.8.0",
+    "@angular-devkit/build-angular": "18.2.8",
+    "@angular-eslint/eslint-plugin": "18.0.1",
+    "@angular-eslint/eslint-plugin-template": "18.0.1",
+    "@angular-eslint/template-parser": "18.0.1",
+    "@angular/cli": "~17.3.0",
+    "@angular/compiler-cli": "18.2.8",
+    "@angular/language-service": "18.2.8",
+    "@types/jest": "29.5.13",
     "@types/node": "18.16.9",
-    "@typescript-eslint/eslint-plugin": "7.3.0",
-    "@typescript-eslint/parser": "7.3.0",
+    "@typescript-eslint/eslint-plugin": "7.16.0",
+    "@typescript-eslint/parser": "7.16.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-cypress": "2.13.4",
-    "jest": "29.4.3",
-    "jest-environment-jsdom": "29.4.3",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "29.7.0",
     "ng-mocks": "14.7.1",
-    "nx": "18.3.0",
+    "nx": "19.8.0",
     "prettier": "^2.6.2",
     "puppeteer": "^15.4.0",
     "ts-jest": "29.1.5",
     "ts-node": "10.9.1",
-    "typescript": "5.4.5",
-    "@nx/workspace": "18.3.0",
-    "@nx/cypress": "18.3.0",
-    "@nx/eslint-plugin": "18.3.0",
-    "@nx/jest": "18.3.0",
-    "@nx/eslint": "18.3.0"
+    "typescript": "5.5.4",
+    "@nx/workspace": "19.8.0",
+    "@nx/cypress": "19.8.0",
+    "@nx/eslint-plugin": "19.8.0",
+    "@nx/jest": "19.8.0",
+    "@nx/eslint": "19.8.0"
   },
   "pathMappings": {},
   "nxJsonPlugins": [],
@@ -92,8 +92,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/responses/device-info.response"
+            "npm:rxjs"
           ]
         },
         {
@@ -102,8 +101,7 @@
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -147,9 +145,7 @@
             "npm:@angular/core",
             "npm:@angular/fire",
             "npm:@angular/platform-browser",
-            "npm:firebase",
-            "npm:environments/environment",
-            "npm:app/configs/hammer.config"
+            "npm:firebase"
           ]
         },
         {
@@ -158,8 +154,6 @@
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
-            "npm:@shared/models/responses/brightness.response",
-            "npm:environments/environment",
             "npm:rxjs"
           ]
         },
@@ -169,8 +163,6 @@
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
-            "npm:@shared/models/responses/device-info.response",
-            "npm:environments/environment",
             "npm:rxjs"
           ]
         },
@@ -180,8 +172,6 @@
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
-            "npm:@shared/models/responses/brightness.response",
-            "npm:environments/environment",
             "npm:rxjs"
           ]
         },
@@ -191,9 +181,7 @@
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
-            "npm:environments/environment",
-            "npm:rxjs",
-            "npm:@shared/models/responses/weather.response"
+            "npm:rxjs"
           ]
         },
         {
@@ -208,8 +196,7 @@
           "file": "apps/smart-clock/src/app/core/pages/activate-device/activate-device.component.ts",
           "hash": "7433008295796534301",
           "deps": [
-            "npm:@angular/core",
-            "npm:app/auth/auth.service"
+            "npm:@angular/core"
           ]
         },
         {
@@ -228,9 +215,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/fire",
-            "npm:rxjs",
-            "npm:@shared/models/theme-name.enum",
-            "npm:@shared/models/theme.model"
+            "npm:rxjs"
           ]
         },
         {
@@ -238,8 +223,7 @@
           "hash": "14786598745083753822",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -255,10 +239,6 @@
           "hash": "6897083765232919041",
           "deps": [
             "npm:@angular/core",
-            "npm:@shared/functions/time-utils",
-            "npm:@shared/functions/utils",
-            "npm:@shared/models/alarm.model",
-            "npm:app/core/services/firebase.service",
             "npm:rxjs"
           ]
         },
@@ -275,8 +255,6 @@
           "hash": "9860592464658421631",
           "deps": [
             "npm:@angular/core",
-            "npm:@shared/models/alarm.model",
-            "npm:@shared/models/daysNames.model",
             "npm:rxjs"
           ]
         },
@@ -292,8 +270,7 @@
           "file": "apps/smart-clock/src/app/modules/alarms/components/alarm/alarm.component.ts",
           "hash": "3962349522655502069",
           "deps": [
-            "npm:@angular/core",
-            "npm:@shared/models/alarm.model"
+            "npm:@angular/core"
           ]
         },
         {
@@ -311,9 +288,7 @@
             "npm:@angular/core",
             "npm:@angular/router",
             "npm:howler",
-            "npm:rxjs",
-            "npm:app/core/services/firebase.service",
-            "npm:app/modules/home/clock.service"
+            "npm:rxjs"
           ]
         },
         {
@@ -330,9 +305,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/alarm.model",
-            "npm:@shared/models/application-page.model"
+            "npm:rxjs"
           ]
         },
         {
@@ -340,8 +313,7 @@
           "hash": "15596702953487259113",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -357,8 +329,7 @@
           "hash": "18351172961554538956",
           "deps": [
             "npm:@angular/core",
-            "npm:rxjs",
-            "npm:app/core/services/firebase.service"
+            "npm:rxjs"
           ]
         },
         {
@@ -375,8 +346,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/application-page.model"
+            "npm:rxjs"
           ]
         },
         {
@@ -385,11 +355,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/alarm.model",
-            "npm:@shared/models/settings.model",
-            "npm:@shared/functions/time-utils",
-            "npm:@shared/models/time.model"
+            "npm:rxjs"
           ]
         },
         {
@@ -419,9 +385,7 @@
           "file": "apps/smart-clock/src/app/modules/home/components/notification-bar/notification-bar.component.ts",
           "hash": "9222994210533495014",
           "deps": [
-            "npm:@angular/core",
-            "npm:app/animations",
-            "npm:app/modules/weather/weather.service"
+            "npm:@angular/core"
           ]
         },
         {
@@ -475,8 +439,7 @@
           "hash": "2602110936957385546",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -509,12 +472,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/application-page.model",
-            "npm:@shared/models/settings.model",
-            "npm:app/modules/settings/settings.service",
-            "npm:app/core/services/firebase.service",
-            "npm:app/modules/weather/weather.service"
+            "npm:rxjs"
           ]
         },
         {
@@ -532,11 +490,6 @@
             "npm:@angular/core",
             "npm:@angular/forms",
             "npm:@angular/router",
-            "npm:@shared/models/application-page.model",
-            "npm:@shared/models/settings.model",
-            "npm:@shared/models/theme-name.enum",
-            "npm:@shared/models/theme.model",
-            "npm:app/core/services/theme.service",
             "npm:rxjs"
           ]
         },
@@ -546,8 +499,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/forms",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -563,13 +515,7 @@
           "hash": "16692042256059216863",
           "deps": [
             "npm:@angular/core",
-            "npm:rxjs",
-            "npm:app/core/services/firebase.service",
-            "npm:app/core/services/theme.service",
-            "npm:@shared/models/clock-style.model",
-            "npm:@shared/models/theme-name.enum",
-            "npm:@shared/models/settings.model",
-            "npm:app/core/http/device/set-device-backlight-brightness.service"
+            "npm:rxjs"
           ]
         },
         {
@@ -585,8 +531,7 @@
           "hash": "11518224637855066969",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@shared/models/application-page.model"
+            "npm:@angular/router"
           ]
         },
         {
@@ -594,8 +539,7 @@
           "hash": "15177732786880020001",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -626,8 +570,7 @@
           "hash": "11777862813225223329",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/router",
-            "npm:@shared/models/application-page.model"
+            "npm:@angular/router"
           ]
         },
         {
@@ -635,8 +578,7 @@
           "hash": "15656022347313844057",
           "deps": [
             "npm:@angular/core",
-            "npm:@angular/platform-browser",
-            "npm:@shared/shared.module"
+            "npm:@angular/platform-browser"
           ]
         },
         {
@@ -686,7 +628,6 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:@shared/models/application-page.model",
             "npm:rxjs"
           ]
         },
@@ -704,8 +645,7 @@
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:rxjs",
-            "npm:@shared/models/application-page.model"
+            "npm:rxjs"
           ]
         },
         {
@@ -734,14 +674,7 @@
           "hash": "10575182982055272527",
           "deps": [
             "npm:@angular/core",
-            "npm:rxjs",
-            "npm:@shared/models/weather.model",
-            "npm:@shared/functions/delayedRetry",
-            "npm:app/core/services/firebase.service",
-            "npm:app/core/http/weather/get-weather.service",
-            "npm:@shared/models/responses/weather.response",
-            "npm:@shared/models/time.model",
-            "npm:@shared/functions/time-utils"
+            "npm:rxjs"
           ]
         },
         {
@@ -756,8 +689,7 @@
           "file": "apps/smart-clock/src/app/shared/components/nav-arrow-button/nav-arrow-button.component.ts",
           "hash": "16671295143952931200",
           "deps": [
-            "npm:@angular/core",
-            "npm:@shared/models/direction.enum"
+            "npm:@angular/core"
           ]
         },
         {
@@ -815,10 +747,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/shared/functions/time-utils.ts",
-          "hash": "15777404619109114417",
-          "deps": [
-            "npm:@shared/models/time.model"
-          ]
+          "hash": "15777404619109114417"
         },
         {
           "file": "apps/smart-clock/src/app/shared/functions/utils.ts",
@@ -1058,7 +987,6 @@
           "file": "apps/smart-clock-e2e/cypress.config.ts",
           "hash": "15414076024138857470",
           "deps": [
-            "npm:cypress",
             "npm:@nx/cypress"
           ]
         },
@@ -1114,14 +1042,6 @@
         "hash": "4700636786592141141"
       },
       {
-        "file": ".nx/workspace-data/d/daemon.log",
-        "hash": "1979299881592737073"
-      },
-      {
-        "file": ".nx/workspace-data/nx_files.nxt",
-        "hash": "14265477406946230440"
-      },
-      {
         "file": ".prettierignore",
         "hash": "9175937087874081623"
       },
@@ -1167,19 +1087,19 @@
       },
       {
         "file": "migrations.json",
-        "hash": "16185593582691999487"
+        "hash": "14664154089973113734"
       },
       {
         "file": "nx.json",
-        "hash": "16860743688216963668"
+        "hash": "6928824917766335565"
       },
       {
         "file": "package-lock.json",
-        "hash": "15279784354682539490"
+        "hash": "5039490212539729110"
       },
       {
         "file": "package.json",
-        "hash": "15915523075788659119"
+        "hash": "18381743128150133748"
       },
       {
         "file": "tools/tsconfig.tools.json",

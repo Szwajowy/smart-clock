@@ -22,9 +22,9 @@
       "type": "npm",
       "name": "npm:@angular-devkit/architect",
       "data": {
-        "version": "0.1701.4",
+        "version": "0.1703.10",
         "packageName": "@angular-devkit/architect",
-        "hash": "sha512-FHEp6etsxjD+04vsrx9QbULRhLoyLfThK/sNMNnRI4n0CaNOS2879ZBua9dRedUEUYR8DzKXw1rPJX0t/65X6g=="
+        "hash": "sha512-wmjx5GspSPprdUGryK5+9vNawbEO7p8h9dxgX3uoeFwPAECcHC+/KK3qPhX2NiGcM6MDsyt25SrbSktJp6PRsA=="
       }
     },
     "npm:@angular-devkit/architect@0.1703.9": {
@@ -85,9 +85,9 @@
       "type": "npm",
       "name": "npm:@angular-devkit/core",
       "data": {
-        "version": "17.1.4",
+        "version": "17.3.10",
         "packageName": "@angular-devkit/core",
-        "hash": "sha512-6qM5W+iw7f08i0w+6LsXbyWm43fPEqPzPS9bBRbyZbf/JtGn4yvGIv0RfUvrBKFZp+lrKsxH3abdbdKWnBWl4g=="
+        "hash": "sha512-czdl54yxU5DOAGy/uUPNjJruoBDTgwi/V+eOgLNybYhgrc+TsY0f7uJ11yEk/pz5sCov7xIiS7RdRv96waS7vg=="
       }
     },
     "npm:@angular-devkit/core@15.2.11": {
@@ -142,15 +142,6 @@
         "version": "7.6.0",
         "packageName": "semver",
         "hash": "sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg=="
-      }
-    },
-    "npm:semver@7.5.4": {
-      "type": "npm",
-      "name": "npm:semver@7.5.4",
-      "data": {
-        "version": "7.5.4",
-        "packageName": "semver",
-        "hash": "sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA=="
       }
     },
     "npm:semver@5.7.2": {
@@ -828,15 +819,6 @@
         "hash": "sha512-vI2w4zl/mDluHt9YEQ/543VTCwPKWiHzKtm9dM2V0NdFcqEexDAjUHzO1oA60HRNaVifGXXM1tRRNluLVHa0Kg=="
       }
     },
-    "npm:inquirer@9.2.12": {
-      "type": "npm",
-      "name": "npm:inquirer@9.2.12",
-      "data": {
-        "version": "9.2.12",
-        "packageName": "inquirer",
-        "hash": "sha512-mg3Fh9g2zfuVWJn6lhST0O7x4n03k7G8Tx5nvikJkbq8/CK47WDVm+UznF0G6s5Zi0KcyUisr6DU8T67N5U+1Q=="
-      }
-    },
     "npm:inquirer": {
       "type": "npm",
       "name": "npm:inquirer",
@@ -891,33 +873,6 @@
         "hash": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
       }
     },
-    "npm:magic-string@0.30.8": {
-      "type": "npm",
-      "name": "npm:magic-string@0.30.8",
-      "data": {
-        "version": "0.30.8",
-        "packageName": "magic-string",
-        "hash": "sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ=="
-      }
-    },
-    "npm:magic-string@0.29.0": {
-      "type": "npm",
-      "name": "npm:magic-string@0.29.0",
-      "data": {
-        "version": "0.29.0",
-        "packageName": "magic-string",
-        "hash": "sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q=="
-      }
-    },
-    "npm:magic-string": {
-      "type": "npm",
-      "name": "npm:magic-string",
-      "data": {
-        "version": "0.30.5",
-        "packageName": "magic-string",
-        "hash": "sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA=="
-      }
-    },
     "npm:mute-stream@1.0.0": {
       "type": "npm",
       "name": "npm:mute-stream@1.0.0",
@@ -943,15 +898,6 @@
         "version": "4.0.1",
         "packageName": "picomatch",
         "hash": "sha512-xUXwsxNjwTQ8K3GnT4pCJm+xq3RUPQbmkYJTP5aFIfNIvbcc/4MUxgBaaRSZJ6yGJZiGSyYlM6MzwTsRk8SYCg=="
-      }
-    },
-    "npm:picomatch@3.0.1": {
-      "type": "npm",
-      "name": "npm:picomatch@3.0.1",
-      "data": {
-        "version": "3.0.1",
-        "packageName": "picomatch",
-        "hash": "sha512-I3EurrIQMlRc9IaAZnqRR044Phh2DXY+55o7uJ0V+hYZAcQYSuFWsc9q5PvyDHUSCe1Qxn/iBz+78s86zWnGag=="
       }
     },
     "npm:picomatch": {
@@ -1039,9 +985,9 @@
       "type": "npm",
       "name": "npm:@angular-devkit/schematics",
       "data": {
-        "version": "17.1.4",
+        "version": "17.3.10",
         "packageName": "@angular-devkit/schematics",
-        "hash": "sha512-Jv67vpYNMjnBOOL/98uSmchIpHX+sOPpOKRiphLJJbndNdfAEEj0wRHfvunWngKEpYkHYW+XPbbfk7lm/Qj/xQ=="
+        "hash": "sha512-FHcNa1ktYRd0SKExCsNJpR75RffsyuPIV8kvBXzXnLHmXMqvl25G2te3yYJ9yYqy9OLy/58HZznZTxWRyUdHOg=="
       }
     },
     "npm:@angular-devkit/schematics@15.2.11": {
@@ -1156,81 +1102,9 @@
       "type": "npm",
       "name": "npm:@angular/cli",
       "data": {
-        "version": "17.1.4",
+        "version": "17.3.10",
         "packageName": "@angular/cli",
-        "hash": "sha512-3hY+7G8RvWF5r8uQWvCXig/LI74bAji4TR6x3TcFclQ9fIY8Lgs7SDUZ6paWOqdex4lPTZw41+ryUydrXYpTtA=="
-      }
-    },
-    "npm:escape-string-regexp@5.0.0": {
-      "type": "npm",
-      "name": "npm:escape-string-regexp@5.0.0",
-      "data": {
-        "version": "5.0.0",
-        "packageName": "escape-string-regexp",
-        "hash": "sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw=="
-      }
-    },
-    "npm:escape-string-regexp": {
-      "type": "npm",
-      "name": "npm:escape-string-regexp",
-      "data": {
-        "version": "1.0.5",
-        "packageName": "escape-string-regexp",
-        "hash": "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="
-      }
-    },
-    "npm:escape-string-regexp@4.0.0": {
-      "type": "npm",
-      "name": "npm:escape-string-regexp@4.0.0",
-      "data": {
-        "version": "4.0.0",
-        "packageName": "escape-string-regexp",
-        "hash": "sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA=="
-      }
-    },
-    "npm:escape-string-regexp@2.0.0": {
-      "type": "npm",
-      "name": "npm:escape-string-regexp@2.0.0",
-      "data": {
-        "version": "2.0.0",
-        "packageName": "escape-string-regexp",
-        "hash": "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
-      }
-    },
-    "npm:figures@5.0.0": {
-      "type": "npm",
-      "name": "npm:figures@5.0.0",
-      "data": {
-        "version": "5.0.0",
-        "packageName": "figures",
-        "hash": "sha512-ej8ksPF4x6e5wvK9yevct0UCXh8TTFlWGVLlgjZuoBH1HwjIfKE/IdL5mq89sFA7zELi1VhKpmtDnrs7zWyeyg=="
-      }
-    },
-    "npm:figures": {
-      "type": "npm",
-      "name": "npm:figures",
-      "data": {
-        "version": "3.2.0",
-        "packageName": "figures",
-        "hash": "sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg=="
-      }
-    },
-    "npm:is-unicode-supported@1.3.0": {
-      "type": "npm",
-      "name": "npm:is-unicode-supported@1.3.0",
-      "data": {
-        "version": "1.3.0",
-        "packageName": "is-unicode-supported",
-        "hash": "sha512-43r2mRvz+8JRIKnWJ+3j8JtjRKZ6GmjzfaE/qiBJnikNnYv/6bagRJ1kUhNk8R5EX/GkobD+r+sfxCPJsiKBLQ=="
-      }
-    },
-    "npm:is-unicode-supported": {
-      "type": "npm",
-      "name": "npm:is-unicode-supported",
-      "data": {
-        "version": "0.1.0",
-        "packageName": "is-unicode-supported",
-        "hash": "sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw=="
+        "hash": "sha512-lA0kf4Cpo8Jcuennq6wGyBTP/UG1oX4xsM9uLRZ2vkPoisjHCk46rWaVP7vfAqdUH39vbATFXftpy1SiEmAI4w=="
       }
     },
     "npm:@angular/common": {
@@ -1327,9 +1201,27 @@
       "type": "npm",
       "name": "npm:@schematics/angular",
       "data": {
-        "version": "17.1.4",
+        "version": "17.3.10",
         "packageName": "@schematics/angular",
-        "hash": "sha512-GNBfGWMJ3A0mRYYmXocgbg/ZcLnGtbRcSkjo88Vc2qRQJ7NJI4tW0X5OH6x7DeiWXmlDLvepbPXygKyuRVcqKQ=="
+        "hash": "sha512-cI+VB/WXlOeAMamni932lE/AZgui8o81dMyEXNXqCuYagNAMuKXliW79Mi5BwYQEABv/BUb4hB4zYtbQqHyACA=="
+      }
+    },
+    "npm:magic-string@0.29.0": {
+      "type": "npm",
+      "name": "npm:magic-string@0.29.0",
+      "data": {
+        "version": "0.29.0",
+        "packageName": "magic-string",
+        "hash": "sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q=="
+      }
+    },
+    "npm:magic-string": {
+      "type": "npm",
+      "name": "npm:magic-string",
+      "data": {
+        "version": "0.30.8",
+        "packageName": "magic-string",
+        "hash": "sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ=="
       }
     },
     "npm:@angular/forms": {
@@ -3649,9 +3541,9 @@
       "type": "npm",
       "name": "npm:ini",
       "data": {
-        "version": "4.1.1",
+        "version": "4.1.2",
         "packageName": "ini",
-        "hash": "sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g=="
+        "hash": "sha512-AMB1mvwR1pyBFY/nSevUX6y8nJWS63/SzUKD3JyQn97s4xgIdgQPT75IRouIiBAN4yLQBUShNYVW0+UG25daCw=="
       }
     },
     "npm:proc-log@4.2.0": {
@@ -6246,51 +6138,6 @@
         "hash": "sha512-B+L5iIa9mgcjLbliir2th36yEwPftrzteHYujzsx3dFP/31GCHcIeS8f5MGd80odLOjaOvSpU3EEAmRQptkxLQ=="
       }
     },
-    "npm:fs-minipass@3.0.3": {
-      "type": "npm",
-      "name": "npm:fs-minipass@3.0.3",
-      "data": {
-        "version": "3.0.3",
-        "packageName": "fs-minipass",
-        "hash": "sha512-XUBA9XClHbnJWSfBzjkm6RvPsyg3sryZt06BEQoXcF7EK/xpGaQYJgQKDJSUH5SGZ76Y7pFx1QBnXz09rU5Fbw=="
-      }
-    },
-    "npm:fs-minipass": {
-      "type": "npm",
-      "name": "npm:fs-minipass",
-      "data": {
-        "version": "2.1.0",
-        "packageName": "fs-minipass",
-        "hash": "sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg=="
-      }
-    },
-    "npm:minipass@7.1.2": {
-      "type": "npm",
-      "name": "npm:minipass@7.1.2",
-      "data": {
-        "version": "7.1.2",
-        "packageName": "minipass",
-        "hash": "sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw=="
-      }
-    },
-    "npm:minipass": {
-      "type": "npm",
-      "name": "npm:minipass",
-      "data": {
-        "version": "3.3.4",
-        "packageName": "minipass",
-        "hash": "sha512-I9WPbWHCGu8W+6k1ZiGpPu0GkoKBeorkfKNuAFBNS1HNFJvke82sxvI5bzcCNpWPorkOO5QQ+zomzzwRxejXiw=="
-      }
-    },
-    "npm:minipass@5.0.0": {
-      "type": "npm",
-      "name": "npm:minipass@5.0.0",
-      "data": {
-        "version": "5.0.0",
-        "packageName": "minipass",
-        "hash": "sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ=="
-      }
-    },
     "npm:call-bind": {
       "type": "npm",
       "name": "npm:call-bind",
@@ -7533,6 +7380,33 @@
         "hash": "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow=="
       }
     },
+    "npm:escape-string-regexp": {
+      "type": "npm",
+      "name": "npm:escape-string-regexp",
+      "data": {
+        "version": "1.0.5",
+        "packageName": "escape-string-regexp",
+        "hash": "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="
+      }
+    },
+    "npm:escape-string-regexp@4.0.0": {
+      "type": "npm",
+      "name": "npm:escape-string-regexp@4.0.0",
+      "data": {
+        "version": "4.0.0",
+        "packageName": "escape-string-regexp",
+        "hash": "sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA=="
+      }
+    },
+    "npm:escape-string-regexp@2.0.0": {
+      "type": "npm",
+      "name": "npm:escape-string-regexp@2.0.0",
+      "data": {
+        "version": "2.0.0",
+        "packageName": "escape-string-regexp",
+        "hash": "sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w=="
+      }
+    },
     "npm:escodegen": {
       "type": "npm",
       "name": "npm:escodegen",
@@ -7983,6 +7857,15 @@
         "hash": "sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw=="
       }
     },
+    "npm:figures": {
+      "type": "npm",
+      "name": "npm:figures",
+      "data": {
+        "version": "3.2.0",
+        "packageName": "figures",
+        "hash": "sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg=="
+      }
+    },
     "npm:file-entry-cache": {
       "type": "npm",
       "name": "npm:file-entry-cache",
@@ -8215,6 +8098,24 @@
         "version": "1.0.0",
         "packageName": "fs-constants",
         "hash": "sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow=="
+      }
+    },
+    "npm:fs-minipass": {
+      "type": "npm",
+      "name": "npm:fs-minipass",
+      "data": {
+        "version": "3.0.3",
+        "packageName": "fs-minipass",
+        "hash": "sha512-XUBA9XClHbnJWSfBzjkm6RvPsyg3sryZt06BEQoXcF7EK/xpGaQYJgQKDJSUH5SGZ76Y7pFx1QBnXz09rU5Fbw=="
+      }
+    },
+    "npm:fs-minipass@2.1.0": {
+      "type": "npm",
+      "name": "npm:fs-minipass@2.1.0",
+      "data": {
+        "version": "2.1.0",
+        "packageName": "fs-minipass",
+        "hash": "sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg=="
       }
     },
     "npm:fs-monkey": {
@@ -8935,6 +8836,15 @@
         "version": "2.0.1",
         "packageName": "is-stream",
         "hash": "sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg=="
+      }
+    },
+    "npm:is-unicode-supported": {
+      "type": "npm",
+      "name": "npm:is-unicode-supported",
+      "data": {
+        "version": "0.1.0",
+        "packageName": "is-unicode-supported",
+        "hash": "sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw=="
       }
     },
     "npm:is-what": {
@@ -9756,6 +9666,33 @@
         "hash": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="
       }
     },
+    "npm:minipass": {
+      "type": "npm",
+      "name": "npm:minipass",
+      "data": {
+        "version": "7.1.2",
+        "packageName": "minipass",
+        "hash": "sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw=="
+      }
+    },
+    "npm:minipass@3.3.6": {
+      "type": "npm",
+      "name": "npm:minipass@3.3.6",
+      "data": {
+        "version": "3.3.6",
+        "packageName": "minipass",
+        "hash": "sha512-DxiNidxSEK+tHG6zOIklvNOwm3hvCrbUrdtzY74U6HKTJxvIDfOUL5W5P2Ghd3DTkhhKPYGqeNUIh5qcM4YBfw=="
+      }
+    },
+    "npm:minipass@5.0.0": {
+      "type": "npm",
+      "name": "npm:minipass@5.0.0",
+      "data": {
+        "version": "5.0.0",
+        "packageName": "minipass",
+        "hash": "sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ=="
+      }
+    },
     "npm:minipass-collect": {
       "type": "npm",
       "name": "npm:minipass-collect",
@@ -10300,9 +10237,9 @@
       "type": "npm",
       "name": "npm:pacote",
       "data": {
-        "version": "17.0.5",
+        "version": "17.0.6",
         "packageName": "pacote",
-        "hash": "sha512-TAE0m20zSDMnchPja9vtQjri19X3pZIyRpm2TJVeI+yU42leJBBDTRYhOcWFsPhaMxf+3iwQkFiKz16G9AEeeA=="
+        "hash": "sha512-cJKrW21VRE8vVTRskJo78c/RCvwJCn1f4qgfxL4w77SOWrTCRcmfkYHlHtS0gqpgjv3zhXflRtgsrUCX5xwNnQ=="
       }
     },
     "npm:pako": {
@@ -12751,7 +12688,7 @@
     },
     {
       "source": "npm:@angular-devkit/build-angular",
-      "target": "npm:magic-string@0.30.8",
+      "target": "npm:magic-string",
       "type": "static"
     },
     {
@@ -13265,11 +13202,6 @@
       "type": "static"
     },
     {
-      "source": "npm:magic-string@0.30.8",
-      "target": "npm:@jridgewell/sourcemap-codec",
-      "type": "static"
-    },
-    {
       "source": "npm:rxjs@7.8.1",
       "target": "npm:tslib",
       "type": "static"
@@ -13381,12 +13313,12 @@
     },
     {
       "source": "npm:@angular-devkit/core",
-      "target": "npm:jsonc-parser",
+      "target": "npm:jsonc-parser@3.2.1",
       "type": "static"
     },
     {
       "source": "npm:@angular-devkit/core",
-      "target": "npm:picomatch@3.0.1",
+      "target": "npm:picomatch@4.0.1",
       "type": "static"
     },
     {
@@ -13411,7 +13343,7 @@
     },
     {
       "source": "npm:@angular-devkit/schematics",
-      "target": "npm:jsonc-parser",
+      "target": "npm:jsonc-parser@3.2.1",
       "type": "static"
     },
     {
@@ -13591,12 +13523,12 @@
     },
     {
       "source": "npm:@angular/cli",
-      "target": "npm:inquirer@9.2.12",
+      "target": "npm:inquirer@9.2.15",
       "type": "static"
     },
     {
       "source": "npm:@angular/cli",
-      "target": "npm:jsonc-parser",
+      "target": "npm:jsonc-parser@3.2.1",
       "type": "static"
     },
     {
@@ -13631,7 +13563,7 @@
     },
     {
       "source": "npm:@angular/cli",
-      "target": "npm:semver@7.5.4",
+      "target": "npm:semver@7.6.0",
       "type": "static"
     },
     {
@@ -13655,87 +13587,77 @@
       "type": "static"
     },
     {
-      "source": "npm:figures@5.0.0",
-      "target": "npm:escape-string-regexp@5.0.0",
-      "type": "static"
-    },
-    {
-      "source": "npm:figures@5.0.0",
-      "target": "npm:is-unicode-supported@1.3.0",
-      "type": "static"
-    },
-    {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:@ljharb/through",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:ansi-escapes",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:chalk@5.3.0",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:cli-cursor",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:cli-width@4.1.0",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:external-editor",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
-      "target": "npm:figures@5.0.0",
+      "source": "npm:inquirer@9.2.15",
+      "target": "npm:figures",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:lodash",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:mute-stream@1.0.0",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:ora",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:run-async@3.0.0",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:rxjs@7.8.1",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:string-width",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:strip-ansi",
       "type": "static"
     },
     {
-      "source": "npm:inquirer@9.2.12",
+      "source": "npm:inquirer@9.2.15",
       "target": "npm:wrap-ansi@6.2.0",
       "type": "static"
     },
@@ -13750,7 +13672,7 @@
       "type": "static"
     },
     {
-      "source": "npm:semver@7.5.4",
+      "source": "npm:semver@7.6.0",
       "target": "npm:lru-cache@6.0.0",
       "type": "static"
     },
@@ -17236,12 +17158,27 @@
     },
     {
       "source": "npm:@isaacs/cliui",
+      "target": "npm:string-width-cjs",
+      "type": "static"
+    },
+    {
+      "source": "npm:@isaacs/cliui",
       "target": "npm:strip-ansi@7.1.0",
       "type": "static"
     },
     {
       "source": "npm:@isaacs/cliui",
+      "target": "npm:strip-ansi-cjs",
+      "type": "static"
+    },
+    {
+      "source": "npm:@isaacs/cliui",
       "target": "npm:wrap-ansi@8.1.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@isaacs/cliui",
+      "target": "npm:wrap-ansi-cjs",
       "type": "static"
     },
     {
@@ -20056,7 +19993,7 @@
     },
     {
       "source": "npm:@schematics/angular",
-      "target": "npm:jsonc-parser",
+      "target": "npm:jsonc-parser@3.2.1",
       "type": "static"
     },
     {
@@ -21691,7 +21628,7 @@
     },
     {
       "source": "npm:cacache",
-      "target": "npm:fs-minipass@3.0.3",
+      "target": "npm:fs-minipass",
       "type": "static"
     },
     {
@@ -21706,7 +21643,7 @@
     },
     {
       "source": "npm:cacache",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -21742,11 +21679,6 @@
     {
       "source": "npm:cacache",
       "target": "npm:unique-filename",
-      "type": "static"
-    },
-    {
-      "source": "npm:fs-minipass@3.0.3",
-      "target": "npm:minipass@7.1.2",
       "type": "static"
     },
     {
@@ -24161,7 +24093,7 @@
     },
     {
       "source": "npm:glob",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -24521,12 +24453,7 @@
     },
     {
       "source": "npm:ignore-walk",
-      "target": "npm:minimatch@9.0.5",
-      "type": "static"
-    },
-    {
-      "source": "npm:minimatch@9.0.5",
-      "target": "npm:brace-expansion",
+      "target": "npm:minimatch",
       "type": "static"
     },
     {
@@ -26886,7 +26813,7 @@
     },
     {
       "source": "npm:make-fetch-happen",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -26970,18 +26897,13 @@
       "type": "static"
     },
     {
-      "source": "npm:minipass",
-      "target": "npm:yallist",
-      "type": "static"
-    },
-    {
       "source": "npm:minipass-collect",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
       "source": "npm:minipass-fetch",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -27001,7 +26923,12 @@
     },
     {
       "source": "npm:minipass-flush",
-      "target": "npm:minipass",
+      "target": "npm:minipass@3.3.6",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
+      "target": "npm:yallist",
       "type": "static"
     },
     {
@@ -27011,26 +26938,46 @@
     },
     {
       "source": "npm:minipass-json-stream",
-      "target": "npm:minipass",
+      "target": "npm:minipass@3.3.6",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
+      "target": "npm:yallist",
       "type": "static"
     },
     {
       "source": "npm:minipass-pipeline",
-      "target": "npm:minipass",
+      "target": "npm:minipass@3.3.6",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
+      "target": "npm:yallist",
       "type": "static"
     },
     {
       "source": "npm:minipass-sized",
-      "target": "npm:minipass",
+      "target": "npm:minipass@3.3.6",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
+      "target": "npm:yallist",
       "type": "static"
     },
     {
       "source": "npm:minizlib",
-      "target": "npm:minipass",
+      "target": "npm:minipass@3.3.6",
       "type": "static"
     },
     {
       "source": "npm:minizlib",
+      "target": "npm:yallist",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
       "target": "npm:yallist",
       "type": "static"
     },
@@ -27236,7 +27183,7 @@
     },
     {
       "source": "npm:npm-registry-fetch",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -27786,12 +27733,12 @@
     },
     {
       "source": "npm:pacote",
-      "target": "npm:fs-minipass@3.0.3",
+      "target": "npm:fs-minipass",
       "type": "static"
     },
     {
       "source": "npm:pacote",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -27847,11 +27794,6 @@
     {
       "source": "npm:pacote",
       "target": "npm:tar",
-      "type": "static"
-    },
-    {
-      "source": "npm:fs-minipass@3.0.3",
-      "target": "npm:minipass@7.1.2",
       "type": "static"
     },
     {
@@ -27916,7 +27858,7 @@
     },
     {
       "source": "npm:path-scurry",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -29461,7 +29403,7 @@
     },
     {
       "source": "npm:ssri",
-      "target": "npm:minipass@7.1.2",
+      "target": "npm:minipass",
       "type": "static"
     },
     {
@@ -29696,7 +29638,7 @@
     },
     {
       "source": "npm:tar",
-      "target": "npm:fs-minipass",
+      "target": "npm:fs-minipass@2.1.0",
       "type": "static"
     },
     {
@@ -29762,6 +29704,16 @@
     {
       "source": "npm:tar-stream",
       "target": "npm:readable-stream",
+      "type": "static"
+    },
+    {
+      "source": "npm:fs-minipass@2.1.0",
+      "target": "npm:minipass@3.3.6",
+      "type": "static"
+    },
+    {
+      "source": "npm:minipass@3.3.6",
+      "target": "npm:yallist",
       "type": "static"
     },
     {
