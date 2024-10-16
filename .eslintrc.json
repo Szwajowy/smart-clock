@@ -1,16 +1,12 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
+  "ignorePatterns": ["**/*"],
   "parserOptions": {
     "ecmaVersion": 2020
   },
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
         "createDefaultProgram": true
       },
@@ -24,23 +20,14 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     },
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
-      ],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -48,9 +35,7 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "onlyDependOnLibsWithTags": ["*"]
               }
             ]
           }
@@ -58,7 +43,5 @@
       }
     }
   ],
-  "plugins": [
-    "@nrwl/nx"
-  ]
+  "plugins": ["@nx"]
 }

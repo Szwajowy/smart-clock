@@ -1,0 +1,1215 @@
+{
+  "version": "6.0",
+  "nxVersion": "16.10.0",
+  "deps": {
+    "@angular/animations": "16.2.12",
+    "@angular/common": "16.2.12",
+    "@angular/compiler": "16.2.12",
+    "@angular/core": "16.2.12",
+    "@angular/fire": "^7.5.0",
+    "@angular/forms": "16.2.12",
+    "@angular/platform-browser": "16.2.12",
+    "@angular/platform-browser-dynamic": "16.2.12",
+    "@angular/router": "16.2.12",
+    "bootstrap-icons": "^1.8.1",
+    "echarts": "^5.3.3",
+    "firebase": "^9.6.6",
+    "hammerjs": "^2.0.8",
+    "howler": "^2.2.3",
+    "ngx-echarts": "^8.0.1",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "0.13.3",
+    "@nx/angular": "16.10.0",
+    "@angular-devkit/build-angular": "16.2.9",
+    "@angular-eslint/eslint-plugin": "16.0.3",
+    "@angular-eslint/eslint-plugin-template": "16.0.3",
+    "@angular-eslint/template-parser": "16.0.3",
+    "@angular/cli": "~16.1.0",
+    "@angular/compiler-cli": "16.2.12",
+    "@angular/language-service": "16.2.12",
+    "@types/jest": "29.4.0",
+    "@types/node": "16.11.7",
+    "@typescript-eslint/eslint-plugin": "5.60.1",
+    "@typescript-eslint/parser": "5.60.1",
+    "eslint": "8.46.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-cypress": "2.13.4",
+    "jest": "29.4.3",
+    "jest-environment-jsdom": "29.4.3",
+    "ng-mocks": "14.7.1",
+    "nx": "16.10.0",
+    "prettier": "^2.6.2",
+    "puppeteer": "^15.4.0",
+    "ts-jest": "29.1.5",
+    "ts-node": "10.9.1",
+    "typescript": "5.1.6",
+    "nx-cloud": "19.1.0",
+    "@nx/workspace": "16.10.0",
+    "@nx/linter": "16.10.0",
+    "@nx/cypress": "16.10.0",
+    "@nx/eslint-plugin": "16.10.0",
+    "@nx/jest": "16.10.0"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "smart-clock": [
+        {
+          "file": "apps/smart-clock/.browserslistrc",
+          "hash": "17510788877013526380"
+        },
+        {
+          "file": "apps/smart-clock/.eslintrc.json",
+          "hash": "11492559542068974059"
+        },
+        {
+          "file": "apps/smart-clock/jest.config.ts",
+          "hash": "5707159335323471587"
+        },
+        {
+          "file": "apps/smart-clock/project.json",
+          "hash": "17193213681611216487"
+        },
+        {
+          "file": "apps/smart-clock/src/app/animations.ts",
+          "hash": "6572546487558552602",
+          "deps": [
+            "npm:@angular/animations"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/app.component.html",
+          "hash": "14433773666856950574"
+        },
+        {
+          "file": "apps/smart-clock/src/app/app.component.scss",
+          "hash": "9418997069123120521"
+        },
+        {
+          "file": "apps/smart-clock/src/app/app.component.ts",
+          "hash": "15956713251144999282",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/responses/device-info.response"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/app.module.ts",
+          "hash": "10678055396968409749",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/app.routes.ts",
+          "hash": "7434212239651714019",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/auth/auth-guard.service.ts",
+          "hash": "1223429499760123667",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/auth/auth.service.ts",
+          "hash": "8223513541612037539",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/configs/hammer.config.ts",
+          "hash": "9043743582031434327",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:hammerjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/core.module.ts",
+          "hash": "1089888295103060009",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/fire",
+            "npm:@angular/platform-browser",
+            "npm:firebase",
+            "npm:environments/environment",
+            "npm:app/configs/hammer.config"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/http/device/get-device-backlight-brightness.service.ts",
+          "hash": "7487778028679397017",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@shared/models/responses/brightness.response",
+            "npm:environments/environment",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/http/device/get-device-informations.service.ts",
+          "hash": "2218871781831279886",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@shared/models/responses/device-info.response",
+            "npm:environments/environment",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/http/device/set-device-backlight-brightness.service.ts",
+          "hash": "11417912530213719546",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@shared/models/responses/brightness.response",
+            "npm:environments/environment",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/http/weather/get-weather.service.ts",
+          "hash": "16794201719578829698",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:environments/environment",
+            "npm:rxjs",
+            "npm:@shared/models/responses/weather.response"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/pages/activate-device/activate-device.component.html",
+          "hash": "14517267671035808767"
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/pages/activate-device/activate-device.component.scss",
+          "hash": "9393091855686021057"
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/pages/activate-device/activate-device.component.ts",
+          "hash": "7433008295796534301",
+          "deps": [
+            "npm:@angular/core",
+            "npm:app/auth/auth.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/services/firebase.service.ts",
+          "hash": "12663579497581543776",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/fire",
+            "npm:rxjs",
+            "npm:firebase"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/core/services/theme.service.ts",
+          "hash": "17568282602952983017",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/fire",
+            "npm:rxjs",
+            "npm:@shared/models/theme-name.enum",
+            "npm:@shared/models/theme.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/alarms.module.ts",
+          "hash": "14786598745083753822",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/alarms.routes.ts",
+          "hash": "11224289946560542689",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/alarms.service.ts",
+          "hash": "6897083765232919041",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@shared/functions/time-utils",
+            "npm:@shared/functions/utils",
+            "npm:@shared/models/alarm.model",
+            "npm:app/core/services/firebase.service",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm/alarm.component.html",
+          "hash": "2528561813228807249"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm/alarm.component.scss",
+          "hash": "14137048066664920125"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm/alarm.component.ts",
+          "hash": "3962349522655502069",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@shared/models/alarm.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm-edit/alarm-edit.component.html",
+          "hash": "14081794095563220991"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm-edit/alarm-edit.component.scss",
+          "hash": "16421115017938813039"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/components/alarm-edit/alarm-edit.component.ts",
+          "hash": "9860592464658421631",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@shared/models/alarm.model",
+            "npm:@shared/models/daysNames.model",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.html",
+          "hash": "12202342237702405201"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.scss",
+          "hash": "12697727898913079807"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.ts",
+          "hash": "5208774072778512211",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:howler",
+            "npm:rxjs",
+            "npm:app/core/services/firebase.service",
+            "npm:app/modules/home/clock.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarms/alarms.component.html",
+          "hash": "16890870388401845786"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarms/alarms.component.scss",
+          "hash": "10647665721624466323"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/alarms/pages/alarms/alarms.component.ts",
+          "hash": "13695247007909788926",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/alarm.model",
+            "npm:@shared/models/application-page.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/calendar.module.ts",
+          "hash": "15596702953487259113",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/calendar.routes.ts",
+          "hash": "6350484849006262058",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/calendar.service.ts",
+          "hash": "18351172961554538956",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:app/core/services/firebase.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/pages/calendar/calendar.component.html",
+          "hash": "5320311976842958379"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/pages/calendar/calendar.component.scss",
+          "hash": "12882278791644767463"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/calendar/pages/calendar/calendar.component.ts",
+          "hash": "14206460245735166616",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/application-page.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/clock.service.ts",
+          "hash": "14423000199068586598",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/alarm.model",
+            "npm:@shared/models/settings.model",
+            "npm:@shared/functions/time-utils",
+            "npm:@shared/models/time.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/boxy-clock-style/boxy-clock-style.component.html",
+          "hash": "9161014413822924048"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/boxy-clock-style/boxy-clock-style.component.scss",
+          "hash": "9575281544959843723"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/boxy-clock-style/boxy-clock-style.component.ts",
+          "hash": "18231988398786036441",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/notification-bar/notification-bar.component.html",
+          "hash": "5939721557360287304"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/notification-bar/notification-bar.component.scss",
+          "hash": "400478546038453447"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/notification-bar/notification-bar.component.ts",
+          "hash": "9222994210533495014",
+          "deps": [
+            "npm:@angular/core",
+            "npm:app/animations",
+            "npm:app/modules/weather/weather.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/standard-clock-style/standard-clock-style.component.html",
+          "hash": "9089700888954550471"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/standard-clock-style/standard-clock-style.component.scss",
+          "hash": "9583262498843627450"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/standard-clock-style/standard-clock-style.component.ts",
+          "hash": "4213577097090248898",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/sunny-clock-style/sunny-clock-style.component.html",
+          "hash": "2800305157260596641"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/sunny-clock-style/sunny-clock-style.component.scss",
+          "hash": "16125717336138261048"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/sunny-clock-style/sunny-clock-style.component.ts",
+          "hash": "6144810284292320491",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/wide-clock-style/wide-clock-style.component.html",
+          "hash": "2865864906290834691"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/wide-clock-style/wide-clock-style.component.scss",
+          "hash": "413828722617111930"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/components/wide-clock-style/wide-clock-style.component.ts",
+          "hash": "7960370818562179865",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/home.module.ts",
+          "hash": "2602110936957385546",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/home.routes.ts",
+          "hash": "7281556823720921387",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/notifications.service.ts",
+          "hash": "2191193892659862105",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/pages/home/home.component.html",
+          "hash": "15129728920734377005"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/pages/home/home.component.scss",
+          "hash": "2225387430844206860"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/home/pages/home/home.component.ts",
+          "hash": "2758874290917687517",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/application-page.model",
+            "npm:@shared/models/settings.model",
+            "npm:app/modules/settings/settings.service",
+            "npm:app/core/services/firebase.service",
+            "npm:app/modules/weather/weather.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/pages/settings/settings.component.html",
+          "hash": "10510387738095253268"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/pages/settings/settings.component.scss",
+          "hash": "3109813132801249072"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/pages/settings/settings.component.ts",
+          "hash": "16898221183132194486",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/router",
+            "npm:@shared/models/application-page.model",
+            "npm:@shared/models/settings.model",
+            "npm:@shared/models/theme-name.enum",
+            "npm:@shared/models/theme.model",
+            "npm:app/core/services/theme.service",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/settings.module.ts",
+          "hash": "772491691677321919",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/settings.routes.ts",
+          "hash": "12899445832308667686",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/settings/settings.service.ts",
+          "hash": "16692042256059216863",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:app/core/services/firebase.service",
+            "npm:app/core/services/theme.service",
+            "npm:@shared/models/clock-style.model",
+            "npm:@shared/models/theme-name.enum",
+            "npm:@shared/models/settings.model",
+            "npm:app/core/http/device/set-device-backlight-brightness.service"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/pages/stopwatch/stopwatch.component.html",
+          "hash": "10306726998884143184"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/pages/stopwatch/stopwatch.component.scss",
+          "hash": "7271950522223101165"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/pages/stopwatch/stopwatch.component.ts",
+          "hash": "11518224637855066969",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@shared/models/application-page.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/stopwatch.module.ts",
+          "hash": "15177732786880020001",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/stopwatch.routes.ts",
+          "hash": "5303882388772699925",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/stopwatch/stopwatch.service.ts",
+          "hash": "14880937282111137924",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/pages/timer/timer.component.html",
+          "hash": "8994865563617802888"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/pages/timer/timer.component.scss",
+          "hash": "3811150555738879326"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/pages/timer/timer.component.ts",
+          "hash": "11777862813225223329",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@shared/models/application-page.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/timer.module.ts",
+          "hash": "15656022347313844057",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@shared/shared.module"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/timer.routes.ts",
+          "hash": "5023374957567600675",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/timer/timer.service.ts",
+          "hash": "17723596084767680473",
+          "deps": [
+            "npm:@angular/core",
+            "npm:howler"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/components/chart/chart.component.html",
+          "hash": "12211615842121430723"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/components/chart/chart.component.scss",
+          "hash": "17869376614781400980"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/components/chart/chart.component.ts",
+          "hash": "790517405107934907",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/one-day-forecast/one-day-forecast.component.html",
+          "hash": "16236190700021598885"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/one-day-forecast/one-day-forecast.component.scss",
+          "hash": "10844947147092360806"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/one-day-forecast/one-day-forecast.component.ts",
+          "hash": "4901571084278743268",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@shared/models/application-page.model",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/three-days-forecast/three-days-forecast.component.html",
+          "hash": "16209111955394965036"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/three-days-forecast/three-days-forecast.component.scss",
+          "hash": "13712767827139343069"
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/pages/three-days-forecast/three-days-forecast.component.ts",
+          "hash": "18353707287466554751",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@shared/models/application-page.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/weather.module.ts",
+          "hash": "15309474257765239297",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:ngx-echarts",
+            [
+              "npm:echarts",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/weather.routes.ts",
+          "hash": "8511669620286394905",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/modules/weather/weather.service.ts",
+          "hash": "10575182982055272527",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:@shared/models/weather.model",
+            "npm:@shared/functions/delayedRetry",
+            "npm:app/core/services/firebase.service",
+            "npm:app/core/http/weather/get-weather.service",
+            "npm:@shared/models/responses/weather.response",
+            "npm:@shared/models/time.model",
+            "npm:@shared/functions/time-utils"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/nav-arrow-button/nav-arrow-button.component.html",
+          "hash": "15262910023438213282"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/nav-arrow-button/nav-arrow-button.component.scss",
+          "hash": "6363535033650667333"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/nav-arrow-button/nav-arrow-button.component.ts",
+          "hash": "16671295143952931200",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@shared/models/direction.enum"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/page-skeleton/page-skeleton.component.html",
+          "hash": "13241308531911370306"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/page-skeleton/page-skeleton.component.scss",
+          "hash": "9321071051605701351"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/page-skeleton/page-skeleton.component.ts",
+          "hash": "6759176857675848059",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/set-time-part/set-time-part.component.html",
+          "hash": "14685371687666805087"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/set-time-part/set-time-part.component.scss",
+          "hash": "3832291883178543981"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/set-time-part/set-time-part.component.ts",
+          "hash": "2374201393035938974",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/weather-icon/weather-icon.component.html",
+          "hash": "1050322078438766918"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/weather-icon/weather-icon.component.scss",
+          "hash": "15036214574332298676"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/components/weather-icon/weather-icon.component.ts",
+          "hash": "16726963506057226370",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/functions/delayedRetry.ts",
+          "hash": "6332506360354888564",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/functions/time-utils.ts",
+          "hash": "15777404619109114417",
+          "deps": [
+            "npm:@shared/models/time.model"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/functions/utils.ts",
+          "hash": "7238868381960482346"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/adjusting-interval.model.ts",
+          "hash": "7387592289439223772"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/alarm.model.ts",
+          "hash": "363836962261237828"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/application-page.model.ts",
+          "hash": "4853069989321635500",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/clock-style.model.ts",
+          "hash": "2448747693382734806"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/daysNames.model.ts",
+          "hash": "6955476302218243965"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/direction.enum.ts",
+          "hash": "12152310807931161394"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/responses/brightness.response.ts",
+          "hash": "11463126847863912002"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/responses/device-info.response.ts",
+          "hash": "13730890923889421108"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/responses/weather.response.ts",
+          "hash": "7150346581986758405"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/settings.model.ts",
+          "hash": "8583037937693447903"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/theme-name.enum.ts",
+          "hash": "9491127040967844102"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/theme.model.ts",
+          "hash": "15170821322265980459"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/time-counter.model.ts",
+          "hash": "2687421826856891167",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/time.model.ts",
+          "hash": "2150983968803805456"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/timezone.model.ts",
+          "hash": "18005908076729038374"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/models/weather.model.ts",
+          "hash": "14705564238679834641"
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/pipes/capitalizefirst.pipe.ts",
+          "hash": "14756480451146955518",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/pipes/date-ago.pipe.ts",
+          "hash": "7890132371697838777",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/services/ajustingInterval.service.ts",
+          "hash": "3070619556600741386",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/app/shared/shared.module.ts",
+          "hash": "341580960133558505",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/audio/alarm-sound.mp3",
+          "hash": "11773837470106741036"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/alarm-notification.png",
+          "hash": "12203671894987353251"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/calendar-notification.png",
+          "hash": "5372870020916479696"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/plus-solid.svg",
+          "hash": "18395127430024351284"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/stopwatch-notification.png",
+          "hash": "12203671894987353251"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/timer-notification.png",
+          "hash": "12203671894987353251"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/01d.svg",
+          "hash": "13713973693323226673"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/02d.svg",
+          "hash": "5872424943818524166"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/03d.svg",
+          "hash": "17015732562387032724"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/04d.svg",
+          "hash": "17015732562387032724"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/09d.svg",
+          "hash": "11830962909863741353"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/10d.svg",
+          "hash": "2384245597587228316"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/11d.svg",
+          "hash": "53374561198349397"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/13d.svg",
+          "hash": "12411613221001403043"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather/50d.svg",
+          "hash": "8486814718353801116"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/icons/weather-notification.png",
+          "hash": "3943423297196619004"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/images/clouds-background.png",
+          "hash": "525071405942211418"
+        },
+        {
+          "file": "apps/smart-clock/src/assets/images/clouds-background.psd",
+          "hash": "1013257871429212913"
+        },
+        {
+          "file": "apps/smart-clock/src/environments/environment.prod.ts",
+          "hash": "7619312852617370577"
+        },
+        {
+          "file": "apps/smart-clock/src/environments/environment.ts",
+          "hash": "2561827090895554187"
+        },
+        {
+          "file": "apps/smart-clock/src/favicon.ico",
+          "hash": "14356862334585494759"
+        },
+        {
+          "file": "apps/smart-clock/src/index.html",
+          "hash": "9348755104243844770"
+        },
+        {
+          "file": "apps/smart-clock/src/main.ts",
+          "hash": "7102541874155143726",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:hammerjs"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/polyfills.ts",
+          "hash": "9813229559833194715",
+          "deps": [
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "apps/smart-clock/src/styles/variables.scss",
+          "hash": "2619497337114583490"
+        },
+        {
+          "file": "apps/smart-clock/src/styles.scss",
+          "hash": "6195214399023084643"
+        },
+        {
+          "file": "apps/smart-clock/tsconfig.json",
+          "hash": "5749670378134113855"
+        },
+        {
+          "file": "apps/smart-clock/tsconfig.spec.json",
+          "hash": "17669705757049736923"
+        }
+      ],
+      "smart-clock-e2e": [
+        {
+          "file": "apps/smart-clock-e2e/.eslintrc.json",
+          "hash": "5570788962263802893"
+        },
+        {
+          "file": "apps/smart-clock-e2e/cypress.config.ts",
+          "hash": "14925566057180716649",
+          "deps": [
+            "npm:cypress",
+            "npm:@nx/cypress"
+          ]
+        },
+        {
+          "file": "apps/smart-clock-e2e/project.json",
+          "hash": "1682275136021193030"
+        },
+        {
+          "file": "apps/smart-clock-e2e/src/e2e/app.cy.ts",
+          "hash": "6131854052527883946"
+        },
+        {
+          "file": "apps/smart-clock-e2e/src/fixtures/example.json",
+          "hash": "17341819486505642070"
+        },
+        {
+          "file": "apps/smart-clock-e2e/src/support/app.po.ts",
+          "hash": "5364106453863571025"
+        },
+        {
+          "file": "apps/smart-clock-e2e/src/support/commands.ts",
+          "hash": "11031723810997510506"
+        },
+        {
+          "file": "apps/smart-clock-e2e/src/support/e2e.ts",
+          "hash": "15928825062325902088"
+        },
+        {
+          "file": "apps/smart-clock-e2e/tsconfig.json",
+          "hash": "10669754561334789726"
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "10484780250276348131"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "4470943527211780268"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "4278578039388637996"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "3373017020644554276"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "4286174754650011609"
+      },
+      {
+        "file": ".nx/cache/file-map.json",
+        "hash": "1101627285810949209"
+      },
+      {
+        "file": ".nx/cache/lockfile.hash",
+        "hash": "12462232943989475308"
+      },
+      {
+        "file": ".nx/cache/parsed-lock-file.json",
+        "hash": "16001181521901099961"
+      },
+      {
+        "file": ".nx/cache/project-graph.json",
+        "hash": "4606111392194236641"
+      },
+      {
+        "file": ".nx/workspace-data/d/daemon.log",
+        "hash": "15639454159908436963"
+      },
+      {
+        "file": ".nx/workspace-data/nx_files.nxt",
+        "hash": "12686674672866243216"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "17733650430415207254"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4724523458863191453"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "6401813341998909734"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "2067450290745489485"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "5844327627086553389"
+      },
+      {
+        "file": "README.md",
+        "hash": "15392755007197095004"
+      },
+      {
+        "file": "decorate-angular-cli.js",
+        "hash": "11823390707371404862"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "3069074216761126282"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "17666962557300311861"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "migrations.json",
+        "hash": "11935157676691057858"
+      },
+      {
+        "file": "nx.json",
+        "hash": "3752836995317378173"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "16320808641858063557"
+      },
+      {
+        "file": "package.json",
+        "hash": "15824513076578199612"
+      },
+      {
+        "file": "tools/generators/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "11395042842467359241"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "3489778326701107650"
+      }
+    ]
+  }
+}
