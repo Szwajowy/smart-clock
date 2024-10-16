@@ -7,7 +7,7 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["apps/smart-clock/tsconfig.*?.json"],
+        "project": ["apps/smart-clock/tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [

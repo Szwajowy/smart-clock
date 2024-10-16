@@ -1,10 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService, DeviceCodeResponse } from "app/auth/auth.service";
+import { Component, OnInit } from '@angular/core';
+import {
+  AuthService,
+  DeviceCodeResponse,
+} from 'app/auth/services/auth.service';
 
 @Component({
-  selector: "app-activate-device",
-  templateUrl: "./activate-device.component.html",
-  styleUrls: ["./activate-device.component.scss"],
+  selector: 'app-activate-device',
+  templateUrl: './activate-device.component.html',
+  styleUrls: ['./activate-device.component.scss'],
 })
 export class ActivateDeviceComponent implements OnInit {
   deviceCodeResponse: DeviceCodeResponse;
