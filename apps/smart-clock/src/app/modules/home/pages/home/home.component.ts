@@ -1,33 +1,32 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { ApplicationPage } from "@shared/models/application-page.model";
-import { Settings } from "@shared/models/settings.model";
+import { ApplicationPage } from '@shared/models/application-page.model';
+import { Settings } from '@shared/models/settings.model';
 
-import { SettingsService } from "app/modules/settings/settings.service";
-import { FirebaseService } from "app/core/services/firebase.service";
-import { WeatherService } from "app/modules/weather/weather.service";
-import { ClockService } from "../../clock.service";
+import { SettingsService } from 'app/modules/settings/settings.service';
+import { FirebaseService } from 'app/core/services/firebase.service';
+import { WeatherService } from 'app/modules/weather/weather.service';
+import { ClockService } from '../../clock.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends ApplicationPage implements OnInit {
   navigation = {
-    top: "/alarms",
-    right: "/weather/today",
-    bottom: "/stopwatch",
-    left: "/settings",
+    top: '/alarms',
+    right: '/weather/today',
+    bottom: '/stopwatch',
+    left: '/settings',
   };
 
-  username = "użytkowniku";
-  settings$: Observable<Settings> = this.settingsService.settings$;
-  weather$ = this.weatherService.getWeather();
-
-  currentDate$ = this.clockService.currentDate$;
+  username = 'użytkowniku';
+  settings$: Observable<Settings>;
+  weather$;
+  currentDate$: Observable<Date>;
 
   constructor(
     router: Router,
@@ -37,6 +36,9 @@ export class HomeComponent extends ApplicationPage implements OnInit {
     private firebaseService: FirebaseService
   ) {
     super(router);
+    this.settings$ = this.settingsService.settings$;
+    this.weather$ = this.weatherService.getWeather();
+    this.currentDate$ = this.clockService.currentDate$;
   }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class HomeComponent extends ApplicationPage implements OnInit {
   }
 
   setUsername() {
-    this.firebaseService.getUserData("name").subscribe((res) => {
+    this.firebaseService.getUserData('name').subscribe((res) => {
       this.username = res;
     });
   }

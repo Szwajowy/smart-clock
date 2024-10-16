@@ -1,12 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Howl } from "howler";
+import { Injectable } from '@angular/core';
 
-import { AdjustingInterval } from "../../shared/models/adjusting-interval.model";
-import { TimeCounter } from "../../shared/models/time-counter.model";
-import { NotificationsService } from "../home/notifications.service";
+import { AdjustingInterval } from '../../shared/models/adjusting-interval.model';
+import { TimeCounter } from '../../shared/models/time-counter.model';
+import { NotificationsService } from '../home/notifications.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class TimerService {
   time = new TimeCounter();
@@ -16,41 +15,36 @@ export class TimerService {
 
   private interval = new AdjustingInterval(this.countDown.bind(this), 10);
 
-  private timerEndSound = new Howl({
-    src: "../../../../assets/audio/alarm-sound.mp3",
-    preload: true,
-    loop: true,
-    volume: 0,
-  });
+  private timerEndSound;
 
   constructor(private notificationsService: NotificationsService) {}
 
   countDown() {
     if (!this.paused) {
-      if (this.time.decrement("milliseconds") === false) {
+      if (this.time.decrement('milliseconds') === false) {
         this.countedDown = true;
-        this.timerEndSound.play();
-        this.timerEndSound.fade(0, 1, 100);
+        // this.timerEndSound.play();
+        // this.timerEndSound.fade(0, 1, 100);
         this.stop();
       }
 
       // SEND NOTIFICATION
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "timer",
-        operation: "post",
+        type: 'timer',
+        operation: 'post',
         content:
           this.pad(this.time.hours) +
-          ":" +
+          ':' +
           this.pad(this.time.minutes) +
-          ":" +
+          ':' +
           this.pad(this.time.seconds),
-        icon: "stopwatch",
+        icon: 'stopwatch',
       });
     }
   }
 
   pad(number) {
-    return number > 9 ? number.toString() : "0" + number;
+    return number > 9 ? number.toString() : '0' + number;
   }
 
   startPause() {
@@ -62,10 +56,10 @@ export class TimerService {
 
       // SEND NOTIFICATION
       this.notificationsService.getInputNotificationsSubject().next({
-        type: "timer",
-        operation: "post",
-        content: "Minutnik został wstrzymany!",
-        icon: "timer",
+        type: 'timer',
+        operation: 'post',
+        content: 'Minutnik został wstrzymany!',
+        icon: 'timer',
       });
     } else {
       this.paused = false;
@@ -83,8 +77,8 @@ export class TimerService {
 
     // SEND NOTIFICATION
     this.notificationsService.getInputNotificationsSubject().next({
-      type: "timer",
-      operation: "remove",
+      type: 'timer',
+      operation: 'remove',
       content: null,
       icon: null,
     });
@@ -93,7 +87,7 @@ export class TimerService {
   reset() {
     this.stop();
     this.countedDown = false;
-    this.timerEndSound.stop();
+    // this.timerEndSound.stop();
   }
 
   isPaused() {

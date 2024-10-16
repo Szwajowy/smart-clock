@@ -4,12 +4,90 @@
   "pathMappings": {},
   "nxJsonPlugins": [],
   "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".eslintignore",
+        "hash": "4470943527211780268"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "15337155884368389616"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "3373017020644554276"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "9753158909660501033"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "1094603469163323313"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "4724523458863191453"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "6401813341998909734"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "2067450290745489485"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "5844327627086553389"
+      },
+      {
+        "file": "README.md",
+        "hash": "15392755007197095004"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "migrations.json",
+        "hash": "60323051964154118"
+      },
+      {
+        "file": "nx.json",
+        "hash": "6928824917766335565"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "7367438350252552299"
+      },
+      {
+        "file": "package.json",
+        "hash": "15513926124487952614"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "11395042842467359241"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "13067870712422493313"
+      }
+    ],
     "projectFileMap": {
       "smart-clock": [
-        {
-          "file": "apps/smart-clock/.browserslistrc",
-          "hash": "17510788877013526380"
-        },
         {
           "file": "apps/smart-clock/.eslintrc.json",
           "hash": "16023397236284521339"
@@ -20,7 +98,7 @@
         },
         {
           "file": "apps/smart-clock/project.json",
-          "hash": "2146774640945305782"
+          "hash": "6099712940744730347"
         },
         {
           "file": "apps/smart-clock/src/app/animations.ts",
@@ -90,7 +168,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/core/core.module.ts",
-          "hash": "4699245165031807349",
+          "hash": "1322374330382696772",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
@@ -162,7 +240,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/core/services/theme.service.ts",
-          "hash": "17568282602952983017",
+          "hash": "5319062471578332813",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/fire",
@@ -226,7 +304,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.html",
-          "hash": "12202342237702405201"
+          "hash": "12550023349277607871"
         },
         {
           "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.scss",
@@ -234,11 +312,10 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/alarms/pages/alarm-firing/alarm-firing.component.ts",
-          "hash": "5208774072778512211",
+          "hash": "13361459378906700361",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
-            "npm:howler",
             "npm:rxjs"
           ]
         },
@@ -419,7 +496,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/home/pages/home/home.component.ts",
-          "hash": "2758874290917687517",
+          "hash": "501701961498991274",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -436,7 +513,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/settings/pages/settings/settings.component.ts",
-          "hash": "16898221183132194486",
+          "hash": "12766377072824878921",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/forms",
@@ -542,10 +619,9 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/timer/timer.service.ts",
-          "hash": "17723596084767680473",
+          "hash": "10835174929446744065",
           "deps": [
-            "npm:@angular/core",
-            "npm:howler"
+            "npm:@angular/core"
           ]
         },
         {
@@ -558,7 +634,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/weather/components/chart/chart.component.ts",
-          "hash": "790517405107934907",
+          "hash": "16001358872406331505",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -575,7 +651,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/weather/pages/one-day-forecast/one-day-forecast.component.ts",
-          "hash": "4901571084278743268",
+          "hash": "11186829912278117293",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -592,7 +668,7 @@
         },
         {
           "file": "apps/smart-clock/src/app/modules/weather/pages/three-days-forecast/three-days-forecast.component.ts",
-          "hash": "18353707287466554751",
+          "hash": "3240785002559253947",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -970,96 +1046,6 @@
           "hash": "10669754561334789726"
         }
       ]
-    },
-    "nonProjectFiles": [
-      {
-        "file": ".editorconfig",
-        "hash": "10484780250276348131"
-      },
-      {
-        "file": ".eslintignore",
-        "hash": "4470943527211780268"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "15337155884368389616"
-      },
-      {
-        "file": ".github/workflows/ci.yml",
-        "hash": "3373017020644554276"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "9753158909660501033"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "1094603469163323313"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "4724523458863191453"
-      },
-      {
-        "file": ".vscode/launch.json",
-        "hash": "6401813341998909734"
-      },
-      {
-        "file": ".vscode/settings.json",
-        "hash": "2067450290745489485"
-      },
-      {
-        "file": ".vscode/tasks.json",
-        "hash": "5844327627086553389"
-      },
-      {
-        "file": "README.md",
-        "hash": "15392755007197095004"
-      },
-      {
-        "file": "decorate-angular-cli.js",
-        "hash": "14094702620983487434"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "12333515226966617182"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "9430166341120122740"
-      },
-      {
-        "file": "libs/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "migrations.json",
-        "hash": "60323051964154118"
-      },
-      {
-        "file": "nx.json",
-        "hash": "6928824917766335565"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "1816592654188266168"
-      },
-      {
-        "file": "package.json",
-        "hash": "7452527057348186163"
-      },
-      {
-        "file": "tools/tsconfig.tools.json",
-        "hash": "11395042842467359241"
-      },
-      {
-        "file": "tsconfig.json",
-        "hash": "3489778326701107650"
-      }
-    ]
+    }
   }
 }

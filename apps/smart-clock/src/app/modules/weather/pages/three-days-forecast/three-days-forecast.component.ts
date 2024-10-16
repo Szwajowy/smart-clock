@@ -18,30 +18,31 @@ export class ThreeDaysForecastComponent extends ApplicationPage {
     left: '/',
   };
 
-  public weather$ = this.weatherService.getWeather().pipe(
-    map((weather) => {
-      let newWeather = JSON.parse(JSON.stringify(weather));
-      const newList = [weather.list[0]];
-      for (let i = 1; i < weather.list.length; i++) {
-        const date = new Date(weather.list[i].dt * 1000);
-        if (date.getUTCHours() === 12) {
-          newList.push(weather.list[i]);
-        }
-      }
-
-      newWeather.list = newList;
-
-      newWeather = newWeather.list.slice(2, 5);
-      for (let i = 0; i < newWeather.length; i++) {
-        newWeather[i].weekday = new Date(newWeather[i].dt).getDay(); // moment.unix(newWeather[i].dt).weekday();
-      }
-
-      return newWeather;
-    })
-  );
+  public weather$;
 
   constructor(router: Router, private weatherService: WeatherService) {
     super(router);
+    this.weather$ = this.weatherService.getWeather().pipe(
+      map((weather) => {
+        let newWeather = JSON.parse(JSON.stringify(weather));
+        const newList = [weather.list[0]];
+        for (let i = 1; i < weather.list.length; i++) {
+          const date = new Date(weather.list[i].dt * 1000);
+          if (date.getUTCHours() === 12) {
+            newList.push(weather.list[i]);
+          }
+        }
+
+        newWeather.list = newList;
+
+        newWeather = newWeather.list.slice(2, 5);
+        for (let i = 0; i < newWeather.length; i++) {
+          newWeather[i].weekday = new Date(newWeather[i].dt).getDay(); // moment.unix(newWeather[i].dt).weekday();
+        }
+
+        return newWeather;
+      })
+    );
   }
 
   getWeekday(dayNumber) {

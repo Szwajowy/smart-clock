@@ -24,7 +24,7 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "builder": "@angular-devkit/build-angular:application",
       "options": {
         "outputPath": "dist/apps/smart-clock",
         "index": "apps/smart-clock/src/index.html",

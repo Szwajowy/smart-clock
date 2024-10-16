@@ -1,36 +1,35 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import { ApplicationPage } from "@shared/models/application-page.model";
-import { Settings } from "@shared/models/settings.model";
-import { ThemeName } from "@shared/models/theme-name.enum";
-import { Theme } from "@shared/models/theme.model";
-import { ThemeService } from "app/core/services/theme.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApplicationPage } from '@shared/models/application-page.model';
+import { Settings } from '@shared/models/settings.model';
+import { ThemeName } from '@shared/models/theme-name.enum';
+import { Theme } from '@shared/models/theme.model';
+import { ThemeService } from 'app/core/services/theme.service';
 
-import { Observable, Subscription } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import { SettingsService } from "../../settings.service";
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { SettingsService } from '../../settings.service';
 
 @Component({
-  selector: "app-settings",
-  templateUrl: "./settings.component.html",
-  styleUrls: ["./settings.component.scss"],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent
   extends ApplicationPage
   implements OnInit, OnDestroy
 {
   public navigation = {
-    top: "",
-    right: "/",
-    bottom: "",
-    left: "/calendar",
+    top: '',
+    right: '/',
+    bottom: '',
+    left: '/calendar',
   };
 
-  public clockStyles = ["1", "2", "3", "4"];
-  public availableThemes$: Observable<Theme[]> =
-    this.themeService.availableThemes$;
-  public settings$: Observable<Settings> = this.settingsService.settings$;
+  public clockStyles = ['1', '2', '3', '4'];
+  public availableThemes$: Observable<Theme[]>;
+  public settings$: Observable<Settings>;
   public settingsForm: UntypedFormGroup;
 
   private subscriptions: Subscription = new Subscription();
@@ -42,6 +41,8 @@ export class SettingsComponent
     router: Router
   ) {
     super(router);
+    this.availableThemes$ = this.themeService.availableThemes$;
+    this.settings$ = this.settingsService.settings$;
   }
 
   ngOnInit() {
@@ -66,21 +67,21 @@ export class SettingsComponent
 
     this.subscriptions.add(
       this.settingsForm
-        .get("activeTheme")
+        .get('activeTheme')
         .valueChanges.subscribe((activeTheme: ThemeName) => {
           this.settingsService.setTheme(activeTheme);
         })
     );
     this.subscriptions.add(
       this.settingsForm
-        .get("activeClockStyle")
+        .get('activeClockStyle')
         .valueChanges.subscribe((activeClockStyle: number) => {
           this.settingsService.setClockStyle(activeClockStyle);
         })
     );
     this.subscriptions.add(
       this.settingsForm
-        .get("screenBrightness")
+        .get('screenBrightness')
         .valueChanges.pipe(debounceTime(200))
         .subscribe((brightness: number) => {
           this.settingsService.setBrightness(brightness);

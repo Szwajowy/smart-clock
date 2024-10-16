@@ -1,23 +1,25 @@
-import { Injectable } from "@angular/core";
-import { Database, listVal, ref } from "@angular/fire/database";
+import { Injectable } from '@angular/core';
+import { Database, listVal, ref } from '@angular/fire/database';
 
-import { firstValueFrom, Observable, Subject } from "rxjs";
+import { firstValueFrom, Observable, Subject } from 'rxjs';
 
-import { ThemeName } from "@shared/models/theme-name.enum";
-import { Theme } from "@shared/models/theme.model";
+import { ThemeName } from '@shared/models/theme-name.enum';
+import { Theme } from '@shared/models/theme.model';
 
 @Injectable()
 export class ThemeService {
-  readonly availableThemes$: Observable<any> = listVal(ref(this.db, "themes"));
+  readonly availableThemes$: Observable<any>;
   readonly activeTheme$: Subject<null> = new Subject();
 
-  constructor(private db: Database) {}
+  constructor(private db: Database) {
+    this.availableThemes$ = listVal(ref(this.db, 'themes'));
+  }
 
   async setTheme(name: ThemeName): Promise<void> {
     const theme: Theme = await this.findTheme(name);
 
     if (!theme) {
-      throw new Error("No such theme exist!");
+      throw new Error('No such theme exist!');
     }
 
     this.setCSSProperties(theme);
@@ -40,7 +42,7 @@ export class ThemeService {
   private setCSSProperties(theme: Theme): void {
     Object.keys(theme.properties).forEach((property) => {
       document.documentElement.style.setProperty(
-        "--" + property,
+        '--' + property,
         theme.properties[property]
       );
     });

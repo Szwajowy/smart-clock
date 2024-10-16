@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { ThemeService } from "../../../../core/services/theme.service";
-import { WeatherService } from "../../weather.service";
+import { ThemeService } from '../../../../core/services/theme.service';
+import { WeatherService } from '../../weather.service';
 
 @Component({
-  selector: "app-chart",
-  templateUrl: "./chart.component.html",
-  styleUrls: ["./chart.component.scss"],
+  selector: 'app-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit, OnDestroy {
   private subs = new Subscription();
 
-  public todayWeatherFull$ = this.weatherService.getWeather();
+  public todayWeatherFull$;
 
   private changeBrightnessBy = 25;
 
@@ -27,17 +27,17 @@ export class ChartComponent implements OnInit, OnDestroy {
     },
     xAxis: [
       {
-        type: "category",
+        type: 'category',
         boundaryGap: false,
         data: [
-          "0:00",
-          "3:00",
-          "6:00",
-          "9:00",
-          "12:00",
-          "15:00",
-          "18:00",
-          "21:00",
+          '0:00',
+          '3:00',
+          '6:00',
+          '9:00',
+          '12:00',
+          '15:00',
+          '18:00',
+          '21:00',
         ],
         show: true,
         axisLine: {
@@ -56,7 +56,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     ],
     yAxis: [
       {
-        type: "value",
+        type: 'value',
         show: true,
         axisLine: {
           show: false,
@@ -68,8 +68,8 @@ export class ChartComponent implements OnInit, OnDestroy {
         axisLabel: {
           show: true,
           inside: true,
-          formatter: "{value}mm",
-          color: "rgba(0,0,0,0.8)",
+          formatter: '{value}mm',
+          color: 'rgba(0,0,0,0.8)',
           fontSize: 10,
           showMinLabel: false,
           showMaxLabel: false,
@@ -78,12 +78,12 @@ export class ChartComponent implements OnInit, OnDestroy {
     ],
     series: [
       {
-        name: "min-temp",
-        type: "line",
-        color: "rgba(0,0,0,0.8)",
+        name: 'min-temp',
+        type: 'line',
+        color: 'rgba(0,0,0,0.8)',
         showSymbol: false,
         areaStyle: {
-          color: "rgba(0,0,0,0.6)",
+          color: 'rgba(0,0,0,0.6)',
         },
         smooth: true,
         data: [],
@@ -96,25 +96,27 @@ export class ChartComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private themeService: ThemeService,
     private weatherService: WeatherService
-  ) {}
+  ) {
+    this.todayWeatherFull$ = this.weatherService.getWeather();
+  }
 
   ngOnInit() {
     this.subs.add(
       this.todayWeatherFull$.subscribe((weather) => {
         const xValues = [];
         const yValues = [];
-        if (this.route.snapshot.data["weather"] == "today") {
+        if (this.route.snapshot.data['weather'] == 'today') {
           for (let i = 0; i < 9; i++) {
             xValues.push(weather.list[i].dt_txt.slice(11, 16));
             yValues.push(
-              weather.list[i].rain ? Math.round(weather.list[i].rain["3h"]) : 0
+              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0
             );
           }
         } else {
           for (let i = 8; i < 17; i++) {
             xValues.push(weather.list[i].dt_txt.slice(11, 16));
             yValues.push(
-              weather.list[i].rain ? Math.round(weather.list[i].rain["3h"]) : 0
+              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0
             );
           }
         }
@@ -123,10 +125,10 @@ export class ChartComponent implements OnInit, OnDestroy {
         this.options.series[0].data = yValues;
 
         let color = getComputedStyle(document.documentElement).getPropertyValue(
-          "--color"
+          '--color'
         );
 
-        if (color[0] === " ") color = color.slice(1);
+        if (color[0] === ' ') color = color.slice(1);
 
         this.updateOptions = {
           yAxis: {
@@ -134,7 +136,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -148,7 +150,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -162,7 +164,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -172,7 +174,7 @@ export class ChartComponent implements OnInit, OnDestroy {
                 color: this.convertToRGBA(
                   this.adjustBrightnessOfColor(
                     color,
-                    this.isColorDark(color) === "dark"
+                    this.isColorDark(color) === 'dark'
                       ? this.changeBrightnessBy
                       : -this.changeBrightnessBy
                   ),
@@ -188,10 +190,10 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.themeService.activeTheme$.subscribe((res) => {
         let color = getComputedStyle(document.documentElement).getPropertyValue(
-          "--color"
+          '--color'
         );
 
-        if (color[0] === " ") color = color.slice(1);
+        if (color[0] === ' ') color = color.slice(1);
 
         this.updateOptions = {
           yAxis: {
@@ -199,7 +201,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -212,7 +214,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -225,7 +227,7 @@ export class ChartComponent implements OnInit, OnDestroy {
               color: this.convertToRGBA(
                 this.adjustBrightnessOfColor(
                   color,
-                  this.isColorDark(color) === "dark"
+                  this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
                     : -this.changeBrightnessBy
                 ),
@@ -235,7 +237,7 @@ export class ChartComponent implements OnInit, OnDestroy {
                 color: this.convertToRGBA(
                   this.adjustBrightnessOfColor(
                     color,
-                    this.isColorDark(color) === "dark"
+                    this.isColorDark(color) === 'dark'
                       ? this.changeBrightnessBy
                       : -this.changeBrightnessBy
                   ),
@@ -254,7 +256,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   isHexColorValid(hex) {
-    if (hex.indexOf("#") === 0) {
+    if (hex.indexOf('#') === 0) {
       hex = hex.slice(1);
     }
     // convert 3-digit hex to 6-digits.
@@ -262,7 +264,7 @@ export class ChartComponent implements OnInit, OnDestroy {
       hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
     if (hex.length !== 6) {
-      throw new Error("Invalid HEX color.");
+      throw new Error('Invalid HEX color.');
     }
 
     return hex;
@@ -276,7 +278,7 @@ export class ChartComponent implements OnInit, OnDestroy {
 
     const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-    return luma > 128 ? "bright" : "dark";
+    return luma > 128 ? 'bright' : 'dark';
   }
 
   private adjustBrightnessOfColor(hex, value) {
@@ -290,14 +292,14 @@ export class ChartComponent implements OnInit, OnDestroy {
       r = r.toString(16);
       g = g.toString(16);
       b = b.toString(16);
-      return "#" + this.padZero(r) + this.padZero(g) + this.padZero(b);
+      return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);
     } else if (value > 0) {
       if (r > 255 - value || g > 255 - value || b > 255 - value) {
-        return "#FFFFFF";
+        return '#FFFFFF';
       }
     } else {
       if (r <= -value || g <= -value || b <= -value) {
-        return "#000000";
+        return '#000000';
       }
     }
 
@@ -306,14 +308,14 @@ export class ChartComponent implements OnInit, OnDestroy {
       (b = (b + value).toString(16));
 
     // pad each with zeros and return
-    return "#" + this.padZero(r) + this.padZero(g) + this.padZero(b);
+    return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);
   }
 
   private convertToRGBA(hex, opacity) {
     hex = this.isHexColorValid(hex);
 
     if (opacity < 0 || opacity > 1) {
-      throw new Error("Invalid opacity.");
+      throw new Error('Invalid opacity.');
     }
 
     // convert color components
@@ -326,7 +328,7 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   private padZero(str, len?) {
     len = len || 2;
-    const zeros = new Array(len).join("0");
+    const zeros = new Array(len).join('0');
     return (zeros + str).slice(-len);
   }
 }
