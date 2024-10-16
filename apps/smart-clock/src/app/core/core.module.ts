@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { provideFirebaseApp } from "@angular/fire/app";
 import { provideAuth } from "@angular/fire/auth";
@@ -21,27 +21,21 @@ import { SetDeviceBacklightBrightnessService } from "./http/device/set-device-ba
 import { FirebaseService } from "./services/firebase.service";
 import { ThemeService } from "./services/theme.service";
 
-@NgModule({
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideDatabase(() => getDatabase()),
-    provideAuth(() => getAuth()),
-    HammerModule,
-  ],
-  providers: [
-    GetDeviceInformationsService,
-    GetDeviceBacklightBrightnessService,
-    SetDeviceBacklightBrightnessService,
-    FirebaseService,
-    ThemeService,
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig,
-    },
-  ],
-  declarations: [],
-  exports: [],
-})
+@NgModule({ declarations: [],
+    exports: [], imports: [BrowserModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideDatabase(() => getDatabase()),
+        provideAuth(() => getAuth()),
+        HammerModule], providers: [
+        GetDeviceInformationsService,
+        GetDeviceBacklightBrightnessService,
+        SetDeviceBacklightBrightnessService,
+        FirebaseService,
+        ThemeService,
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: MyHammerConfig,
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class CoreModule {}

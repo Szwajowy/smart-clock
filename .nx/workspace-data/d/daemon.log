@@ -97,3 +97,58 @@
 [NX Daemon Server] - 2024-10-16T14:02:58.210Z - Closed a connection. Number of open connections: 0
 [NX Daemon Server] - 2024-10-16T14:02:58.210Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
 [NX Daemon Server] - 2024-10-16T14:02:58.210Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
+[NX Daemon Server] - 2024-10-16T14:09:49.820Z - Started listening on: \\.\pipe\nx\C:\Users\krzys\AppData\Local\Temp\b2f071c5a0b7d720f698\d.sock
+[NX Daemon Server] - 2024-10-16T14:09:49.825Z - [WATCHER]: Subscribed to changes within: D:\Projekty\smart-clock (native)
+[NX Daemon Server] - 2024-10-16T14:09:49.827Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:09:49.828Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-16T14:09:49.830Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:09:49.832Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:09:49.832Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:09:49.832Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-10-16T14:09:49.833Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:09:49.833Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
+[NX Daemon Server] - 2024-10-16T14:09:49.834Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
+[NX Daemon Server] - 2024-10-16T14:09:57.123Z - Started listening on: \\.\pipe\nx\C:\Users\krzys\AppData\Local\Temp\b2f071c5a0b7d720f698\d.sock
+[NX Daemon Server] - 2024-10-16T14:09:57.128Z - [WATCHER]: Subscribed to changes within: D:\Projekty\smart-clock (native)
+[NX Daemon Server] - 2024-10-16T14:09:57.136Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:09:57.137Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-16T14:09:57.138Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:09:57.141Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:09:57.142Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:09:57.143Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2024-10-16T14:09:57.143Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:09:57.143Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
+[NX Daemon Server] - 2024-10-16T14:09:57.143Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
+[NX Daemon Server] - 2024-10-16T14:10:58.548Z - Started listening on: \\.\pipe\nx\C:\Users\krzys\AppData\Local\Temp\b2f071c5a0b7d720f698\d.sock
+[NX Daemon Server] - 2024-10-16T14:10:58.552Z - [WATCHER]: Subscribed to changes within: D:\Projekty\smart-clock (native)
+[NX Daemon Server] - 2024-10-16T14:10:58.555Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:10:58.555Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-16T14:10:58.557Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:10:58.559Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:10:58.559Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:10:58.559Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2024-10-16T14:10:58.563Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:10:58.564Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
+[NX Daemon Server] - 2024-10-16T14:10:58.564Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
+[NX Daemon Server] - 2024-10-16T14:14:02.903Z - Started listening on: \\.\pipe\nx\C:\Users\krzys\AppData\Local\Temp\b2f071c5a0b7d720f698\d.sock
+[NX Daemon Server] - 2024-10-16T14:14:02.908Z - [WATCHER]: Subscribed to changes within: D:\Projekty\smart-clock (native)
+[NX Daemon Server] - 2024-10-16T14:14:02.913Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:14:02.915Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:14:02.915Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:14:02.918Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:14:02.918Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:14:02.918Z - Handled FORCE_SHUTDOWN. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-10-16T14:14:02.919Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:14:02.919Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
+[NX Daemon Server] - 2024-10-16T14:14:02.919Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
+[NX Daemon Server] - 2024-10-16T14:14:58.246Z - Started listening on: \\.\pipe\nx\C:\Users\krzys\AppData\Local\Temp\b2f071c5a0b7d720f698\d.sock
+[NX Daemon Server] - 2024-10-16T14:14:58.251Z - [WATCHER]: Subscribed to changes within: D:\Projekty\smart-clock (native)
+[NX Daemon Server] - 2024-10-16T14:14:58.254Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:14:58.254Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-16T14:14:58.256Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-16T14:14:58.258Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:14:58.259Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-10-16T14:14:58.259Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-10-16T14:14:58.259Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-10-16T14:14:58.259Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (sources)
+[NX Daemon Server] - 2024-10-16T14:14:58.259Z - [WATCHER]: Stopping the watcher for D:\Projekty\smart-clock (outputs)
