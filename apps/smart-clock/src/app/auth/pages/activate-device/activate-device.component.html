@@ -1,11 +1,11 @@
 <div class="page-wrapper">
   <ng-container *ngIf="success === undefined">
     <div class="flex-wrapper" *ngIf="deviceCodeResponse; else loading">
-      <qr-code
+      <!-- <qr-code
         class="qr-code"
         size="150"
         [value]="deviceCodeResponse.verification_uri_complete"
-      ></qr-code>
+      ></qr-code> -->
       <div class="right-side">
         <h1>To activate this device</h1>
         <ol class="steps">

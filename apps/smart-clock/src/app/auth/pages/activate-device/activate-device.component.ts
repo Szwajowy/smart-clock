@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AuthService,
-  DeviceCodeResponse,
-} from 'app/auth/services/auth.service';
+import { DeviceCodeResponse } from 'app/auth/models/auth.models';
+import { AuthService } from 'app/auth/services/auth.service';
 
 @Component({
   selector: 'app-activate-device',

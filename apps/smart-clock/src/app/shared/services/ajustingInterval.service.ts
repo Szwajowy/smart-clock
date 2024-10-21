@@ -1,7 +1,4 @@
-import { Injectable } from "@angular/core";
-
-@Injectable()
-export class AdjustingIntervalService {
+export class AdjustingInterval {
   private running;
 
   private expected;

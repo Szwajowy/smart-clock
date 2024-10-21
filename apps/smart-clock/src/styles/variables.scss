@@ -1,11 +1,4 @@
-// $app-accent: #0061D1;
-// $app-accent-lighter: lighten( $app-accent, 20% );
-
-// $app-color: #FFF; // #FFF
-// $app-color-darker: darken($app-color, 30%);
-// $app-color-darkest: darken($app-color, 40%);
-
-$app-text-shadow: rgba(0,0,0,0.2);
+$app-text-shadow: rgba(0, 0, 0, 0.2);
 
 $app-padding: 20px;
 $app-border-radius: 0;
@@ -14,12 +7,12 @@ $app-height: 480px;
 $app-width: 800px;
 
 :root {
-  --accent: #0061D1;
-  --accent-lighter: #0072F4;
+  --accent: #0061d1;
+  --accent-lighter: #0072f4;
 
-  --color: #FFFFFF;
-  --color-darker: #E2E2E2;
-  --color-darkest: #ACACAC;
+  --color: #ffffff;
+  --color-darker: #e2e2e2;
+  --color-darkest: #acacac;
 
   --font-family: 'Montserrat', sans-serif;
 }
