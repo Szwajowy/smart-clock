@@ -2,6 +2,8 @@
   "name": "smart-clock",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/smart-clock/src",
+  "prefix": "app",
   "generators": {
     "@schematics/angular:component": {
       "style": "scss",
@@ -20,8 +22,6 @@
       "skipTests": true
     }
   },
-  "sourceRoot": "apps/smart-clock/src",
-  "prefix": "app",
   "targets": {
     "build": {
       "builder": "@angular-devkit/build-angular:application",
@@ -80,7 +80,8 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "buildTarget": "smart-clock:build"
+        "buildTarget": "smart-clock:build",
+        "proxyConfig": "apps/smart-clock/proxy.conf.json"
       },
       "configurations": {
         "production": {
