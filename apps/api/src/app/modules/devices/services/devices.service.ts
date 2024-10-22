@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Device } from '../interfaces/device.interface';
+import { isSerialUsed } from '../utils/devices.utils';
 
 @Injectable()
 export class DevicesService {
@@ -14,6 +15,12 @@ export class DevicesService {
   }
 
   createDevice(device: Device): Device {
+    if (isSerialUsed(device.serial, this.devices))
+      throw new HttpException(
+        'Device with this serial already exists',
+        HttpStatus.BAD_REQUEST
+      );
+
     this.devices.push(device);
     return this.getDevice(device.serial);
   }
