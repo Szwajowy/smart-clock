@@ -24,6 +24,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/swagger": "^7.4.2",
+    "@nestjs/typeorm": "^10.0.2",
     "@nx/angular": "20.0.1",
     "axios": "^1.6.0",
     "bootstrap-icons": "^1.8.1",
