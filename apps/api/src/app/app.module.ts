@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import typeorm from '../config/typeorm';
 import { DevicesModule } from './modules/devices/devices.module';
-import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: process.env.MONGODB_CONNECTION_STRING,
-      database: process.env.MONGODB_DATABASE,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [typeorm],
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        configService.get('typeorm'),
     }),
     DevicesModule,
   ],

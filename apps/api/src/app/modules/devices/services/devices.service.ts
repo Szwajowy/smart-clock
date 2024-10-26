@@ -1,31 +1,52 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Device } from '../interfaces/device.interface';
-import { isSerialUsed } from '../utils/devices.utils';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Device } from '../entities/device.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DevicesService {
   private devices: Device[] = [];
 
-  getDevices(): Device[] {
-    return this.devices;
+  constructor(
+    @InjectRepository(Device)
+    private deviceRepository: Repository<Device>
+  ) {}
+
+  findAll(): Promise<Device[]> {
+    return this.deviceRepository.find();
   }
 
-  getDevice(id: string): Device | undefined {
-    return this.devices.find((device) => device.serial === id);
+  findOne(serial: string): Promise<Device> {
+    return this.deviceRepository.findOneBy({ serial }).then((device) => {
+      if (!device)
+        throw new NotFoundException(
+          `Device with "${serial}" id was not found.`
+        );
+
+      return device;
+    });
   }
 
-  createDevice(device: Device): Device {
-    if (isSerialUsed(device.serial, this.devices))
-      throw new HttpException(
-        'Device with this serial already exists',
-        HttpStatus.BAD_REQUEST
-      );
+  create(device: Device): Promise<Device> {
+    return this.deviceRepository
+      .findOneBy({ serial: device.serial })
+      .then((foundDevice) => {
+        if (foundDevice)
+          throw new HttpException(
+            'Device with this serial already exists',
+            HttpStatus.BAD_REQUEST
+          );
 
-    this.devices.push(device);
-    return this.getDevice(device.serial);
+        return this.deviceRepository.create(device);
+      });
   }
 
-  updateDevice(device: Partial<Device>): Device {
+  update(device: Partial<Device>): Device {
     const updatedDeviceIndex = this.devices.findIndex(
       (foundDevice) => (foundDevice.serial = device.serial)
     );
@@ -33,6 +54,6 @@ export class DevicesService {
       ...this.devices[updatedDeviceIndex],
       ...device,
     };
-    return this.getDevice(device.serial);
+    return {} as Device;
   }
 }

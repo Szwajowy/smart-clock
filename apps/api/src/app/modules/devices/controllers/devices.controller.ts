@@ -1,18 +1,10 @@
-import {
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { DevicesService } from '../services/devices.service';
-import { Device } from '../interfaces/device.interface';
 import { CreateDeviceDto } from '../dtos/create-device.dto';
 import { UpdateDeviceDto } from '../dtos/update-device.dto';
+import { Device } from '../entities/device.entity';
 
 @ApiTags('devices')
 @Controller('devices')
@@ -20,31 +12,26 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @Get()
-  getDevices(): Device[] {
-    return this.devicesService.getDevices();
+  getDevices(): Promise<Device[]> {
+    return this.devicesService.findAll();
   }
 
   @Get('/:id')
-  getDevice(@Param('id') id: string): Device {
-    const device = this.devicesService.getDevice(id);
-
-    if (!device)
-      throw new NotFoundException(`Device with id "${id}" was not found.`);
-
-    return device;
+  getDevice(@Param('id') id: string): Promise<Device> {
+    return this.devicesService.findOne(id);
   }
 
   @Post()
-  createDevice(@Body() createDeviceDto: CreateDeviceDto): Device {
-    const newDevice: Device = {
+  createDevice(@Body() createDeviceDto: CreateDeviceDto): Promise<Device> {
+    const newDevice = {
       serial: createDeviceDto.serial,
-    };
+    } as Device;
 
-    return this.devicesService.createDevice(newDevice);
+    return this.devicesService.create(newDevice);
   }
 
   @Patch()
   updateDevice(@Body() updateDeviceDto: UpdateDeviceDto): Device {
-    return this.devicesService.updateDevice(updateDeviceDto);
+    return this.devicesService.update(updateDeviceDto);
   }
 }
