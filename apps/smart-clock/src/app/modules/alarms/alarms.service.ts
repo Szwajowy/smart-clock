@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { transformTimeToMinutes } from "@shared/functions/time-utils";
-import { cloneObject } from "@shared/functions/utils";
-import { Alarm } from "@shared/models/alarm.model";
-import { FirebaseService } from "app/core/services/firebase.service";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { first, tap } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { transformTimeToMinutes } from '@shared/functions/time-utils';
+import { cloneObject } from '@shared/functions/utils';
+import { Alarm } from '@shared/models/alarm.model';
+import { FirebaseService } from 'app/core/services/firebase.service';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { first, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AlarmsService {
@@ -81,22 +81,22 @@ export class AlarmsService {
 
   pushAlarmsToDb(): void {
     this.alarms$.pipe(first()).subscribe((alarms: Alarm[]) => {
-      this.firebaseService.setDeviceData("alarms", alarms);
+      this.firebaseService.setDeviceData('alarms', alarms);
     });
   }
 
-  fetchAlarmsFromDb(): Observable<any> {
-    return this.firebaseService.getDeviceDataList("alarms").pipe(
+  fetchAlarmsFromDb(): Observable<unknown[]> {
+    return this.firebaseService.getDeviceDataList('alarms').pipe(
       tap((alarms) => {
-        this.alarms$.next(alarms);
-      })
+        this.alarms$.next(alarms as Alarm[]);
+      }),
     );
   }
 
   isAlarmBetween(
     alarm: Alarm,
     startTime: { minute: number; hour: number },
-    endTime: { minute: number; hour: number }
+    endTime: { minute: number; hour: number },
   ): boolean {
     const alarmInMinutes = transformTimeToMinutes({
       hour: alarm.time.hours,

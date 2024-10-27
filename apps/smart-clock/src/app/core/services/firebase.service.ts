@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Database, listVal, objectVal } from "@angular/fire/database";
-import { switchMap } from "rxjs/operators";
-import { of } from "rxjs";
-import { ref, set } from "firebase/database";
+import { Injectable } from '@angular/core';
+import { Database, listVal, objectVal } from '@angular/fire/database';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ref, set } from 'firebase/database';
 
 @Injectable()
 export class FirebaseService {
@@ -11,8 +11,8 @@ export class FirebaseService {
   constructor(private db: Database) {}
 
   getUserData(part: string) {
-    return listVal(ref(this.db, "users")).pipe(
-      switchMap((users: any) => {
+    return listVal(ref(this.db, 'users')).pipe(
+      switchMap((users: { devices: { id: number }[] }[]) => {
         let found = false;
         let foundUser = null;
         for (const user in users) {
@@ -32,7 +32,7 @@ export class FirebaseService {
         }
 
         if (!found) return of(null);
-      })
+      }),
     );
   }
 
@@ -44,7 +44,7 @@ export class FirebaseService {
     return listVal(ref(this.db, `devices/${this.serial}/${part}`));
   }
 
-  setDeviceData(part: string, data: any) {
+  setDeviceData(part: string, data: unknown) {
     return set(ref(this.db, `devices/${this.serial}/${part}`), data);
   }
 

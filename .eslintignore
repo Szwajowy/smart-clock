@@ -7,3 +7,4 @@ commitlint.config.js
 src/test.ts
 src/polyfills.ts
 src/main.ts
+**/jest.config.ts

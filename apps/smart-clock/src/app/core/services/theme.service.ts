@@ -8,7 +8,7 @@ import { Theme } from '@shared/models/theme.model';
 
 @Injectable()
 export class ThemeService {
-  readonly availableThemes$: Observable<any>;
+  readonly availableThemes$: Observable<Theme[]>;
   readonly activeTheme$: Subject<null> = new Subject();
 
   constructor(private db: Database) {
@@ -29,7 +29,7 @@ export class ThemeService {
     let foundTheme = null;
 
     const availableThemes: Theme[] = await firstValueFrom(
-      this.availableThemes$
+      this.availableThemes$,
     );
 
     availableThemes.forEach((theme) => {
@@ -43,7 +43,7 @@ export class ThemeService {
     Object.keys(theme.properties).forEach((property) => {
       document.documentElement.style.setProperty(
         '--' + property,
-        theme.properties[property]
+        theme.properties[property],
       );
     });
     this.activeTheme$.next(null);

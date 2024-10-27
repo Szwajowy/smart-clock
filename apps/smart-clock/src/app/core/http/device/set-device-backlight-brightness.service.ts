@@ -1,17 +1,17 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BrightnessResponse } from "@shared/models/responses/brightness.response";
-import { environment } from "environments/environment";
-import { Observable, catchError, of } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BrightnessResponse } from '@shared/models/responses/brightness.response';
+import { environment } from 'environments/environment';
+import { Observable, catchError, of } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class SetDeviceBacklightBrightnessService {
   constructor(private http: HttpClient) {}
 
   setDeviceBacklightBrightness(
-    brightness: number
+    brightness: number,
   ): Observable<BrightnessResponse> {
     const requestBody = {
       brightness: this.calcBrightness(brightness),
@@ -19,21 +19,21 @@ export class SetDeviceBacklightBrightnessService {
 
     const requestOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
     };
 
     return this.http
       .post<BrightnessResponse>(
-        environment.helperApi.url + "/backlight_brightness",
+        environment.helperApi.url + '/backlight_brightness',
         requestBody,
-        requestOptions
+        requestOptions,
       )
       .pipe(
-        catchError((error) => {
+        catchError(() => {
           // TODO: Display message to user
           return of({ brightness: 0 });
-        })
+        }),
       );
   }
 

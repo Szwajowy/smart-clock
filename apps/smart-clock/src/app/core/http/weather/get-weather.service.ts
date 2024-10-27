@@ -1,12 +1,12 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { environment } from "environments/environment";
-import { catchError, Observable, of } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
+import { catchError, Observable, of } from 'rxjs';
 
-import { WeatherResponse } from "@shared/models/responses/weather.response";
+import { WeatherResponse } from '@shared/models/responses/weather.response';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GetWeatherService {
   constructor(private http: HttpClient) {}
@@ -14,13 +14,13 @@ export class GetWeatherService {
   getWeather(cityName: string): Observable<WeatherResponse> {
     return this.http
       .get<WeatherResponse>(
-        `${environment.openWeather.apiURL}/data/2.5/forecast?q=${cityName}&units=metric&lang=pl&appid=${environment.openWeather.apiKey}`
+        `${environment.openWeather.apiURL}/data/2.5/forecast?q=${cityName}&units=metric&lang=pl&appid=${environment.openWeather.apiKey}`,
       )
       .pipe(
-        catchError((error) => {
+        catchError(() => {
           // TODO: Display information to user
           return of(null);
-        })
+        }),
       );
   }
 }

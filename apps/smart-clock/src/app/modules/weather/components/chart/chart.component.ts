@@ -304,9 +304,9 @@ export class ChartComponent implements OnInit, OnDestroy {
       }
     }
 
-    (r = (r + value).toString(16)),
-      (g = (g + value).toString(16)),
-      (b = (b + value).toString(16));
+    r = (r + value).toString(16);
+    g = (g + value).toString(16);
+    b = (b + value).toString(16);
 
     // pad each with zeros and return
     return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);

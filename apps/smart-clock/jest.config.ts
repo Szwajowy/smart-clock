@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'smart-clock',
   preset: '../../jest.preset.js',

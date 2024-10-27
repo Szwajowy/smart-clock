@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+// import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { FirebaseService } from 'app/core/services/firebase.service';
-import { ClockService } from 'app/modules/home/clock.service';
+// import { Observable } from 'rxjs';
+// import { map } from 'rxjs/operators';
+// import { FirebaseService } from 'app/core/services/firebase.service';
+// import { ClockService } from 'app/modules/home/clock.service';
 
 @Component({
   selector: 'app-alarm-firing',

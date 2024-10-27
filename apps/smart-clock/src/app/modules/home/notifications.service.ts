@@ -1,11 +1,16 @@
-import { Injectable } from "@angular/core";
-import { Subject, BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
 
-import { bufferTime } from "rxjs/operators";
+import { bufferTime } from 'rxjs/operators';
 
 @Injectable()
 export class NotificationsService {
-  private inputNotificationsSubject = new Subject<any>();
+  private inputNotificationsSubject = new Subject<{
+    type: string;
+    operation: string;
+    content: string;
+    icon: string;
+  }>();
   private notificationsSubject = new BehaviorSubject<[]>([]);
 
   private activeNotification = 0;
@@ -20,7 +25,7 @@ export class NotificationsService {
 
         notificationsList.forEach((notification) => {
           indexOfExistingNot = finalNotificationsList.findIndex(
-            (finalNotification) => finalNotification.type === notification.type
+            (finalNotification) => finalNotification.type === notification.type,
           );
 
           if (indexOfExistingNot === -1) {
@@ -32,7 +37,7 @@ export class NotificationsService {
 
         // CHECK IF NOTIFICATION EXIST
         finalNotificationsList.forEach((res) => {
-          if (res.operation === "post") {
+          if (res.operation === 'post') {
             let notificationExist = false;
 
             this.notifications.forEach((notification, index) => {
@@ -47,7 +52,7 @@ export class NotificationsService {
             });
 
             if (!notificationExist) {
-              if (res.type === "weather") {
+              if (res.type === 'weather') {
                 this.notifications.unshift({
                   type: res.type,
                   icon: res.icon,
@@ -63,7 +68,7 @@ export class NotificationsService {
             }
 
             this.getNotificationsSubject().next(this.notifications as []);
-          } else if (res.operation === "remove") {
+          } else if (res.operation === 'remove') {
             this.notifications.forEach((notification, index) => {
               if (notification.type == res.type) {
                 this.notifications.splice(index, 1);
