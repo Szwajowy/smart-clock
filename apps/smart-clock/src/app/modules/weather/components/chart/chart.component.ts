@@ -90,12 +90,12 @@ export class ChartComponent implements OnInit, OnDestroy {
       },
     ],
   };
-  updateOptions: any;
+  updateOptions: { [key: string]: unknown };
 
   constructor(
     private route: ActivatedRoute,
     private themeService: ThemeService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
   ) {
     this.todayWeatherFull$ = this.weatherService.getWeather();
   }
@@ -109,14 +109,14 @@ export class ChartComponent implements OnInit, OnDestroy {
           for (let i = 0; i < 9; i++) {
             xValues.push(weather.list[i].dt_txt.slice(11, 16));
             yValues.push(
-              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0
+              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0,
             );
           }
         } else {
           for (let i = 8; i < 17; i++) {
             xValues.push(weather.list[i].dt_txt.slice(11, 16));
             yValues.push(
-              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0
+              weather.list[i].rain ? Math.round(weather.list[i].rain['3h']) : 0,
             );
           }
         }
@@ -125,7 +125,7 @@ export class ChartComponent implements OnInit, OnDestroy {
         this.options.series[0].data = yValues;
 
         let color = getComputedStyle(document.documentElement).getPropertyValue(
-          '--color'
+          '--color',
         );
 
         if (color[0] === ' ') color = color.slice(1);
@@ -138,9 +138,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                1
+                1,
               ),
             },
           },
@@ -152,9 +152,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                1
+                1,
               ),
             },
           },
@@ -166,9 +166,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                0.9
+                0.9,
               ),
               areaStyle: {
                 color: this.convertToRGBA(
@@ -176,21 +176,21 @@ export class ChartComponent implements OnInit, OnDestroy {
                     color,
                     this.isColorDark(color) === 'dark'
                       ? this.changeBrightnessBy
-                      : -this.changeBrightnessBy
+                      : -this.changeBrightnessBy,
                   ),
-                  0.8
+                  0.8,
                 ),
               },
             },
           ],
         };
-      })
+      }),
     );
 
     this.subs.add(
-      this.themeService.activeTheme$.subscribe((res) => {
+      this.themeService.activeTheme$.subscribe(() => {
         let color = getComputedStyle(document.documentElement).getPropertyValue(
-          '--color'
+          '--color',
         );
 
         if (color[0] === ' ') color = color.slice(1);
@@ -203,9 +203,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                1
+                1,
               ),
             },
           },
@@ -216,9 +216,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                1
+                1,
               ),
             },
           },
@@ -229,9 +229,9 @@ export class ChartComponent implements OnInit, OnDestroy {
                   color,
                   this.isColorDark(color) === 'dark'
                     ? this.changeBrightnessBy
-                    : -this.changeBrightnessBy
+                    : -this.changeBrightnessBy,
                 ),
-                0.9
+                0.9,
               ),
               areaStyle: {
                 color: this.convertToRGBA(
@@ -239,15 +239,15 @@ export class ChartComponent implements OnInit, OnDestroy {
                     color,
                     this.isColorDark(color) === 'dark'
                       ? this.changeBrightnessBy
-                      : -this.changeBrightnessBy
+                      : -this.changeBrightnessBy,
                   ),
-                  0.8
+                  0.8,
                 ),
               },
             },
           ],
         };
-      })
+      }),
     );
   }
 
@@ -272,9 +272,9 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   isColorDark(hex) {
     hex = this.isHexColorValid(hex);
-    const r: any = parseInt(hex.slice(0, 2), 16),
-      g: any = parseInt(hex.slice(2, 4), 16),
-      b: any = parseInt(hex.slice(4, 6), 16);
+    const r: number = parseInt(hex.slice(0, 2), 16),
+      g: number = parseInt(hex.slice(2, 4), 16),
+      b: number = parseInt(hex.slice(4, 6), 16);
 
     const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
@@ -284,15 +284,16 @@ export class ChartComponent implements OnInit, OnDestroy {
   private adjustBrightnessOfColor(hex, value) {
     hex = this.isHexColorValid(hex);
     // invert color components
-    let r: any = parseInt(hex.slice(0, 2), 16),
-      g: any = parseInt(hex.slice(2, 4), 16),
-      b: any = parseInt(hex.slice(4, 6), 16);
+    let r: number = parseInt(hex.slice(0, 2), 16),
+      g: number = parseInt(hex.slice(2, 4), 16),
+      b: number = parseInt(hex.slice(4, 6), 16);
+    let rs: string, gs: string, bs: string;
 
     if (value === 0) {
-      r = r.toString(16);
-      g = g.toString(16);
-      b = b.toString(16);
-      return '#' + this.padZero(r) + this.padZero(g) + this.padZero(b);
+      rs = r.toString(16);
+      gs = g.toString(16);
+      bs = b.toString(16);
+      return '#' + this.padZero(rs) + this.padZero(gs) + this.padZero(bs);
     } else if (value > 0) {
       if (r > 255 - value || g > 255 - value || b > 255 - value) {
         return '#FFFFFF';

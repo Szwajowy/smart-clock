@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, Subscription } from "rxjs";
-import { first } from "rxjs/operators";
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 
-import { FirebaseService } from "app/core/services/firebase.service";
-import { WeatherService } from "../weather/weather.service";
-import { ThemeService } from "app/core/services/theme.service";
-import { ClockStyle } from "@shared/models/clock-style.model";
-import { ThemeName } from "@shared/models/theme-name.enum";
-import { Settings } from "@shared/models/settings.model";
-import { SetDeviceBacklightBrightnessService } from "app/core/http/device/set-device-backlight-brightness.service";
+import { FirebaseService } from 'app/core/services/firebase.service';
+import { WeatherService } from '../weather/weather.service';
+import { ThemeService } from 'app/core/services/theme.service';
+import { ClockStyle } from '@shared/models/clock-style.model';
+import { ThemeName } from '@shared/models/theme-name.enum';
+import { Settings } from '@shared/models/settings.model';
+import { SetDeviceBacklightBrightnessService } from 'app/core/http/device/set-device-backlight-brightness.service';
 
 @Injectable()
 export class SettingsService {
@@ -17,28 +17,28 @@ export class SettingsService {
     activeTheme: ThemeName.blue,
     brightness: 50,
     clockStyle: ClockStyle.standard,
-    city: "Katowice",
+    city: 'Katowice',
     updateTime: 2,
     timezone: {
-      name: "Europe/Warsaw",
-      offset: "+02:00",
+      name: 'Europe/Warsaw',
+      offset: '+02:00',
     },
     lastUpdate: new Date().getTime(),
   };
 
   readonly settings$: BehaviorSubject<Settings> = new BehaviorSubject(
-    this.defaultSettings
+    this.defaultSettings,
   );
 
   constructor(
     private firebaseService: FirebaseService,
     private setDeviceBacklightBrightnessService: SetDeviceBacklightBrightnessService,
     private themeService: ThemeService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
   ) {}
 
   private async loadSettingsFromLocalStorage(): Promise<Settings> {
-    const localStorageSettings = localStorage.getItem("settings");
+    const localStorageSettings = localStorage.getItem('settings');
     let parsedSettings: object;
     const settings = await this.getCurrentSettings();
 
@@ -57,7 +57,7 @@ export class SettingsService {
     let settings: Settings;
 
     return combineLatest({
-      firebaseSettings: this.firebaseService.getDeviceData("settings"),
+      firebaseSettings: this.firebaseService.getDeviceData('settings'),
       localSettings: this.loadSettingsFromLocalStorage(),
     }).subscribe(
       ({
@@ -87,7 +87,7 @@ export class SettingsService {
           .subscribe();
         this.themeService.setTheme(settings.activeTheme);
         this.weatherService.setCity(settings.city);
-      }
+      },
     );
   }
 
@@ -119,7 +119,7 @@ export class SettingsService {
 
     this.setDeviceBacklightBrightnessService
       .setDeviceBacklightBrightness(value)
-      .subscribe((response: { brightness: number }) => {
+      .subscribe(() => {
         settings.brightness = value;
         this.updateSettings(settings);
       });
@@ -137,10 +137,10 @@ export class SettingsService {
   }
 
   private saveSettingsToLocalStorage(settings: Settings): void {
-    localStorage.setItem("settings", JSON.stringify(settings));
+    localStorage.setItem('settings', JSON.stringify(settings));
   }
 
   private putSettingsToFirebase(settings): void {
-    this.firebaseService.setDeviceData("settings", settings);
+    this.firebaseService.setDeviceData('settings', settings);
   }
 }

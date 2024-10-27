@@ -37,15 +37,15 @@ export class WeatherService {
       const localWeatherUpdateDateTime = new Date(localWeather.updatedAt);
       const localWeatherUpdateTime = new Time(
         localWeatherUpdateDateTime.getHours(),
-        localWeatherUpdateDateTime.getMinutes()
+        localWeatherUpdateDateTime.getMinutes(),
       );
       const plannedRefreshDateTime = new Date(localWeatherUpdateDateTime);
       plannedRefreshDateTime.setHours(
-        plannedRefreshDateTime.getHours() + this.updateTime
+        plannedRefreshDateTime.getHours() + this.updateTime,
       );
       const plannedRefreshTime = new Time(
         plannedRefreshDateTime.getHours(),
-        plannedRefreshDateTime.getMinutes()
+        plannedRefreshDateTime.getMinutes(),
       );
 
       if (
@@ -64,21 +64,21 @@ export class WeatherService {
           switchMap((weather: Weather) => {
             const firebaseWeather = weather ? new Weather(weather) : null;
             const firebaseWeatherUpdateDateTime = new Date(
-              firebaseWeather.updatedAt
+              firebaseWeather.updatedAt,
             );
             const firebaseWeatherUpdateTime = new Time(
               firebaseWeatherUpdateDateTime.getHours(),
-              firebaseWeatherUpdateDateTime.getMinutes()
+              firebaseWeatherUpdateDateTime.getMinutes(),
             );
             const plannedRefreshDateTime = new Date(
-              firebaseWeatherUpdateDateTime
+              firebaseWeatherUpdateDateTime,
             );
             plannedRefreshDateTime.setHours(
-              plannedRefreshDateTime.getHours() + this.updateTime
+              plannedRefreshDateTime.getHours() + this.updateTime,
             );
             const plannedRefreshTime = new Time(
               plannedRefreshDateTime.getHours(),
-              plannedRefreshDateTime.getMinutes()
+              plannedRefreshDateTime.getMinutes(),
             );
             if (
               firebaseWeather &&
@@ -111,7 +111,7 @@ export class WeatherService {
                 catchError((error) => {
                   console.log(error);
                   return of(null);
-                })
+                }),
               );
             }
           }),
@@ -119,11 +119,11 @@ export class WeatherService {
           catchError((error) => {
             console.log(error);
             return of(null);
-          })
+          }),
         );
       }
     }),
-    shareReplay(1)
+    shareReplay(1),
   );
 
   private localWeather: Weather;
@@ -133,7 +133,7 @@ export class WeatherService {
   constructor(
     private firebaseService: FirebaseService,
     private notificationsService: NotificationsService,
-    private getWeatherService: GetWeatherService
+    private getWeatherService: GetWeatherService,
   ) {}
 
   private getLocalWeather(): void {
@@ -146,8 +146,8 @@ export class WeatherService {
     localStorage.setItem('weather', JSON.stringify(this.localWeather));
   }
 
-  private getFirebaseWeather(): Observable<undefined> {
-    return this.firebaseService.getDeviceData('weather') as Observable<any>;
+  private getFirebaseWeather(): Observable<unknown> {
+    return this.firebaseService.getDeviceData('weather') as Observable<unknown>;
   }
 
   private updateFirebaseWeather(weather: WeatherResponse) {
@@ -173,7 +173,7 @@ export class WeatherService {
     return this.weather$;
   }
 
-  getNotification(): Subject<any> {
+  getNotification(): Subject<unknown> {
     return this.notificationSubject;
   }
 
