@@ -8,19 +8,19 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Device {
+export class DeviceInfo {
   @PrimaryColumn()
-  serial: string;
+  serial!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @VersionColumn()
-  version: number;
+  version!: number;
 }

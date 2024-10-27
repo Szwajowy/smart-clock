@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import typeorm from '../config/typeorm';
-import { DevicesModule } from './modules/devices/devices.module';
+import { PresentationDeviceModule } from 'presentation-device';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { DevicesModule } from './modules/devices/devices.module';
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
-    DevicesModule,
+    PresentationDeviceModule,
   ],
   controllers: [],
   providers: [],

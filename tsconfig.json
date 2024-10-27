@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,7 +13,12 @@
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "business-logic-device": ["libs/business-logic-device/src/index.ts"],
+      "data-access-device-info": ["libs/data-access-device-info/src/index.ts"],
+      "presentation-device": ["libs/presentation-device/src/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
